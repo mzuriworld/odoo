@@ -922,6 +922,75 @@ class ProductTemplate(models.Model):
             'mapped_attribute_names': self._get_mapped_attribute_names(parent_combination),
         }
 
+    def _get_attribute_inclusions(
+            self, parent_combination=None, parent_name=None, combination_ids=None
+    ):
+        """Return the list of attribute exclusions of a product.
+
+        :param parent_combination: the combination from which
+            `self` is an optional or accessory product. Indeed exclusions
+            rules on one product can concern another product.
+        :type parent_combination: recordset `product.template.attribute.value`
+        :param parent_name: the name of the parent product combination.
+        :type parent_name: str
+        :param list combination: The combination of the product, as a
+            list of `product.template.attribute.value` ids.
+
+        :return: dict of exclusions
+            - exclusions: from this product itself
+            - archived_combinations: list of archived combinations
+            - parent_combination: ids of the given parent_combination
+            - parent_exclusions: from the parent_combination
+           - parent_product_name: the name of the parent product if any, used in the interface
+               to explain why some combinations are not available.
+               (e.g: Not available with Customizable Desk (Legs: Steel))
+           - mapped_attribute_names: the name of every attribute values based on their id,
+               used to explain in the interface why that combination is not available
+               (e.g: Not available with Color: Black)
+        """
+        self.ensure_one()
+        parent_combination = parent_combination or self.env['product.template.attribute.value']
+        archived_products = self.with_context(active_test=False).product_variant_ids.filtered(lambda l: not l.active)
+        active_combinations = set(
+            tuple(product.product_template_attribute_value_ids.ids) for product in self.product_variant_ids)
+        return {
+            'inclusions': self._get_own_attribute_inclusions(combination_ids=combination_ids
+            ),
+            # 'archived_combinations': list(set(
+            #     tuple(product.product_template_attribute_value_ids.ids)
+            #     for product in archived_products
+            #     if product.product_template_attribute_value_ids and all(
+            #         ptav.ptav_active or combination_ids and ptav.id in combination_ids
+            #         for ptav in product.product_template_attribute_value_ids
+            #     )
+            # ) - active_combinations),
+            # 'parent_exclusions': self._get_parent_attribute_exclusions(parent_combination),
+            # 'parent_combination': parent_combination.ids,
+            # 'parent_product_name': parent_name,
+            # 'mapped_attribute_names': self._get_mapped_attribute_names(parent_combination),
+        }
+    def _get_own_attribute_inclusions(self, combination_ids=None):
+        """Get exclusions coming from the current template.
+
+        :param list combination: The combination of the product, as a
+            list of `product.template.attribute.value` ids.
+        Dictionnary, each product template attribute value is a key, and for each of them
+        the value is an array with the other ptav that they exclude (empty if no exclusion).
+        """
+        self.ensure_one()
+        product_template_attribute_values = self.valid_product_template_attribute_line_ids.product_template_value_ids
+        return {
+            ptav.id: [
+                value.id
+                for filter_line in ptav.include_for.filtered(
+                    lambda filter_line: filter_line.product_tmpl_id == self
+                ) for value in filter_line.value_ids if value.ptav_active
+            ]
+            for ptav in product_template_attribute_values if (
+                ptav.ptav_active or combination_ids and ptav.id in combination_ids
+            )
+        }
+
     @api.model
     def _complete_inverse_exclusions(self, exclusions):
         """Will complete the dictionnary of exclusions with their respective inverse

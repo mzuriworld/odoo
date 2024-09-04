@@ -9,14 +9,13 @@ import random
 import selectors
 import threading
 import time
-from psycopg2 import InterfaceError
+from psycopg2 import InterfaceError, sql
 
 import odoo
 from odoo import api, fields, models
 from odoo.service.server import CommonServer
 from odoo.tools.misc import DEFAULT_SERVER_DATETIME_FORMAT
-from odoo.tools import date_utils, SQL
-from odoo.tools.misc import OrderedSet
+from odoo.tools import date_utils
 
 _logger = logging.getLogger(__name__)
 
@@ -41,9 +40,9 @@ def get_notify_payload_max_length(default=8000):
 NOTIFY_PAYLOAD_MAX_LENGTH = get_notify_payload_max_length()
 
 
-# ---------------------------------------------------------
+#----------------------------------------------------------
 # Bus
-# ---------------------------------------------------------
+#----------------------------------------------------------
 def json_dump(v):
     return json.dumps(v, separators=(',', ':'), default=date_utils.json_default)
 
@@ -99,74 +98,50 @@ class ImBus(models.Model):
 
     @api.model
     def _sendmany(self, notifications):
-        for notification in notifications:
-            self._sendone(*notification)
-
-    @api.model
-    def _sendone(self, target, notification_type, message):
-        self._ensure_hooks()
-        channel = channel_with_db(self.env.cr.dbname, target)
-        self.env.cr.precommit.data["bus.bus.values"].append(
-            {
-                "channel": json_dump(channel),
-                "message": json_dump(
-                    {
-                        "type": notification_type,
-                        "payload": message,
-                    }
-                ),
-            }
-        )
-        self.env.cr.postcommit.data["bus.bus.channels"].add(channel)
-
-    def _ensure_hooks(self):
-        if "bus.bus.values" not in self.env.cr.precommit.data:
-            self.env.cr.precommit.data["bus.bus.values"] = []
-
-            @self.env.cr.precommit.add
-            def create_bus():
-                self.sudo().create(self.env.cr.precommit.data.pop("bus.bus.values"))
-
-        if "bus.bus.channels" not in self.env.cr.postcommit.data:
-            self.env.cr.postcommit.data["bus.bus.channels"] = OrderedSet()
-
+        channels = set()
+        values = []
+        for target, notification_type, message in notifications:
+            channel = channel_with_db(self.env.cr.dbname, target)
+            channels.add(channel)
+            values.append({
+                'channel': json_dump(channel),
+                'message': json_dump({
+                    'type': notification_type,
+                    'payload': message,
+                })
+            })
+        self.sudo().create(values)
+        if channels:
             # We have to wait until the notifications are commited in database.
             # When calling `NOTIFY imbus`, notifications will be fetched in the
             # bus table. If the transaction is not commited yet, there will be
             # nothing to fetch, and the websocket will return no notification.
             @self.env.cr.postcommit.add
             def notify():
-                payloads = get_notify_payloads(
-                    list(self.env.cr.postcommit.data.pop("bus.bus.channels"))
-                )
-                if len(payloads) > 1:
-                    _logger.info(
-                        "The imbus notification payload was too large, it's been split into %d payloads.",
-                        len(payloads),
-                    )
-                with odoo.sql_db.db_connect("postgres").cursor() as cr:
+                with odoo.sql_db.db_connect('postgres').cursor() as cr:
+                    query = sql.SQL("SELECT {}('imbus', %s)").format(sql.Identifier(ODOO_NOTIFY_FUNCTION))
+                    payloads = get_notify_payloads(list(channels))
+                    if len(payloads) > 1:
+                        _logger.info("The imbus notification payload was too large, "
+                                     "it's been split into %d payloads.", len(payloads))
                     for payload in payloads:
-                        cr.execute(
-                            SQL(
-                                "SELECT %s('imbus', %s)",
-                                SQL.identifier(ODOO_NOTIFY_FUNCTION),
-                                payload,
-                            )
-                        )
+                        cr.execute(query, (payload,))
 
     @api.model
-    def _poll(self, channels, last=0, ignore_ids=None):
+    def _sendone(self, channel, notification_type, message):
+        self._sendmany([[channel, notification_type, message]])
+
+    @api.model
+    def _poll(self, channels, last=0):
         # first poll return the notification in the 'buffer'
         if last == 0:
             timeout_ago = datetime.datetime.utcnow()-datetime.timedelta(seconds=TIMEOUT)
             domain = [('create_date', '>', timeout_ago.strftime(DEFAULT_SERVER_DATETIME_FORMAT))]
         else:  # else returns the unread notifications
             domain = [('id', '>', last)]
-        if ignore_ids:
-            domain.append(("id", "not in", ignore_ids))
         channels = [json_dump(channel_with_db(self.env.cr.dbname, c)) for c in channels]
         domain.append(('channel', 'in', channels))
-        notifications = self.sudo().search_read(domain, ["message"])
+        notifications = self.sudo().search_read(domain)
         # list of notification to return
         result = []
         for notif in notifications:
@@ -181,9 +156,9 @@ class ImBus(models.Model):
         return last.id if last else 0
 
 
-# ---------------------------------------------------------
+#----------------------------------------------------------
 # Dispatcher
-# ---------------------------------------------------------
+#----------------------------------------------------------
 
 class BusSubscription:
     def __init__(self, channels, last):

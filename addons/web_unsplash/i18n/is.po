@@ -4,15 +4,14 @@
 # 
 # Translators:
 # jonasyngvi, 2024
-# Kristófer Arnþórsson, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 10:28+0000\n"
+"POT-Creation-Date: 2023-10-26 21:56+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Kristófer Arnþórsson, 2024\n"
+"Last-Translator: jonasyngvi, 2024\n"
 "Language-Team: Icelandic (https://app.transifex.com/odoo/teams/41243/is/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,7 +42,7 @@ msgstr ""
 #: code:addons/web_unsplash/static/src/components/media_dialog/image_selector.xml:0
 #, python-format
 msgid "Apply"
-msgstr "Virkja"
+msgstr ""
 
 #. module: web_unsplash
 #: model:ir.model,name:web_unsplash.model_ir_attachment
@@ -53,7 +52,7 @@ msgstr "Viðhengi"
 #. module: web_unsplash
 #: model:ir.model,name:web_unsplash.model_res_config_settings
 msgid "Config Settings"
-msgstr "Stillingarvalkostir"
+msgstr ""
 
 #. module: web_unsplash
 #. odoo-python
@@ -170,7 +169,7 @@ msgstr ""
 #. module: web_unsplash
 #: model:ir.model,name:web_unsplash.model_res_users
 msgid "User"
-msgstr "Notandi"
+msgstr ""
 
 #. module: web_unsplash
 #. odoo-javascript
@@ -191,11 +190,4 @@ msgstr ""
 #: code:addons/web_unsplash/static/src/components/media_dialog/image_selector.xml:0
 #, python-format
 msgid "here:"
-msgstr ""
-
-#. module: web_unsplash
-#. odoo-javascript
-#: code:addons/web_unsplash/static/src/components/media_dialog/image_selector.xml:0
-#, python-format
-msgid "unsplash"
 msgstr ""

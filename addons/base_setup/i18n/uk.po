@@ -246,7 +246,7 @@ msgstr "Налаштування"
 #. module: base_setup
 #: model_terms:ir.ui.view,arch_db:base_setup.res_config_settings_view_form
 msgid "Configure Document Layout"
-msgstr "Налаштуйте шаблон документу"
+msgstr "Налаштуйте шаблон доументу"
 
 #. module: base_setup
 #: model_terms:ir.ui.view,arch_db:base_setup.res_config_settings_view_form

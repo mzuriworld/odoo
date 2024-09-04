@@ -1794,7 +1794,7 @@ const ColorpickerUserValueWidget = SelectUserValueWidget.extend({
             options.excluded = this.options.dataAttributes.excluded.replace(/ /g, '').split(',');
         }
         if (this.options.dataAttributes.opacity) {
-            options.opacity = parseFloat(this.options.dataAttributes.opacity);
+            options.opacity = this.options.dataAttributes.opacity;
         }
         if (this.options.dataAttributes.withCombinations) {
             options.withCombinations = !!this.options.dataAttributes.withCombinations;
@@ -2378,20 +2378,19 @@ const ListUserValueWidget = UserValueWidget.extend({
      */
     _notifyCurrentState(preview = false) {
         const isIdModeName = this.el.dataset.idMode === "name" || !this.isCustom;
-        const trimmed = (str) => str.trim().replace(/\s+/g, " ");
         const values = [...this.listTable.querySelectorAll('.o_we_list_record_name input')].map(el => {
-            const id = trimmed(isIdModeName ? el.name : el.value);
+            const id = isIdModeName ? el.name : el.value;
             return Object.assign({
                 id: /^-?[0-9]{1,15}$/.test(id) ? parseInt(id) : id,
-                name: trimmed(el.value),
-                display_name: trimmed(el.value),
+                name: el.value,
+                display_name: el.value,
             }, el.dataset);
         });
         if (this.hasDefault) {
             const checkboxes = [...this.listTable.querySelectorAll('we-button.o_we_checkbox_wrapper.active')];
             this.selected = checkboxes.map(el => {
                 const input = el.parentElement.previousSibling.firstChild;
-                const id = trimmed(isIdModeName ? input.name : input.value);
+                const id = isIdModeName ? input.name : input.value;
                 return /^-?[0-9]{1,15}$/.test(id) ? parseInt(id) : id;
             });
             values.forEach(v => {
@@ -6392,8 +6391,6 @@ const ImageHandlerOption = SnippetOptionWidget.extend({
             img.classList.add('o_modified_image_to_save');
             const loadedImg = await loadImage(dataURL, img);
             this._applyImage(loadedImg);
-            // Also apply to carousel thumbnail if applicable.
-            weUtils.forwardToThumbnail(img);
             return loadedImg;
         }
         return img;
@@ -6733,8 +6730,6 @@ registry.ImageTools = ImageHandlerOption.extend({
                 img.dataset.mimetype = img.dataset.originalMimetype;
                 delete img.dataset.originalMimetype;
             }
-            // Also apply to carousel thumbnail if applicable.
-            weUtils.forwardToThumbnail(img);
         }
         img.classList.add('o_modified_image_to_save');
     },
@@ -6996,8 +6991,6 @@ registry.ImageTools = ImageHandlerOption.extend({
         if (save) {
             img.dataset.shapeColors = newColors.join(';');
         }
-        // Also apply to carousel thumbnail if applicable.
-        weUtils.forwardToThumbnail(img);
     },
     /**
      * Sets the image in the supplied SVG and replace the src with a dataURL
@@ -8086,7 +8079,6 @@ registry.BackgroundImage = SnippetOptionWidget.extend({
         }
         const combined = backgroundImagePartsToCss(parts);
         this.$target.css('background-image', combined);
-        this.options.wysiwyg.odooEditor.editable.focus();
     },
 });
 
@@ -9615,17 +9607,16 @@ registry.CarouselHandler = registry.GalleryHandler.extend({
             : this.$target[0].querySelector(".carousel");
         carouselEl.classList.remove("slide");
         $(carouselEl).carousel(position);
-        const indicatorEls = this.$target[0].querySelectorAll(".carousel-indicators li");
-        indicatorEls.forEach((indicatorEl, i) => {
-            indicatorEl.classList.toggle("active", i === position);
-        });
+        for (const indicatorEl of this.$target[0].querySelectorAll(".carousel-indicators li")) {
+            indicatorEl.classList.remove("active");
+        }
+        this.$target[0].querySelector(`.carousel-indicators li[data-bs-slide-to="${position}"]`)
+                    .classList.add("active");
         this.trigger_up("activate_snippet", {
             $snippet: $(this.$target[0].querySelector(".carousel-item.active img")),
             ifInactiveOptions: true,
         });
         carouselEl.classList.add("slide");
-        // Prevent the carousel from automatically sliding afterwards.
-        $(carouselEl).carousel("pause");
     },
 });
 

@@ -81,7 +81,6 @@ export class Many2ManyTagsField extends Component {
                 create: this.props.canCreate && this.props.createDomain,
                 createEdit: this.props.canCreateEdit,
                 onDelete: removeRecord,
-                edit: this.props.record.isInEdition,
             },
             getEvalParams: (props) => {
                 return {

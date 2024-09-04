@@ -8,7 +8,6 @@
 # Claudia Baisan, 2024
 # Hongu Cosmin <cosmin513@gmail.com>, 2024
 # Dorin Hongu <dhongu@gmail.com>, 2024
-# Maria Muntean, 2024
 # 
 msgid ""
 msgstr ""
@@ -16,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-26 21:56+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Maria Muntean, 2024\n"
+"Last-Translator: Dorin Hongu <dhongu@gmail.com>, 2024\n"
 "Language-Team: Romanian (https://app.transifex.com/odoo/teams/41243/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,7 +50,7 @@ msgstr ""
 #: code:addons/website_sale_slides/models/product_product.py:0
 #, python-format
 msgid "Access to: %s%s"
-msgstr "Acces la: %s%s"
+msgstr ""
 
 #. module: website_sale_slides
 #: model:product.template,name:website_sale_slides.product_course_channel_5_product_template
@@ -61,7 +60,7 @@ msgstr "Bazele Creării Mobilei"
 #. module: website_sale_slides
 #: model_terms:ir.ui.view,arch_db:website_sale_slides.snippet_options
 msgid "Buy Now Button"
-msgstr "Buton Cumpărați acum"
+msgstr ""
 
 #. module: website_sale_slides
 #. odoo-javascript
@@ -75,14 +74,12 @@ msgstr "Cumpărați cursul pentru a vă valida răspunsurile!"
 #: code:addons/website_sale_slides/static/src/xml/slide_course_join.xml:0
 #, python-format
 msgid "Buy this Course"
-msgstr "Cumpărați acest curs"
+msgstr ""
 
 #. module: website_sale_slides
 #: model_terms:ir.actions.act_window,help:website_sale_slides.sale_report_action_slides
 msgid "Come back once your courses starts selling to report on your revenues."
 msgstr ""
-"Reveniți odată ce cursurile dvs. încep să se vândă pentru a raporta despre "
-"veniturile dvs."
 
 #. module: website_sale_slides
 #: model:ir.model,name:website_sale_slides.model_slide_channel
@@ -93,17 +90,17 @@ msgstr "Curs"
 #. module: website_sale_slides
 #: model:product.template,name:website_sale_slides.default_product_course_product_template
 msgid "Course Access"
-msgstr "Acces la curs"
+msgstr ""
 
 #. module: website_sale_slides
 #: model_terms:ir.ui.view,arch_db:website_sale_slides.snippet_options
 msgid "Course Page"
-msgstr "Pagina cursului"
+msgstr ""
 
 #. module: website_sale_slides
 #: model_terms:ir.ui.view,arch_db:website_sale_slides.course_buy_course_button
 msgid "Course Unavailable"
-msgstr "Curs indisponibil"
+msgstr ""
 
 #. module: website_sale_slides
 #: model:ir.model.fields,field_description:website_sale_slides.field_product_product__channel_ids
@@ -160,7 +157,7 @@ msgstr "Autentificare"
 #. module: website_sale_slides
 #: model_terms:ir.actions.act_window,help:website_sale_slides.sale_report_action_slides
 msgid "No sales data yet!"
-msgstr "Nu există încă date privind vânzările!"
+msgstr ""
 
 #. module: website_sale_slides
 #: model:ir.model.fields.selection,name:website_sale_slides.selection__slide_channel__enroll__payment
@@ -171,12 +168,11 @@ msgstr "La plata"
 #: model_terms:ir.ui.view,arch_db:website_sale_slides.course_purchased_confirmation_message
 msgid "Once your order is paid &amp; confirmed, you will gain access to:"
 msgstr ""
-"Odată ce comanda dvs. este plătită &amp; confirmată, veți obține acces la:"
 
 #. module: website_sale_slides
 #: model_terms:ir.ui.view,arch_db:website_sale_slides.course_buy_course_button
 msgid "Prerequisite:"
-msgstr "Precondiții:"
+msgstr ""
 
 #. module: website_sale_slides
 #: model_terms:ir.ui.view,arch_db:website_sale_slides.course_slides_list_slide
@@ -243,12 +239,12 @@ msgstr "Înscrie-te"
 #. module: website_sale_slides
 #: model_terms:ir.ui.view,arch_db:website_sale_slides.course_purchased_confirmation_message
 msgid "Start Learning"
-msgstr "Începeți să învățați"
+msgstr ""
 
 #. module: website_sale_slides
 #: model:product.template,name:website_sale_slides.product_course_channel_1_product_template
 msgid "Taking care of Trees Course"
-msgstr "Curs de îngrijire a arborilor"
+msgstr ""
 
 #. module: website_sale_slides
 #: model_terms:ir.ui.view,arch_db:website_sale_slides.course_buy_course_button
@@ -258,7 +254,7 @@ msgstr "Sunt câteva"
 #. module: website_sale_slides
 #: model_terms:ir.ui.view,arch_db:website_sale_slides.course_main
 msgid "This course cannot be bought because its linked product"
-msgstr "Acest curs nu poate fi cumpărat deoarece produsul său asociat"
+msgstr ""
 
 #. module: website_sale_slides
 #. odoo-javascript
@@ -290,20 +286,18 @@ msgid ""
 "You are not allowed to add members to this course. Please contact the course"
 " responsible or an administrator."
 msgstr ""
-"Nu vi se permite să adăugați membri la acest curs. Vă rugăm să contactați "
-"responsabilul cursului sau un administrator."
 
 #. module: website_sale_slides
 #. odoo-python
 #: code:addons/website_sale_slides/models/sale_order.py:0
 #, python-format
 msgid "You can only add a course once in your cart."
-msgstr "Puteți adăuga un curs o singură dată în coșul dvs."
+msgstr ""
 
 #. module: website_sale_slides
 #: model_terms:ir.ui.view,arch_db:website_sale_slides.course_purchased_confirmation_message
 msgid "You have gained access to the following course(s):"
-msgstr "Ați obținut acces la următoarele cursuri:"
+msgstr ""
 
 #. module: website_sale_slides
 #: model:ir.actions.act_window,name:website_sale_slides.sale_report_action_slides
@@ -313,22 +307,22 @@ msgstr "Venituri eLearning"
 #. module: website_sale_slides
 #: model_terms:ir.ui.view,arch_db:website_sale_slides.sale_report_view_graph_slides
 msgid "eLearning Sales Analysis"
-msgstr "Analiza vânzărilor eLearning"
+msgstr ""
 
 #. module: website_sale_slides
 #: model_terms:ir.ui.view,arch_db:website_sale_slides.course_main
 msgid "is not published."
-msgstr "nu este publicat."
+msgstr ""
 
 #. module: website_sale_slides
 #: model_terms:ir.ui.view,arch_db:website_sale_slides.course_buy_course_button
 msgid "prerequisite courses."
-msgstr "cursuri prerechizite."
+msgstr ""
 
 #. module: website_sale_slides
 #: model_terms:ir.ui.view,arch_db:website_sale_slides.course_purchased_confirmation_message
 msgid "step(s)"
-msgstr "pas (pași)"
+msgstr ""
 
 #. module: website_sale_slides
 #: model_terms:ir.ui.view,arch_db:website_sale_slides.course_buy_course_link

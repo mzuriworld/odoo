@@ -1215,7 +1215,6 @@ class BaseModel(metaclass=MetaModel):
             batch_xml_ids.clear()
 
             # try to create in batch
-            global_error_message = None
             try:
                 with cr.savepoint():
                     recs = self._load_records(data_list, mode == 'update')
@@ -1227,8 +1226,6 @@ class BaseModel(metaclass=MetaModel):
                     info = data_list[0]['info']
                     messages.append(dict(info, type='error', message=_(u"Unknown database error: '%s'", e)))
                 return
-            except UserError as e:
-                global_error_message = dict(data_list[0]['info'], type='error', message=str(e))
             except Exception:
                 pass
 
@@ -1267,9 +1264,6 @@ class BaseModel(metaclass=MetaModel):
                         'message': _(u"Found more than 10 errors and more than one error per 10 records, interrupted to avoid showing too many errors.")
                     })
                     break
-            if errors > 0 and global_error_message and global_error_message not in messages:
-                # If we cannot create the records 1 by 1, we display the error raised when we created the records simultaneously
-                messages.insert(0, global_error_message)
 
         # make 'flush' available to the methods below, in the case where XMLID
         # resolution fails, for instance
@@ -2633,25 +2627,6 @@ class BaseModel(metaclass=MetaModel):
                 row['__domain'] = expression.AND([row['__domain'], [(fullname, '=', row[fullname])]])
 
     @api.model
-    def _read_group_get_annoted_groupby(self, groupby, lazy):
-        groupby = [groupby] if isinstance(groupby, str) else groupby
-        lazy_groupby = groupby[:1] if lazy else groupby
-
-        annoted_groupby = {}  # Key as the name in the result, value as the explicit groupby specification
-        for group_spec in lazy_groupby:
-            field_name, property_name, granularity = parse_read_group_spec(group_spec)
-            if field_name not in self._fields:
-                raise ValueError(f"Invalid field {field_name!r} on model {self._name!r}")
-            field = self._fields[field_name]
-            if property_name and field.type != 'properties':
-                raise ValueError(f"Property name {property_name!r} has to be used on a property field.")
-            if field.type in ('date', 'datetime'):
-                annoted_groupby[group_spec] = f"{field_name}:{granularity or 'month'}"
-            else:
-                annoted_groupby[group_spec] = group_spec
-        return annoted_groupby
-
-    @api.model
     def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
         """Get the list of records in list view grouped by the given ``groupby`` fields.
 
@@ -2697,7 +2672,18 @@ class BaseModel(metaclass=MetaModel):
         # - Modify `groupby` default value 'month' into specifique groupby specification
         # - Modify `fields` into aggregates specification of _read_group
         # - Modify the order to be compatible with the _read_group specification
-        annoted_groupby = self._read_group_get_annoted_groupby(groupby, lazy=lazy)
+        annoted_groupby = {}  # Key as the name in the result, value as the explicit groupby specification
+        for group_spec in lazy_groupby:
+            field_name, property_name, granularity = parse_read_group_spec(group_spec)
+            if field_name not in self._fields:
+                raise ValueError(f"Invalid field {field_name!r} on model {self._name!r}")
+            field = self._fields[field_name]
+            if property_name and field.type != 'properties':
+                raise ValueError(f"Property name {property_name!r} has to be used on a property field.")
+            if field.type in ('date', 'datetime'):
+                annoted_groupby[group_spec] = f"{field_name}:{granularity or 'month'}"
+            else:
+                annoted_groupby[group_spec] = group_spec
 
         annoted_aggregates = {  # Key as the name in the result, value as the explicit aggregate specification
             f"{lazy_groupby[0].split(':')[0]}_count" if lazy and len(lazy_groupby) == 1 else '__count': '__count',
@@ -2718,7 +2704,7 @@ class BaseModel(metaclass=MetaModel):
                 continue
 
             if name not in self._fields:
-                raise ValueError(f"Invalid field {name!r} on model {self._name!r}")
+                raise ValueError(f"Invalid field {field_name!r} on model {self._name!r}")
             field = self._fields[name]
             if field.base_field.store and field.base_field.column_type and field.group_operator and field_spec not in annoted_groupby:
                 annoted_aggregates[name] = f"{name}:{field.group_operator}"
@@ -2892,16 +2878,15 @@ class BaseModel(metaclass=MetaModel):
             else:
                 comodel = self.env.get(definition.get('comodel'))
                 if comodel is None or comodel._transient or comodel._abstract:
-                    raise UserError(_(
-                                            "You cannot use %(property_name)r because the linked %(model_name)r model doesn't exist or is invalid",
-                        property_name=definition.get('string', property_name), model_name=definition.get('comodel'),
-                    ))
-
-                # check the existences of the many2many
-                condition = SQL(
-                    "%s::int IN (SELECT id FROM %s)",
-                    SQL.identifier(property_alias), SQL.identifier(comodel._table),
-                )
+                    # all value are false, because the model does not exist anymore
+                    # (or is a transient model e.g.)
+                    condition = SQL("FALSE")
+                else:
+                    # check the existences of the many2many
+                    condition = SQL(
+                        "%s::int IN (SELECT id FROM %s)",
+                        SQL.identifier(property_alias), SQL.identifier(comodel._table),
+                    )
 
             query.add_join(
                 "LEFT JOIN",
@@ -2929,10 +2914,9 @@ class BaseModel(metaclass=MetaModel):
         elif property_type == 'many2one':
             comodel = self.env.get(definition.get('comodel'))
             if comodel is None or comodel._transient or comodel._abstract:
-                raise UserError(_(
-                    "You cannot use %(property_name)r because the linked %(model_name)r model doesn't exist or is invalid",
-                    property_name=definition.get('string', property_name), model_name=definition.get('comodel'),
-                ))
+                # all value are false, because the model does not exist anymore
+                # (or is a transient model e.g.)
+                return SQL('FALSE')
 
             return SQL(
                 """ CASE
@@ -3699,9 +3683,7 @@ class BaseModel(metaclass=MetaModel):
         langs = set(langs or [l[0] for l in self.env['res.lang'].get_installed()])
         self_lang = self.with_context(check_translations=True, prefetch_langs=True)
         val_en = self_lang.with_context(lang='en_US')[field_name]
-        if not field.translate:
-            translations = []
-        elif field.translate is True:
+        if not callable(field.translate):
             translations = [{
                 'lang': lang,
                 'source': val_en,

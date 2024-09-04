@@ -309,7 +309,6 @@ export class Link extends Component {
         }
         var allWhitespace = /\s+/gi;
         var allStartAndEndSpace = /^\s+|\s+$/gi;
-        const isImage = this.props.link && this.props.link.querySelector('img');
         return {
             content: content,
             url: this._correctLink(this.state.url),
@@ -322,7 +321,6 @@ export class Link extends Component {
             oldAttributes: this.state.oldAttributes,
             isNewWindow: isNewWindow,
             doStripDomain: doStripDomain,
-            isImage,
         };
     }
     /**
@@ -473,7 +471,7 @@ export class Link extends Component {
      */
     _updateLinkContent($link, linkInfos, { force = false } = {}) {
         if (force || (this.props.needLabel && (linkInfos.content !== this.state.originalText || linkInfos.url !== this.state.url))) {
-            if (linkInfos.content === this.state.originalText || linkInfos.isImage) {
+            if (linkInfos.content === this.state.originalText) {
                 $link.html(this.state.originalHTML.replaceAll('\u200B', '').replaceAll('\uFEFF', ''));
             } else if (linkInfos.content && linkInfos.content.length) {
                 let contentWrapperEl = $link[0];

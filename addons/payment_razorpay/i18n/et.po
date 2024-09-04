@@ -6,7 +6,6 @@
 # Martin Trigaux, 2023
 # Leaanika Randmets, 2023
 # Marek Pontus, 2023
-# Stevin Lilla, 2024
 # Anna, 2024
 # 
 msgid ""
@@ -36,7 +35,7 @@ msgstr ""
 #, python-format
 msgid ""
 "An error occurred during the processing of your payment. Please try again."
-msgstr "Makse töötlemise ajal ilmnes viga. Palun proovi uuesti."
+msgstr ""
 
 #. module: payment_razorpay
 #: model:ir.model.fields,field_description:payment_razorpay.field_payment_provider__code
@@ -53,19 +52,19 @@ msgstr "Could not establish the connection to the API."
 #. module: payment_razorpay
 #: model_terms:ir.ui.view,arch_db:payment_razorpay.payment_provider_form_razorpay
 msgid "Key Id"
-msgstr "Võtme ID"
+msgstr ""
 
 #. module: payment_razorpay
 #: model_terms:ir.ui.view,arch_db:payment_razorpay.payment_provider_form_razorpay
 msgid "Key Secret"
-msgstr "Võtme saladus"
+msgstr ""
 
 #. module: payment_razorpay
 #. odoo-python
 #: code:addons/payment_razorpay/models/payment_transaction.py:0
 #, python-format
 msgid "No transaction found matching reference %s."
-msgstr "Ühtegi tehingut ei leitud, mis on seotud viitega %s."
+msgstr ""
 
 #. module: payment_razorpay
 #: model:ir.model,name:payment_razorpay.model_payment_provider
@@ -109,41 +108,46 @@ msgstr ""
 #: code:addons/payment_razorpay/models/payment_provider.py:0
 #, python-format
 msgid "Razorpay gave us the following information: '%s'"
-msgstr "Razorpay andis meile järgmise informatsiooni:  '%s'"
+msgstr ""
 
 #. module: payment_razorpay
 #. odoo-python
 #: code:addons/payment_razorpay/models/payment_transaction.py:0
 #, python-format
 msgid "Received data with invalid status: %s"
-msgstr "Received data with invalid status: %s"
+msgstr ""
 
 #. module: payment_razorpay
 #. odoo-python
 #: code:addons/payment_razorpay/models/payment_transaction.py:0
 #, python-format
 msgid "Received data with missing entity id."
-msgstr "Saadud andmed puuduliku üksuse ID-ga"
+msgstr ""
 
 #. module: payment_razorpay
 #. odoo-python
 #: code:addons/payment_razorpay/models/payment_transaction.py:0
 #, python-format
 msgid "Received data with missing reference."
-msgstr "Saadud andmed puuduliku viitega."
+msgstr ""
 
 #. module: payment_razorpay
 #. odoo-python
 #: code:addons/payment_razorpay/models/payment_transaction.py:0
 #, python-format
 msgid "Received data with missing status."
-msgstr "Saadud andmed on puuduliku staatusega."
+msgstr ""
 
 #. module: payment_razorpay
 #. odoo-python
 #: code:addons/payment_razorpay/models/payment_transaction.py:0
 #, python-format
 msgid "Received incomplete refund data."
+msgstr ""
+
+#. module: payment_razorpay
+#: model_terms:ir.ui.view,arch_db:payment_razorpay.redirect_form
+msgid "TODO: remove in master"
 msgstr ""
 
 #. module: payment_razorpay
@@ -175,7 +179,7 @@ msgstr "Antud makseteenuse pakkuja tehniline kood."
 #: code:addons/payment_razorpay/models/payment_transaction.py:0
 #, python-format
 msgid "The transaction is not linked to a token."
-msgstr "Tehing ei ole seotud tokeniga."
+msgstr ""
 
 #. module: payment_razorpay
 #. odoo-python
@@ -187,4 +191,4 @@ msgstr ""
 #. module: payment_razorpay
 #: model_terms:ir.ui.view,arch_db:payment_razorpay.payment_provider_form_razorpay
 msgid "Webhook Secret"
-msgstr "Webhook Secret"
+msgstr ""

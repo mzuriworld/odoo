@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Piia Paurson <piia@avalah.ee>, 2023
+# Anna, 2023
 # Eneli Õigus <enelioigus@gmail.com>, 2023
 # Gert Valdek <gert@airobot.ee>, 2023
 # Martin Trigaux, 2023
@@ -15,17 +16,14 @@
 # Triine Aavik <triine@avalah.ee>, 2023
 # Egon Raamat <egon@avalah.ee>, 2023
 # JanaAvalah, 2023
-# Anna, 2024
-# Tairi Tiimann, 2024
-# Stevin Lilla, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 10:27+0000\n"
+"POT-Creation-Date: 2023-10-26 21:55+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Stevin Lilla, 2024\n"
+"Last-Translator: JanaAvalah, 2023\n"
 "Language-Team: Estonian (https://app.transifex.com/odoo/teams/41243/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +34,7 @@ msgstr ""
 #. module: mrp_subcontracting
 #: model_terms:ir.ui.view,arch_db:mrp_subcontracting.subcontracting_portal
 msgid "/my/productions"
-msgstr "/my/productions"
+msgstr ""
 
 #. module: mrp_subcontracting
 #. odoo-python
@@ -139,7 +137,6 @@ msgid "Detail Component"
 msgstr "Detailkomponent"
 
 #. module: mrp_subcontracting
-#: model_terms:ir.ui.view,arch_db:mrp_subcontracting.stock_picking_form_view
 #: model_terms:ir.ui.view,arch_db:mrp_subcontracting.subcontracting_portal_production_form_view
 msgid "Details"
 msgstr "Üksikasjad"
@@ -190,8 +187,6 @@ msgid ""
 "In order to manage stock accurately, subcontracting locations must be type "
 "Internal, linked to the appropriate company."
 msgstr ""
-"Laovarude täpseks haldamiseks peavad allhanke asukohad olema \"Sisemine\" "
-"tüüpi, seotud vastava ettevõttega."
 
 #. module: mrp_subcontracting
 #: model_terms:ir.ui.view,arch_db:mrp_subcontracting.mrp_production_subcontracting_filter
@@ -227,7 +222,7 @@ msgstr ""
 #: code:addons/mrp_subcontracting/models/stock_picking.py:0
 #, python-format
 msgid "Locations to update"
-msgstr "Uuendamiseks asukohad"
+msgstr ""
 
 #. module: mrp_subcontracting
 #: model:ir.model.fields,field_description:mrp_subcontracting.field_res_partner__production_ids
@@ -396,7 +391,6 @@ msgstr "Täienda allhankijat"
 #. odoo-python
 #: code:addons/mrp_subcontracting/models/stock_warehouse.py:0
 #: code:addons/mrp_subcontracting/models/stock_warehouse.py:0
-#: code:addons/mrp_subcontracting/wizard/product_replenish.py:0
 #: model:stock.route,name:mrp_subcontracting.route_resupply_subcontractor_mto
 #, python-format
 msgid "Resupply Subcontractor on Order"
@@ -415,7 +409,7 @@ msgstr "Tagastuskorje"
 #. module: mrp_subcontracting
 #: model_terms:ir.ui.view,arch_db:mrp_subcontracting.portal_my_productions
 msgid "Scheduled Date"
-msgstr "Planeeritud kuupäev"
+msgstr "Planeeritud hoolduse kuupäev"
 
 #. module: mrp_subcontracting
 #. odoo-python

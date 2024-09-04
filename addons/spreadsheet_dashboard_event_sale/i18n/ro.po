@@ -7,7 +7,6 @@
 # Martin Trigaux, 2024
 # Foldi Robert <foldirobert@nexterp.ro>, 2024
 # Cozmin Candea <office@terrabit.ro>, 2024
-# Alin Miclea, 2024
 # 
 msgid ""
 msgstr ""
@@ -15,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-26 21:56+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Alin Miclea, 2024\n"
+"Last-Translator: Cozmin Candea <office@terrabit.ro>, 2024\n"
 "Language-Team: Romanian (https://app.transifex.com/odoo/teams/41243/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,28 +50,28 @@ msgstr "Dată"
 #: code:addons/spreadsheet_dashboard_event_sale/data/files/events_dashboard.json:0
 #, python-format
 msgid "Event by Organizer"
-msgstr "Eveniment după organizator"
+msgstr ""
 
 #. module: spreadsheet_dashboard_event_sale
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_event_sale/data/files/events_dashboard.json:0
 #, python-format
 msgid "Event by Tags"
-msgstr "Eveniment după etichete"
+msgstr ""
 
 #. module: spreadsheet_dashboard_event_sale
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_event_sale/data/files/events_dashboard.json:0
 #, python-format
 msgid "Event by Template"
-msgstr "Eveniment după șablon"
+msgstr ""
 
 #. module: spreadsheet_dashboard_event_sale
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_event_sale/data/files/events_dashboard.json:0
 #, python-format
 msgid "Event by Venue"
-msgstr "Eveniment după locație"
+msgstr ""
 
 #. module: spreadsheet_dashboard_event_sale
 #. odoo-javascript
@@ -92,7 +91,7 @@ msgstr "Evenimente"
 #: code:addons/spreadsheet_dashboard_event_sale/data/files/events_dashboard.json:0
 #, python-format
 msgid "Events Status"
-msgstr "Stare Evenimente"
+msgstr ""
 
 #. module: spreadsheet_dashboard_event_sale
 #. odoo-javascript
@@ -127,7 +126,7 @@ msgstr "Anterior"
 #: code:addons/spreadsheet_dashboard_event_sale/data/files/events_dashboard.json:0
 #, python-format
 msgid "Registration Status"
-msgstr "Stare înregistrare"
+msgstr ""
 
 #. module: spreadsheet_dashboard_event_sale
 #. odoo-javascript
@@ -164,7 +163,7 @@ msgstr "Șablon"
 #: code:addons/spreadsheet_dashboard_event_sale/data/files/events_dashboard.json:0
 #, python-format
 msgid "Top Organizers"
-msgstr "Top Organizatori"
+msgstr ""
 
 #. module: spreadsheet_dashboard_event_sale
 #. odoo-javascript
@@ -178,14 +177,14 @@ msgstr "Top etichete"
 #: code:addons/spreadsheet_dashboard_event_sale/data/files/events_dashboard.json:0
 #, python-format
 msgid "Top Templates"
-msgstr "Top Șabloane"
+msgstr ""
 
 #. module: spreadsheet_dashboard_event_sale
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_event_sale/data/files/events_dashboard.json:0
 #, python-format
 msgid "Top Venues"
-msgstr "Top Locații"
+msgstr ""
 
 #. module: spreadsheet_dashboard_event_sale
 #. odoo-javascript
@@ -200,28 +199,28 @@ msgstr "Loc de întâlnire"
 #: code:addons/spreadsheet_dashboard_event_sale/data/files/events_dashboard.json:0
 #, python-format
 msgid "attendees - current"
-msgstr "participanți - actuali"
+msgstr ""
 
 #. module: spreadsheet_dashboard_event_sale
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_event_sale/data/files/events_dashboard.json:0
 #, python-format
 msgid "attendees - previous"
-msgstr "participanți - anteriori"
+msgstr ""
 
 #. module: spreadsheet_dashboard_event_sale
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_event_sale/data/files/events_dashboard.json:0
 #, python-format
 msgid "events - current"
-msgstr "Evenimente - actuale"
+msgstr ""
 
 #. module: spreadsheet_dashboard_event_sale
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_event_sale/data/files/events_dashboard.json:0
 #, python-format
 msgid "events - previous"
-msgstr "evenimente - anterioare"
+msgstr ""
 
 #. module: spreadsheet_dashboard_event_sale
 #. odoo-javascript
@@ -237,11 +236,11 @@ msgstr "de la ultima perioadă"
 #: code:addons/spreadsheet_dashboard_event_sale/data/files/events_dashboard.json:0
 #, python-format
 msgid "untaxed revenue - current"
-msgstr "venituri neimpozitate - curente"
+msgstr ""
 
 #. module: spreadsheet_dashboard_event_sale
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_event_sale/data/files/events_dashboard.json:0
 #, python-format
 msgid "untaxed revenue - previous"
-msgstr "venituri neimpozitate - anterioare"
+msgstr ""

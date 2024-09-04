@@ -57,7 +57,6 @@ class SerialDriver(Driver):
     STATUS_CONNECTED = 'connected'
     STATUS_ERROR = 'error'
     STATUS_CONNECTING = 'connecting'
-    STATUS_DISCONNECTED = 'disconnected'
 
     def __init__(self, identifier, device):
         """ Attributes initialization method for `SerialDriver`.
@@ -138,8 +137,6 @@ class SerialDriver(Driver):
                 while not self._stopped.is_set():
                     self._take_measure()
                     time.sleep(self._protocol.newMeasureDelay)
-                self._status['status'] = self.STATUS_DISCONNECTED
-                self._push_status()
         except Exception:
             msg = _('Error while reading %s', self.device_name)
             _logger.exception(msg)

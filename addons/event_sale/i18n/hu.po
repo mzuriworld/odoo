@@ -3,15 +3,16 @@
 # 	* event_sale
 # 
 # Translators:
-# Tamás Dombos, 2023
 # sixsix six, 2023
 # Ákos Nagy <akos.nagy@oregional.hu>, 2023
-# Tamás Németh <ntomasz81@gmail.com>, 2023
 # Krisztián Juhász <juhasz.krisztian@josafar.hu>, 2023
+# Gergő Kertész <gergo.kertesz@maxflow.hu>, 2023
 # Istvan <leki69@gmail.com>, 2023
+# Tamás Németh <ntomasz81@gmail.com>, 2023
 # krnkris, 2023
 # Martin Trigaux, 2023
-# gezza <geza.nagy@oregional.hu>, 2024
+# gezza <geza.nagy@oregional.hu>, 2023
+# Tamás Dombos, 2024
 # 
 msgid ""
 msgstr ""
@@ -19,7 +20,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-26 21:55+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: gezza <geza.nagy@oregional.hu>, 2024\n"
+"Last-Translator: Tamás Dombos, 2024\n"
 "Language-Team: Hungarian (https://app.transifex.com/odoo/teams/41243/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +38,7 @@ msgstr ""
 #. module: event_sale
 #: model_terms:ir.ui.view,arch_db:event_sale.event_registration_ticket_view_form
 msgid "<span class=\"o_stat_text\">Sale Order</span>"
-msgstr "<span class=\"o_stat_text\">Vevői rendelés</span>"
+msgstr ""
 
 #. module: event_sale
 #: model_terms:ir.ui.view,arch_db:event_sale.view_event_form_inherit_ticket
@@ -111,7 +112,7 @@ msgstr "Kampány"
 #. module: event_sale
 #: model_terms:ir.ui.view,arch_db:event_sale.event_configurator_view_form
 msgid "Cancel"
-msgstr "Visszavonás"
+msgstr "Töröl"
 
 #. module: event_sale
 #: model:ir.model.fields.selection,name:event_sale.selection__event_sale_report__event_registration_state__cancel
@@ -220,7 +221,7 @@ msgstr "Szerkesztő"
 #. module: event_sale
 #: model:ir.model.fields,field_description:event_sale.field_registration_editor_line__email
 msgid "Email"
-msgstr "Email"
+msgstr "E-mail"
 
 #. module: event_sale
 #: model:ir.model,name:event_sale.model_event_event
@@ -242,7 +243,7 @@ msgstr "Esemény konfigurátor"
 #: model:ir.model.fields,field_description:event_sale.field_event_sale_report__event_date_end
 #: model_terms:ir.ui.view,arch_db:event_sale.event_sale_report_view_search
 msgid "Event End Date"
-msgstr "Esemény vége"
+msgstr "Esemény vége dátuma"
 
 #. module: event_sale
 #: model:ir.model,name:event_sale.model_event_registration
@@ -263,7 +264,7 @@ msgstr ""
 #. module: event_sale
 #: model:ir.actions.act_window,name:event_sale.action_sale_order_event_registration
 msgid "Event Registrations"
-msgstr "Esemény regisztráció"
+msgstr "Rendezvény regisztráció"
 
 #. module: event_sale
 #: model_terms:ir.ui.view,arch_db:event_sale.event_sale_report_view_search
@@ -279,7 +280,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:event_sale.field_event_sale_report__event_date_begin
 #: model_terms:ir.ui.view,arch_db:event_sale.event_sale_report_view_search
 msgid "Event Start Date"
-msgstr "Esemény kezdete"
+msgstr "Esemény kezdő időpontja"
 
 #. module: event_sale
 #: model:ir.model,name:event_sale.model_event_type_ticket
@@ -299,7 +300,7 @@ msgstr "Esemény jegy"
 #. module: event_sale
 #: model:ir.model.fields,field_description:event_sale.field_product_product__event_ticket_ids
 msgid "Event Tickets"
-msgstr "Esemény jegyek "
+msgstr "Jegyek a rendezvényre"
 
 #. module: event_sale
 #: model:ir.model.fields,field_description:event_sale.field_event_sale_report__event_type_id
@@ -335,7 +336,7 @@ msgstr "Csoportosítás"
 #: model:ir.model.fields,field_description:event_sale.field_registration_editor__id
 #: model:ir.model.fields,field_description:event_sale.field_registration_editor_line__id
 msgid "ID"
-msgstr "ID"
+msgstr "Azonosító"
 
 #. module: event_sale
 #. odoo-python
@@ -371,7 +372,7 @@ msgstr "Frissítve"
 #. module: event_sale
 #: model:ir.model.fields,field_description:event_sale.field_event_registration__utm_medium_id
 msgid "Medium"
-msgstr "Médium"
+msgstr "Közepes"
 
 #. module: event_sale
 #: model:ir.model.fields,field_description:event_sale.field_registration_editor_line__name
@@ -423,7 +424,7 @@ msgstr "Elmúlt események"
 #. module: event_sale
 #: model:ir.model.fields,field_description:event_sale.field_event_sale_report__sale_status
 msgid "Payment Status"
-msgstr "Fizetés állapota"
+msgstr "Kiegyenlítés állapota"
 
 #. module: event_sale
 #: model_terms:ir.ui.view,arch_db:event_sale.event_sale_report_view_search
@@ -528,7 +529,7 @@ msgstr "Regisztrációk"
 #. module: event_sale
 #: model:ir.model.fields,field_description:event_sale.field_registration_editor__event_registration_ids
 msgid "Registrations to Edit"
-msgstr "Szerkesztendő regisztráció"
+msgstr "Szerkesztendő jelentkezés "
 
 #. module: event_sale
 #: model:ir.actions.act_window,name:event_sale.event_sale_report_action
@@ -545,12 +546,12 @@ msgstr "Bevételek"
 #: model:ir.model.fields,field_description:event_sale.field_event_sale_report__sale_order_id
 #: model_terms:ir.ui.view,arch_db:event_sale.event_sale_report_view_form
 msgid "Sale Order"
-msgstr "Vevői rendelés"
+msgstr "Értékesítési rendelés"
 
 #. module: event_sale
 #: model:ir.model.fields,field_description:event_sale.field_event_sale_report__sale_order_line_id
 msgid "Sale Order Line"
-msgstr "Vevői rendelés sor"
+msgstr "Rendelési tétel"
 
 #. module: event_sale
 #: model:ir.model.fields,field_description:event_sale.field_event_sale_report__sale_order_state
@@ -576,7 +577,7 @@ msgstr ""
 #. module: event_sale
 #: model_terms:ir.ui.view,arch_db:event_sale.event_event_ticket_view_tree_from_event
 msgid "Sales End"
-msgstr "Értékesítés vége"
+msgstr "Vevői megrendelések lezárva"
 
 #. module: event_sale
 #: model:ir.model,name:event_sale.model_sale_order
@@ -584,14 +585,14 @@ msgstr "Értékesítés vége"
 #: model:ir.model.fields,field_description:event_sale.field_registration_editor__sale_order_id
 #: model:ir.model.fields.selection,name:event_sale.selection__event_sale_report__sale_order_state__sale
 msgid "Sales Order"
-msgstr "Vevői rendelés"
+msgstr "Megrendelések"
 
 #. module: event_sale
 #: model:ir.model,name:event_sale.model_sale_order_line
 #: model:ir.model.fields,field_description:event_sale.field_event_registration__sale_order_line_id
 #: model:ir.model.fields,field_description:event_sale.field_registration_editor_line__sale_order_line_id
 msgid "Sales Order Line"
-msgstr "Vevői rendelés sor"
+msgstr "Vevői megrendelés sor"
 
 #. module: event_sale
 #: model_terms:ir.ui.view,arch_db:event_sale.event_event_ticket_view_tree_from_event
@@ -629,7 +630,7 @@ msgstr "Státusz"
 #. module: event_sale
 #: model_terms:ir.ui.view,arch_db:event_sale.event_sale_report_view_search
 msgid "Ticket"
-msgstr "Jegy"
+msgstr "Hibajegy"
 
 #. module: event_sale
 #: model_terms:ir.ui.view,arch_db:event_sale.event_ticket_id_change_exception

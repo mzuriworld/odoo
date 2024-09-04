@@ -24,7 +24,7 @@
         'views/account_move_views.xml',
         'views/crm_team_views.xml',
         'views/digest_views.xml',
-        'views/product_attribute_views.xml',
+        'views/product_views.xml',
         'views/product_document_views.xml',
         'views/product_tag_views.xml',
         'views/product_views.xml',

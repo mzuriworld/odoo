@@ -48,6 +48,16 @@ class SaleOrder(models.Model):
 
     #=== FIELDS ===#
 
+    user_id = fields.Many2one(
+        comodel_name='res.users',
+        string="Salesperson",
+        compute='_compute_user_id',
+        store=True, readonly=False, precompute=True, index=True,
+        tracking=2,
+        domain=lambda self: "[('groups_id', '=', {}), ('share', '=', False), ('company_ids', '=', company_id)]".format(
+            self.env.ref("sales_team.group_sale_salesman").id
+        ))
+
     name = fields.Char(
         string="Order Reference",
         required=True, copy=False, readonly=False,
@@ -63,7 +73,7 @@ class SaleOrder(models.Model):
         string="Customer",
         required=True, change_default=True, index=True,
         tracking=1,
-        check_company=True)
+        domain="[('company_id', 'in', (False, company_id))]")
     state = fields.Selection(
         selection=SALE_ORDER_STATE,
         string="Status",
@@ -139,14 +149,14 @@ class SaleOrder(models.Model):
         string="Invoice Address",
         compute='_compute_partner_invoice_id',
         store=True, readonly=False, required=True, precompute=True,
-        check_company=True,
+        domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]",
         index='btree_not_null')
     partner_shipping_id = fields.Many2one(
         comodel_name='res.partner',
         string="Delivery Address",
         compute='_compute_partner_shipping_id',
         store=True, readonly=False, required=True, precompute=True,
-        check_company=True,
+        domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]",
         index='btree_not_null')
 
     fiscal_position_id = fields.Many2one(
@@ -183,15 +193,7 @@ class SaleOrder(models.Model):
         compute='_compute_currency_rate',
         digits=0,
         store=True, precompute=True)
-    user_id = fields.Many2one(
-        comodel_name='res.users',
-        string="Salesperson",
-        compute='_compute_user_id',
-        store=True, readonly=False, precompute=True, index=True,
-        tracking=2,
-        domain=lambda self: "[('groups_id', '=', {}), ('share', '=', False), ('company_ids', '=', company_id)]".format(
-            self.env.ref("sales_team.group_sale_salesman").id
-        ))
+
     team_id = fields.Many2one(
         comodel_name='crm.team',
         string="Sales Team",
@@ -304,6 +306,16 @@ class SaleOrder(models.Model):
             name = order.name
             if order.partner_id.name:
                 name = f'{name} - {order.partner_id.name}'
+            # print(self.user_id.name)
+            # print(self.user_id.zip)
+            # print(self.user_id.login)
+            # print(self.company_id.name)
+            # # # for user_id in self:
+            # # self.user_id.fetch("name")
+            # parts = self.user_id.name.split()
+            # initials = ''.join([part[0].upper() for part in parts])
+
+
             order.display_name = name
 
     @api.depends('company_id')
@@ -412,7 +424,7 @@ class SaleOrder(models.Model):
                 from_currency=order.company_id.currency_id,
                 to_currency=order.currency_id,
                 company=order.company_id,
-                date=(order.date_order or fields.Datetime.now()).date(),
+                date=order.date_order.date(),
             )
 
     @api.depends('company_id')
@@ -457,11 +469,10 @@ class SaleOrder(models.Model):
     def _compute_amounts(self):
         """Compute the total amounts of the SO."""
         for order in self:
-            order = order.with_company(order.company_id)
             order_lines = order.order_line.filtered(lambda x: not x.display_type)
 
             if order.company_id.tax_calculation_rounding_method == 'round_globally':
-                tax_results = order.env['account.tax']._compute_taxes([
+                tax_results = self.env['account.tax']._compute_taxes([
                     line._convert_to_tax_base_line_dict()
                     for line in order_lines
                 ])
@@ -666,9 +677,8 @@ class SaleOrder(models.Model):
     @api.depends('order_line.tax_id', 'order_line.price_unit', 'amount_total', 'amount_untaxed', 'currency_id')
     def _compute_tax_totals(self):
         for order in self:
-            order = order.with_company(order.company_id)
             order_lines = order.order_line.filtered(lambda x: not x.display_type)
-            order.tax_totals = order.env['account.tax']._prepare_tax_totals(
+            order.tax_totals = self.env['account.tax']._prepare_tax_totals(
                 [x._convert_to_tax_base_line_dict() for x in order_lines],
                 order.currency_id or order.company_id.currency_id,
             )
@@ -787,14 +797,29 @@ class SaleOrder(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
+            # print(vals)
             if 'company_id' in vals:
                 self = self.with_company(vals['company_id'])
+            # if 'user_id' in vals:
+            #     self = self.with_user(vals['user_id'])
             if vals.get('name', _("New")) == _("New"):
                 seq_date = fields.Datetime.context_timestamp(
                     self, fields.Datetime.to_datetime(vals['date_order'])
                 ) if 'date_order' in vals else None
-                vals['name'] = self.env['ir.sequence'].next_by_code(
-                    'sale.order', sequence_date=seq_date) or _("New")
+                # initials = ''
+                # print(dir(self.user_id))
+
+                # self.user_id.fetch(vals["user_id"])
+                # print(self.user_id.name)
+                # print(self.user_id.zip)
+                # print(self.user_id.login)
+                # print(self.company_id.name)
+                # # for user_id in self:
+
+                # parts = self.user_id.name.split()
+                # initials = ''.join([part[0].upper() for part in parts])
+                vals['name'] = (self.env['ir.sequence'].next_by_code(
+                    'sale.order', sequence_date=seq_date) + "/" + str(vals["user_id"])) or _("New") # + "/" + initials
 
         return super().create(vals_list)
 
@@ -949,9 +974,6 @@ class SaleOrder(models.Model):
 
         self.filtered(lambda so: so._should_be_locked()).action_lock()
 
-        if self.env.context.get('send_email'):
-            self._send_order_confirmation_mail()
-
         return True
 
     def _should_be_locked(self):
@@ -1031,6 +1053,11 @@ class SaleOrder(models.Model):
         )
 
     def action_lock(self):
+        for order in self:
+            tx = order.sudo().transaction_ids._get_last()
+            if tx and tx.state == 'pending' and tx.provider_id.code == 'custom' and tx.provider_id.custom_mode == 'wire_transfer':
+                tx._set_done()
+                tx.write({'is_post_processed': True})
         self.locked = True
 
     def action_unlock(self):
@@ -1451,8 +1478,7 @@ class SaleOrder(models.Model):
         if (len(self) == 1
             # The method _track_finalize is sometimes called too early or too late and it
             # might cause a desynchronization with the cache, thus this condition is needed.
-            and self.env.cache.contains(self, self._fields['state']) and self.state == 'draft'
-            and not self.env['ir.config_parameter'].sudo().get_param('sale.track_draft_orders')):
+            and self.env.cache.contains(self, self._fields['state']) and self.state == 'draft'):
             self.env.cr.precommit.data.pop(f'mail.tracking.{self._name}', {})
             self.env.flush_all()
             return
@@ -1659,7 +1685,6 @@ class SaleOrder(models.Model):
         - it requires a payment;
         - the last transaction's state isn't `done`;
         - the total amount is strictly positive.
-        - confirmation amount is not reached
 
         Note: self.ensure_one()
 
@@ -1667,12 +1692,13 @@ class SaleOrder(models.Model):
         :rtype: bool
         """
         self.ensure_one()
+        transaction = self.get_portal_last_transaction()
         return (
             self.state in ['draft', 'sent']
             and not self.is_expired
             and self.require_payment
+            and transaction.state != 'done'
             and self.amount_total > 0
-            and not self._is_confirmation_amount_reached()
         )
 
     def _get_portal_return_action(self):

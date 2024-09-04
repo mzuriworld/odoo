@@ -2,16 +2,12 @@
 # This file contains the translation of the following modules:
 # 	* pos_hr
 # 
-# Translators:
-# Kristófer Arnþórsson, 2024
-# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 10:27+0000\n"
+"POT-Creation-Date: 2023-10-26 21:55+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Kristófer Arnþórsson, 2024\n"
 "Language-Team: Icelandic (https://app.transifex.com/odoo/teams/41243/is/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,7 +49,7 @@ msgstr ""
 #. module: pos_hr
 #: model:ir.model,name:pos_hr.model_res_config_settings
 msgid "Config Settings"
-msgstr "Stillingarvalkostir"
+msgstr ""
 
 #. module: pos_hr
 #: model:ir.model,name:pos_hr.model_hr_employee
@@ -103,6 +99,7 @@ msgstr ""
 
 #. module: pos_hr
 #. odoo-javascript
+#: code:addons/pos_hr/static/src/app/header_lock_button/header_lock_button.xml:0
 #: code:addons/pos_hr/static/src/overrides/components/navbar/navbar.xml:0
 #, python-format
 msgid "Lock"
@@ -113,13 +110,6 @@ msgstr ""
 #: code:addons/pos_hr/static/src/app/login_screen/login_screen.xml:0
 #, python-format
 msgid "Log in to"
-msgstr ""
-
-#. module: pos_hr
-#. odoo-javascript
-#: code:addons/pos_hr/static/src/app/select_cashier_mixin.js:0
-#, python-format
-msgid "No Cashiers"
 msgstr ""
 
 #. module: pos_hr
@@ -183,13 +173,6 @@ msgid "Select Cashier"
 msgstr ""
 
 #. module: pos_hr
-#. odoo-javascript
-#: code:addons/pos_hr/static/src/app/select_cashier_mixin.js:0
-#, python-format
-msgid "There are no employees to select as cashier. Please create one."
-msgstr ""
-
-#. module: pos_hr
 #. odoo-python
 #: code:addons/pos_hr/models/hr_employee.py:0
 #, python-format
@@ -203,4 +186,4 @@ msgstr ""
 #: code:addons/pos_hr/static/src/app/login_screen/login_screen.xml:0
 #, python-format
 msgid "or"
-msgstr "eða"
+msgstr ""

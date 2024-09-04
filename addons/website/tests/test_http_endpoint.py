@@ -2,6 +2,8 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 from odoo.tests import HttpCase
 
+import werkzeug
+
 
 class TestHttpEndPoint(HttpCase):
 
@@ -34,4 +36,4 @@ class TestHttpEndPoint(HttpCase):
     def test_redirect_double_slash(self):
         res = self.url_open('/test_http//greeting', allow_redirects=False)
         self.assertIn(res.status_code, (301, 308))
-        self.assertURLEqual(res.headers.get('Location'), '/test_http/greeting')
+        self.assertEqual(werkzeug.urls.url_parse(res.headers.get('Location', '')).path, '/test_http/greeting')

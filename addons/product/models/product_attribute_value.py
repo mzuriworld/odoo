@@ -47,9 +47,11 @@ class ProductAttributeValue(models.Model):
     image = fields.Image(
         string="Image",
         help="You can upload an image that will be used as the color of the attribute value.",
-        max_width=70,
-        max_height=70,
+        max_width=2048,
+        max_height=2048,
     )
+
+
 
     _sql_constraints = [
         ('value_company_uniq',

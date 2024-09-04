@@ -341,7 +341,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__awarded_points
 #, python-format
 msgid "Points"
-msgstr "Taškai"
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model:event.quiz,name:website_event_track_quiz.event_7_track_13_quiz
@@ -388,7 +388,7 @@ msgstr "Klausimai"
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_form
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_track_content
 msgid "Quiz"
-msgstr "Apklausa"
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_track__quiz_points
@@ -421,7 +421,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_search
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_tree
 msgid "Quizzes"
-msgstr "Apklausos"
+msgstr ""
 
 #. module: website_event_track_quiz
 #. odoo-javascript
@@ -493,7 +493,7 @@ msgstr ""
 #: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
 #, python-format
 msgid "There was an error validating this quiz."
-msgstr "Patvirtinant šią anketą įvyko klaida."
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,help:website_event_track_quiz.field_event_quiz_answer__comment
@@ -507,7 +507,7 @@ msgstr ""
 #: code:addons/website_event_track_quiz/static/src/js/event_quiz.js:0
 #, python-format
 msgid "This quiz is already done. Retaking it is not possible."
-msgstr "Ši apklausa jau pabaigta. Pakartoti nėra numatyta."
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_5_question_1_1

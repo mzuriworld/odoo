@@ -4,15 +4,14 @@
 # 
 # Translators:
 # jonasyngvi, 2024
-# Kristófer Arnþórsson, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 10:27+0000\n"
+"POT-Creation-Date: 2024-01-05 12:31+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Kristófer Arnþórsson, 2024\n"
+"Last-Translator: jonasyngvi, 2024\n"
 "Language-Team: Icelandic (https://app.transifex.com/odoo/teams/41243/is/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -80,7 +79,7 @@ msgstr ""
 #. module: hr_homeworking
 #: model:ir.model,name:hr_homeworking.model_res_partner
 msgid "Contact"
-msgstr "Hafa samband"
+msgstr ""
 
 #. module: hr_homeworking
 #: model:ir.model.fields,field_description:hr_homeworking.field_homework_location_wizard__work_location_type
@@ -99,13 +98,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:hr_homeworking.field_homework_location_wizard__create_uid
 #: model:ir.model.fields,field_description:hr_homeworking.field_hr_employee_location__create_uid
 msgid "Created by"
-msgstr "Búið til af"
+msgstr ""
 
 #. module: hr_homeworking
 #: model:ir.model.fields,field_description:hr_homeworking.field_homework_location_wizard__create_date
 #: model:ir.model.fields,field_description:hr_homeworking.field_hr_employee_location__create_date
 msgid "Created on"
-msgstr "Búið til þann"
+msgstr ""
 
 #. module: hr_homeworking
 #: model:ir.model.fields,field_description:hr_homeworking.field_hr_employee__exceptional_location_id
@@ -130,7 +129,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:hr_homeworking.field_homework_location_wizard__display_name
 #: model:ir.model.fields,field_description:hr_homeworking.field_hr_employee_location__display_name
 msgid "Display Name"
-msgstr "Birtingarnafn"
+msgstr ""
 
 #. module: hr_homeworking
 #. odoo-javascript
@@ -175,19 +174,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:hr_homeworking.field_homework_location_wizard__id
 #: model:ir.model.fields,field_description:hr_homeworking.field_hr_employee_location__id
 msgid "ID"
-msgstr "Auðkenni (ID)"
+msgstr ""
 
 #. module: hr_homeworking
 #: model:ir.model.fields,field_description:hr_homeworking.field_homework_location_wizard__write_uid
 #: model:ir.model.fields,field_description:hr_homeworking.field_hr_employee_location__write_uid
 msgid "Last Updated by"
-msgstr "Síðast uppfært af"
+msgstr ""
 
 #. module: hr_homeworking
 #: model:ir.model.fields,field_description:hr_homeworking.field_homework_location_wizard__write_date
 #: model:ir.model.fields,field_description:hr_homeworking.field_hr_employee_location__write_date
 msgid "Last Updated on"
-msgstr "Síðast uppfært þann"
+msgstr ""
 
 #. module: hr_homeworking
 #: model:ir.model.fields,field_description:hr_homeworking.field_homework_location_wizard__work_location_id
@@ -310,14 +309,6 @@ msgstr ""
 #. module: hr_homeworking
 #: model:ir.model,name:hr_homeworking.model_res_users
 msgid "User"
-msgstr "Notandi"
-
-#. module: hr_homeworking
-#. odoo-javascript
-#: code:addons/hr_homeworking/static/src/im_status_patch.xml:0
-#: code:addons/hr_homeworking/static/src/im_status_patch.xml:0
-#, python-format
-msgid "User work at {{location}} and is {{status}}"
 msgstr ""
 
 #. module: hr_homeworking
@@ -349,12 +340,4 @@ msgstr ""
 #: code:addons/hr_homeworking/models/hr_work_location.py:0
 #, python-format
 msgid "You cannot delete locations that are being used by your employees"
-msgstr ""
-
-#. module: hr_homeworking
-#. odoo-javascript
-#: code:addons/hr_homeworking/static/src/im_status_patch.xml:0
-#: code:addons/hr_homeworking/static/src/im_status_patch.xml:0
-#, python-format
-msgid "{{status}}"
 msgstr ""

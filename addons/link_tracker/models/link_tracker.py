@@ -13,8 +13,6 @@ from odoo.exceptions import UserError
 from odoo.osv import expression
 from odoo.addons.mail.tools import link_preview
 
-LINK_TRACKER_MIN_CODE_LENGTH = 3
-
 
 class LinkTracker(models.Model):
     """ Link trackers allow users to wrap any URL into a short URL that can be
@@ -259,7 +257,7 @@ class LinkTrackerCode(models.Model):
 
     @api.model
     def _get_random_code_strings(self, n=1):
-        size = LINK_TRACKER_MIN_CODE_LENGTH
+        size = 3
         while True:
             code_propositions = [
                 ''.join(random.choices(string.ascii_letters + string.digits, k=size))
@@ -278,7 +276,7 @@ class LinkTrackerClick(models.Model):
     _description = "Link Tracker Click"
 
     campaign_id = fields.Many2one(
-        'utm.campaign', 'UTM Campaign', index='btree_not_null',
+        'utm.campaign', 'UTM Campaign',
         related="link_id.campaign_id", store=True, ondelete="set null")
     link_id = fields.Many2one(
         'link.tracker', 'Link',

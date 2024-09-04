@@ -1,8 +1,6 @@
 /** @odoo-module **/
 
 import publicWidget from "@web/legacy/js/public/public_widget";
-import { ReCaptcha } from "@google_recaptcha/js/recaptcha";
-import { _t } from "@web/core/l10n/translation";
 
 publicWidget.registry.follow = publicWidget.Widget.extend({
     selector: '#wrapwrap:has(.js_follow)',
@@ -11,12 +9,6 @@ publicWidget.registry.follow = publicWidget.Widget.extend({
     init() {
         this._super(...arguments);
         this.rpc = this.bindService("rpc");
-        this._recaptcha = new ReCaptcha();
-        this.notification = this.bindService("notification");
-    },
-
-    async willStart() {
-        return this._recaptcha.loadLibs();
     },
 
     /**
@@ -108,7 +100,7 @@ publicWidget.registry.follow = publicWidget.Widget.extend({
      * @private
      * @param {Event} ev
      */
-    async _onClick(ev) {
+    _onClick: function (ev) {
         var self = this;
         var $jsFollow = $(ev.currentTarget).closest('.js_follow');
         var $email = $jsFollow.find(".js_follow_email");
@@ -121,24 +113,12 @@ publicWidget.registry.follow = publicWidget.Widget.extend({
 
         var email = $email.length ? $email.val() : false;
         if (email || this.isUser) {
-            const tokenCaptcha = await this._recaptcha.getToken("website_mail_follow");
-            const token = tokenCaptcha.token;
-
-            if (tokenCaptcha.error) {
-                self.notification.add(tokenCaptcha.error, {
-                    type: "danger",
-                    title: _t("Error"),
-                    sticky: true
-                });
-                return false;
-            }
-            this.rpc("/website_mail/follow", {
-                "id": +$jsFollow.data("id"),
-                "object": $jsFollow.data("object"),
-                "message_is_follower": $jsFollow.attr("data-follow") || "off",
-                "email": email,
-                "recaptcha_token_response": token
-            }).then(function(follow) {
+            this.rpc('/website_mail/follow', {
+                'id': +$jsFollow.data('id'),
+                'object': $jsFollow.data('object'),
+                'message_is_follower': $jsFollow.attr("data-follow") || "off",
+                'email': email,
+            }).then(function (follow) {
                 self._toggleSubscription(follow, email, $jsFollow);
             });
         }

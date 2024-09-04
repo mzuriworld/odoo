@@ -497,10 +497,8 @@ export function parseDateTime(value, options = {}) {
  * Returns a date object parsed from the given serialized string.
  * @param {string} value serialized date string, e.g. "2018-01-01"
  */
-export function deserializeDate(value, options = {}) {
-    const defaultDict = {numberingSystem: "latn", zone: "default"}
-    const joinedDict = {...defaultDict, ...options}
-    return DateTime.fromSQL(value, joinedDict).reconfigure({
+export function deserializeDate(value) {
+    return DateTime.fromSQL(value, { numberingSystem: "latn", zone: "default" }).reconfigure({
         numberingSystem: Settings.defaultNumberingSystem,
     });
 }

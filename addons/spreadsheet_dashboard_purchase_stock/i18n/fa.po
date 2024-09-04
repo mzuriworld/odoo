@@ -10,7 +10,6 @@
 # Hamed Mohammadi <hamed@dehongi.com>, 2023
 # Martin Trigaux, 2023
 # Hanna Kheradroosta, 2024
-# Mostafa Barmshory <mostafa.barmshory@gmail.com>, 2024
 # 
 msgid ""
 msgstr ""
@@ -18,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-26 21:56+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Mostafa Barmshory <mostafa.barmshory@gmail.com>, 2024\n"
+"Last-Translator: Hanna Kheradroosta, 2024\n"
 "Language-Team: Persian (https://app.transifex.com/odoo/teams/41243/fa/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -51,7 +50,7 @@ msgstr "مقدار"
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Amount Purchased"
-msgstr "مبلغ خریداری شده"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
@@ -65,7 +64,7 @@ msgstr "میانگین سفارش"
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Average order"
-msgstr "میانگین ارزش یا حجم یک سفارش"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
@@ -75,7 +74,7 @@ msgstr "میانگین ارزش یا حجم یک سفارش"
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Buyer"
-msgstr "خریدار"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
@@ -105,42 +104,42 @@ msgstr "جاری"
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Days to confirm"
-msgstr "روزها برای تایید"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Days to receive"
-msgstr "روزهای برای دریافت"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "KPI"
-msgstr "شاخص کلیدی عملکرد"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Late Receipts"
-msgstr "دریافت های دیرهنگام"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Lead Time to Receive"
-msgstr "زمان دریافت"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Opened"
-msgstr "باز شد"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
@@ -208,42 +207,42 @@ msgstr "خرید"
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Purchase Analysis by Partner Country"
-msgstr "جزیه و تحلیل خرید توسط کشور شریک"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Purchase Analysis by Product"
-msgstr "تجزیه و تحلیل خرید بر اساس محصول"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Purchase Analysis by Product Category"
-msgstr "تجزیه و تحلیل خرید بر اساس دسته بندی محصول"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Purchase Analysis by Purchase Representative"
-msgstr "تجزیه و تحلیل خرید توسط نماینده خرید"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Purchase Analysis by Vendor"
-msgstr "تجزیه و تحلیل خرید توسط فروشنده"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Purchase Orders by Untaxed Amount"
-msgstr "سفارشات خرید بر اساس مبلغ بدون مالیات"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
@@ -266,7 +265,7 @@ msgstr "تعداد سفارش داده شده"
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Quantity ordered"
-msgstr "مقدار سفارش داده شده"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
@@ -280,7 +279,7 @@ msgstr "درخواست پیش فاکتور"
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Requests for Quotation by Untaxed Amount"
-msgstr "درخواست برای پیش فاکتور بر اساس مبلغ بدون مالیات"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
@@ -294,28 +293,28 @@ msgstr "پاسخگو"
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Scheduled on"
-msgstr "برنامه ریزی شده در"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Top Buyers"
-msgstr "خریداران برتر"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Top Countries"
-msgstr "کشورهای برتر"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Top Orders"
-msgstr "برترین سفارشات"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
@@ -336,14 +335,14 @@ msgstr "برترین محصولات"
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Top RFQs"
-msgstr "برترین درخواست های پیش فاکتور"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Top Vendors"
-msgstr "فروشندگان برتر"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
@@ -351,7 +350,7 @@ msgstr "فروشندگان برتر"
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Total Untaxed"
-msgstr "کل بدون مالیات"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
@@ -365,7 +364,7 @@ msgstr "انتقال"
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Transfers by Creation Date"
-msgstr "نقل و انتقالات بر اساس تاریخ ایجاد"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
@@ -383,21 +382,21 @@ msgstr "فروشنده"
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "last period"
-msgstr "دوره قبلی"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "purchase stats - current"
-msgstr "آمار خرید - فعلی"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "purchase stats - previous"
-msgstr "آمار خرید - قبلی"
+msgstr ""
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript

@@ -6,7 +6,7 @@ import logging
 import pytz
 
 from collections import defaultdict
-from datetime import date, datetime, time
+from datetime import time, datetime
 
 from odoo import api, fields, models
 from odoo.tools import format_date, frozendict
@@ -111,19 +111,8 @@ class HolidaysType(models.Model):
             or that don't need an allocation
             return [('id', domain_operator, [x['id'] for x in res])]
         """
-
-        if {'default_date_from', 'default_date_to', 'tz'} <= set(self._context):
-            default_date_from_dt = fields.Datetime.to_datetime(self._context.get('default_date_from'))
-            default_date_to_dt = fields.Datetime.to_datetime(self._context.get('default_date_to'))
-
-            # Cast: Datetime -> Date using user's tz
-            date_from = fields.Date.context_today(self, default_date_from_dt)
-            date_to = fields.Date.context_today(self, default_date_to_dt)
-
-        else:
-            date_from = fields.Date.today().strftime('%Y-1-1')
-            date_to = fields.Date.today().strftime('%Y-12-31')
-
+        date_from = self._context.get('default_date_from') or fields.Date.today().strftime('%Y-1-1')
+        date_to = self._context.get('default_date_to') or fields.Date.today().strftime('%Y-12-31')
         employee_id = self._context.get('default_employee_id', self._context.get('employee_id')) or self.env.user.employee_id.id
 
         if not isinstance(value, bool):
@@ -377,20 +366,6 @@ class HolidaysType(models.Model):
     # ------------------------------------------------------------
 
     @api.model
-    def has_accrual_allocation(self):
-        employee = self.env['hr.employee']._get_contextual_employee()
-        if not employee:
-            return False
-        return bool(self.env['hr.leave.allocation'].search_count([
-            ('employee_id', '=', employee.id),
-            ('state', '=', 'validate'),
-            ('allocation_type', '=', 'accrual'),
-            '|',
-            ('date_to', '>', date.today()),
-            ('date_to', '=', False),
-        ]))
-
-    @api.model
     def get_allocation_data_request(self, target_date=None):
         leave_types = self.search([
             '|',
@@ -439,6 +414,7 @@ class HolidaysType(models.Model):
                         'exceeding_duration': extra_data[employee][leave_type]['exceeding_duration'],
                         'request_unit': leave_type.request_unit,
                         'icon': leave_type.sudo().icon_id.url,
+                        'has_accrual_allocation': False,
                         'allows_negative': leave_type.allows_negative,
                         'max_allowed_negative': leave_type.max_allowed_negative,
                     },
@@ -466,6 +442,8 @@ class HolidaysType(models.Model):
                 for allocation, data in allocations_leaves_consumed[employee][leave_type].items():
                     # We only need the allocation that are valid at the given date
                     if allocation:
+                        if allocation.allocation_type == 'accrual':
+                            lt_info[1]['has_accrual_allocation'] = True
                         today = fields.Date.today()
                         if allocation.date_from <= today and (not allocation.date_to or allocation.date_to >= today):
                             # we get each allocation available now to indicate visually if

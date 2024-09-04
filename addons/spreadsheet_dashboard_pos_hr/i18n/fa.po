@@ -8,7 +8,6 @@
 # Hamed Mohammadi <hamed@dehongi.com>, 2023
 # Yousef Shadmanesh <y.shadmanesh@gmail.com>, 2023
 # Hanna Kheradroosta, 2024
-# Mostafa Barmshory <mostafa.barmshory@gmail.com>, 2024
 # 
 msgid ""
 msgstr ""
@@ -16,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-26 21:56+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Mostafa Barmshory <mostafa.barmshory@gmail.com>, 2024\n"
+"Last-Translator: Hanna Kheradroosta, 2024\n"
 "Language-Team: Persian (https://app.transifex.com/odoo/teams/41243/fa/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +29,7 @@ msgstr ""
 #: code:addons/spreadsheet_dashboard_pos_hr/data/files/pos_dashboard.json:0
 #, python-format
 msgid "Average order"
-msgstr "میانگین ارزش یا حجم یک سفارش"
+msgstr ""
 
 #. module: spreadsheet_dashboard_pos_hr
 #. odoo-javascript
@@ -66,7 +65,7 @@ msgstr "کارمند"
 #: code:addons/spreadsheet_dashboard_pos_hr/data/files/pos_dashboard.json:0
 #, python-format
 msgid "KPI"
-msgstr "شاخص کلیدی عملکرد"
+msgstr ""
 
 #. module: spreadsheet_dashboard_pos_hr
 #. odoo-javascript
@@ -92,14 +91,14 @@ msgstr "سفارشات"
 #: code:addons/spreadsheet_dashboard_pos_hr/data/files/pos_dashboard.json:0
 #, python-format
 msgid "Orders by Month"
-msgstr " تعداد سفارش‌های  ثبت شده در هر ماه"
+msgstr ""
 
 #. module: spreadsheet_dashboard_pos_hr
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_pos_hr/data/files/pos_dashboard.json:0
 #, python-format
 msgid "Orders by Total"
-msgstr "دسته‌بندی یا نمایش سفارش‌ها بر اساس مجموع مبلغ یا ارزش کل هر سفارش "
+msgstr ""
 
 #. module: spreadsheet_dashboard_pos_hr
 #. odoo-javascript
@@ -123,7 +122,7 @@ msgstr "پایانه فروش"
 #: code:addons/spreadsheet_dashboard_pos_hr/data/files/pos_dashboard.json:0
 #, python-format
 msgid "Point of Sale Analysis by Point of Sale"
-msgstr " "
+msgstr ""
 
 #. module: spreadsheet_dashboard_pos_hr
 #. odoo-javascript
@@ -188,7 +187,7 @@ msgstr "درآمد"
 #: code:addons/spreadsheet_dashboard_pos_hr/data/files/pos_dashboard.json:0
 #, python-format
 msgid "Session"
-msgstr "نشست"
+msgstr "جلسه"
 
 #. module: spreadsheet_dashboard_pos_hr
 #. odoo-javascript
@@ -202,14 +201,14 @@ msgstr "جلسات"
 #: code:addons/spreadsheet_dashboard_pos_hr/data/files/pos_dashboard.json:0
 #, python-format
 msgid "Top Orders"
-msgstr "برترین سفارشات"
+msgstr ""
 
 #. module: spreadsheet_dashboard_pos_hr
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_pos_hr/data/files/pos_dashboard.json:0
 #, python-format
 msgid "Top Points of Sale"
-msgstr "برترین پایانه فروش"
+msgstr ""
 
 #. module: spreadsheet_dashboard_pos_hr
 #. odoo-javascript
@@ -223,14 +222,14 @@ msgstr "برترین محصولات"
 #: code:addons/spreadsheet_dashboard_pos_hr/data/files/pos_dashboard.json:0
 #, python-format
 msgid "Top Responsibles"
-msgstr "برترین مسئولین"
+msgstr ""
 
 #. module: spreadsheet_dashboard_pos_hr
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_pos_hr/data/files/pos_dashboard.json:0
 #, python-format
 msgid "Top Sessions"
-msgstr "برترین جلسات"
+msgstr ""
 
 #. module: spreadsheet_dashboard_pos_hr
 #. odoo-javascript
@@ -253,11 +252,11 @@ msgstr "از آخرین دوره"
 #: code:addons/spreadsheet_dashboard_pos_hr/data/files/pos_dashboard.json:0
 #, python-format
 msgid "stats - current"
-msgstr "آمار - جاری"
+msgstr ""
 
 #. module: spreadsheet_dashboard_pos_hr
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_pos_hr/data/files/pos_dashboard.json:0
 #, python-format
 msgid "stats - previous"
-msgstr "آمار - قبلی"
+msgstr ""

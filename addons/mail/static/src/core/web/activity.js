@@ -9,12 +9,7 @@ import { AvatarCardPopover } from "@mail/discuss/web/avatar_card/avatar_card_pop
 import { Component, onMounted, onWillUnmount, useState } from "@odoo/owl";
 
 import { browser } from "@web/core/browser/browser";
-import {
-    deserializeDate,
-    deserializeDateTime,
-    formatDate,
-    formatDateTime,
-} from "@web/core/l10n/dates";
+import { deserializeDateTime } from "@web/core/l10n/dates";
 import { _t } from "@web/core/l10n/translation";
 import { usePopover } from "@web/core/popover/popover_hook";
 import { useService } from "@web/core/utils/hooks";
@@ -39,7 +34,6 @@ export class Activity extends Component {
     setup() {
         this.activityService = useService("mail.activity");
         this.threadService = useService("mail.thread");
-        this.storeService = useService("mail.store");
         this.state = useState({ showDetails: false });
         this.popover = usePopover(ActivityMarkAsDone, { position: "right" });
         this.avatarCard = usePopover(AvatarCardPopover);
@@ -58,11 +52,9 @@ export class Activity extends Component {
     }
 
     get displayCreateDate() {
-        return formatDateTime(deserializeDateTime(this.props.data.create_date));
-    }
-
-    get displayDeadlineDate() {
-        return formatDate(deserializeDate(this.props.data.date_deadline));
+        return deserializeDateTime(this.props.data.create_date).toLocaleString(
+            luxon.DateTime.DATETIME_SHORT_WITH_SECONDS
+        );
     }
 
     updateDelayAtNight() {
@@ -128,12 +120,5 @@ export class Activity extends Component {
 
     get thread() {
         return this.threadService.getThread(this.props.data.res_model, this.props.data.res_id);
-    }
-
-    /**
-     * @param {MouseEvent} ev
-     */
-    async onClick(ev) {
-        this.storeService.handleClickOnLink(ev, this.thread);
     }
 }

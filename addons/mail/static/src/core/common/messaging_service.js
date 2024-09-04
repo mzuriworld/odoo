@@ -25,13 +25,7 @@ export class Messaging {
         this.isReady = new Deferred();
         this.imStatusService = services.im_status;
         const user = services.user;
-        if (user.partnerId) {
-            this.store.Persona.insert({
-                id: user.partnerId,
-                type: "partner",
-                isAdmin: user.isAdmin,
-            });
-        }
+        this.store.Persona.insert({ id: user.partnerId, type: "partner", isAdmin: user.isAdmin });
         this.store.discuss.inbox = {
             id: "inbox",
             model: "mail.box",
@@ -59,11 +53,9 @@ export class Messaging {
      * Import data received from init_messaging
      */
     async initialize() {
-        await this.rpc(
-            "/mail/init_messaging",
-            { context: this.env.services.user.context },
-            { silent: true }
-        ).then(this.initMessagingCallback.bind(this));
+        await this.rpc("/mail/init_messaging", {}, { silent: true }).then(
+            this.initMessagingCallback.bind(this)
+        );
     }
 
     initMessagingCallback(data) {

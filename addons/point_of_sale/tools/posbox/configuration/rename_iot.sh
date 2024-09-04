@@ -12,11 +12,10 @@ function connect () {
 	then
 		IOT_NAME="${HOSTNAME}"
 	fi
+	sudo mount -o remount,rw /
+	sudo mount -o remount,rw /root_bypass_ramdisks
 	if [ "${IOT_NAME}" != "${HOSTNAME}" ]
 	then
-    sudo mount -o remount,rw /
-    sudo mount -o remount,rw /root_bypass_ramdisks
-
 		sudo sed -i "s/${HOSTNAME}/${IOT_NAME}/g" ${HOSTS}
 		echo "${IOT_NAME}" > /tmp/hostname
 		sudo cp /tmp/hostname "${HOST_FILE}"
@@ -27,10 +26,9 @@ function connect () {
 
 		sudo hostname "${IOT_NAME}"
 		sudo reboot
-
-    sudo mount -o remount,ro /
-    sudo mount -o remount,ro /root_bypass_ramdisks
 	fi
+	sudo mount -o remount,ro /
+	sudo mount -o remount,ro /root_bypass_ramdisks
 }
 
 connect "${1}"

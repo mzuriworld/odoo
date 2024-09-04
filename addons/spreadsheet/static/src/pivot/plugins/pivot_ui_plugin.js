@@ -23,47 +23,26 @@ const { DateTime } = luxon;
  * Convert pivot period to the related filter value
  *
  * @param {import("@spreadsheet/global_filters/plugins/global_filters_core_plugin").RangeType} timeRange
- * @param {string|number} value
+ * @param {string} value
  * @returns {object}
  */
 function pivotPeriodToFilterValue(timeRange, value) {
     // reuse the same logic as in `parseAccountingDate`?
-    if (typeof value === "number") {
-        value = value.toString(10);
-    }
-    if (
-        value === "false" || // the value "false" is the default value when there is no data for a group header
-        typeof value !== "string"
-    ) {
-        // anything else then a string at this point is incorrect, so no filtering
-        return undefined;
-    }
-
-    const yearValue = value.split("/").at(-1);
-    if (!yearValue) {
-        return undefined;
-    }
-    const yearOffset = yearValue - DateTime.now().year;
+    const yearOffset = (value.split("/").pop() | 0) - DateTime.now().year;
     switch (timeRange) {
         case "year":
             return {
                 yearOffset,
             };
         case "month": {
-            const month = value.includes("/") ? Number.parseInt(value.split("/")[0]) : -1;
-            if (!(month in monthsOptions)) {
-                return { yearOffset, period: undefined };
-            }
+            const month = value.split("/")[0] | 0;
             return {
                 yearOffset,
                 period: monthsOptions[month - 1].id,
             };
         }
         case "quarter": {
-            const quarter = value.includes("/") ? Number.parseInt(value.split("/")[0]) : -1;
-            if (!(quarter in FILTER_DATE_OPTION.quarter)) {
-                return { yearOffset, period: undefined };
-            }
+            const quarter = value.split("/")[0] | 0;
             return {
                 yearOffset,
                 period: FILTER_DATE_OPTION.quarter[quarter - 1],
@@ -222,10 +201,7 @@ export class PivotUIPlugin extends spreadsheet.UIPlugin {
     getPivotIdFromPosition(position) {
         const cell = this.getters.getCorrespondingFormulaCell(position);
         if (cell && cell.isFormula) {
-            const pivotFunction = this.getters.getFirstPivotFunction(
-                position.sheetId,
-                cell.compiledFormula.tokens
-            );
+            const pivotFunction = this.getters.getFirstPivotFunction(position.sheetId, cell.compiledFormula.tokens);
             if (pivotFunction && pivotFunction.args[0]) {
                 return pivotFunction.args[0].toString();
             }

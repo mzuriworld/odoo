@@ -107,6 +107,7 @@ patch(SaleOrderLineProductField.prototype, {
     },
 
     async _openProductConfigurator(edit=false) {
+        console.log("tutej");
         const saleOrderRecord = this.props.record.model.root;
         let ptavIds = this.props.record.data.product_template_attribute_value_ids.records.map(
             record => record.resId
@@ -138,6 +139,7 @@ patch(SaleOrderLineProductField.prototype, {
                 )
         }
 
+         console.log("moje dane spfl147: " + customAttributeValues.join(";"));
         this.dialog.add(ProductConfiguratorDialog, {
             productTemplateId: this.props.record.data.product_template_id[0],
             ptavIds: ptavIds,
@@ -149,6 +151,7 @@ patch(SaleOrderLineProductField.prototype, {
                     }
                 }
             ),
+
             quantity: this.props.record.data.product_uom_qty,
             productUOMId: this.props.record.data.product_uom[0],
             companyId: saleOrderRecord.data.company_id[0],

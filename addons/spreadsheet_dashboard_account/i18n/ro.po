@@ -7,7 +7,6 @@
 # Cozmin Candea <office@terrabit.ro>, 2024
 # Martin Trigaux, 2024
 # Dorin Hongu <dhongu@gmail.com>, 2024
-# Alin Miclea, 2024
 # 
 msgid ""
 msgstr ""
@@ -15,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-26 21:56+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Alin Miclea, 2024\n"
+"Last-Translator: Dorin Hongu <dhongu@gmail.com>, 2024\n"
 "Language-Team: Romanian (https://app.transifex.com/odoo/teams/41243/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,7 +34,7 @@ msgstr "zile"
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "# days"
-msgstr "# zile"
+msgstr ""
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
@@ -53,14 +52,14 @@ msgstr "Sumă"
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Average Invoice"
-msgstr "Factură medie"
+msgstr ""
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "COGS"
-msgstr "COGS"
+msgstr ""
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
@@ -75,7 +74,7 @@ msgstr "Țară"
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Current year"
-msgstr "Anul curent"
+msgstr ""
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
@@ -89,7 +88,7 @@ msgstr "Client"
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "DSO"
-msgstr "DSO"
+msgstr ""
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
@@ -117,7 +116,7 @@ msgstr "Facturat"
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Invoiced by Month"
-msgstr "Facturat pe lună"
+msgstr ""
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
@@ -131,7 +130,7 @@ msgstr "Facturi"
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Invoices by Total Signed"
-msgstr "Facturi după Total Semnat"
+msgstr ""
 
 #. module: spreadsheet_dashboard_account
 #: model:spreadsheet.dashboard,name:spreadsheet_dashboard_account.dashboard_invoicing
@@ -144,14 +143,14 @@ msgstr "Facturare"
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "KPI - Average Invoice"
-msgstr "KPI - Factură medie"
+msgstr ""
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "KPI - DSO"
-msgstr "KPI - DSO"
+msgstr ""
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
@@ -159,14 +158,14 @@ msgstr "KPI - DSO"
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "KPI - Income"
-msgstr "KPI - Venituri"
+msgstr ""
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "KPI - Invoice Count"
-msgstr "KPI - Număr facturi"
+msgstr ""
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
@@ -174,7 +173,7 @@ msgstr "KPI - Număr facturi"
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "KPI - Unpaid Invoices"
-msgstr "KPI - Facturi Neplătite"
+msgstr ""
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
@@ -252,7 +251,7 @@ msgstr "Stare"
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Top Categories"
-msgstr "Top Categorii"
+msgstr ""
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
@@ -260,14 +259,14 @@ msgstr "Top Categorii"
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Top Countries"
-msgstr "Top Țări"
+msgstr ""
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Top Invoices"
-msgstr "Top Facturi"
+msgstr ""
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
@@ -283,18 +282,18 @@ msgstr "Top produse"
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "Top Salespeople"
-msgstr "Top Agenți de Vânzări"
+msgstr ""
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "in current year"
-msgstr "în anul curent"
+msgstr ""
 
 #. module: spreadsheet_dashboard_account
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_account/data/files/invoicing_dashboard.json:0
 #, python-format
 msgid "unpaid"
-msgstr "neplătit"
+msgstr ""

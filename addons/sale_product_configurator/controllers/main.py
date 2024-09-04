@@ -266,6 +266,10 @@ class ProductConfiguratorController(Controller):
             parent_combination=parent_combination,
             combination_ids=combination.ids,
         )
+        attribute_inclusions = product_template._get_attribute_inclusions(
+            parent_combination=parent_combination,
+            combination_ids=combination.ids,
+        )
 
         return dict(
             product_tmpl_id=product_template.id,
@@ -300,6 +304,7 @@ class ProductConfiguratorController(Controller):
                 create_variant=ptal.attribute_id.create_variant,
             ) for ptal in product_template.attribute_line_ids],
             exclusions=attribute_exclusions['exclusions'],
+            inclusions=attribute_inclusions['inclusions'],
             archived_combinations=attribute_exclusions['archived_combinations'],
             parent_exclusions=attribute_exclusions['parent_exclusions'],
         )

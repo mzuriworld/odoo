@@ -123,6 +123,8 @@
       </TaxesOutputs>
       <InvoiceTotals>
         <TotalGrossAmount>2400.00</TotalGrossAmount>
+        <TotalGeneralDiscounts>100.00</TotalGeneralDiscounts>
+        <TotalGeneralSurcharges>100.00</TotalGeneralSurcharges>
         <TotalGrossAmountBeforeTaxes>2400.00</TotalGrossAmountBeforeTaxes>
         <TotalTaxOutputs>504.00</TotalTaxOutputs>
         <TotalTaxesWithheld>0.00</TotalTaxesWithheld>
@@ -132,6 +134,7 @@
       </InvoiceTotals>
       <Items>
         <InvoiceLine>
+          <FileReference>BILL_2023_01_0001_fa</FileReference>
           <FileDate>2023-01-01</FileDate>
           <ItemDescription>product_a</ItemDescription>
           <Quantity>1.0</Quantity>
@@ -153,6 +156,7 @@
           </TaxesOutputs>
         </InvoiceLine>
         <InvoiceLine>
+          <FileReference>BILL_2023_01_0001_fa</FileReference>
           <FileDate>2023-01-01</FileDate>
           <ItemDescription>product_a</ItemDescription>
           <Quantity>1.0</Quantity>
@@ -174,6 +178,7 @@
           </TaxesOutputs>
         </InvoiceLine>
         <InvoiceLine>
+          <FileReference>BILL_2023_01_0001_fa</FileReference>
           <FileDate>2023-01-01</FileDate>
           <ItemDescription>product_a</ItemDescription>
           <Quantity>1.0</Quantity>
@@ -195,6 +200,7 @@
           </TaxesOutputs>
         </InvoiceLine>
         <InvoiceLine>
+          <FileReference>BILL_2023_01_0001_fa</FileReference>
           <FileDate>2023-01-01</FileDate>
           <ItemDescription>product_a</ItemDescription>
           <Quantity>1.0</Quantity>
@@ -223,6 +229,7 @@
           </TaxesOutputs>
         </InvoiceLine>
         <InvoiceLine>
+          <FileReference>BILL_2023_01_0001_fa</FileReference>
           <FileDate>2023-01-01</FileDate>
           <ItemDescription>product_a</ItemDescription>
           <Quantity>1.0</Quantity>

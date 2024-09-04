@@ -16,9 +16,7 @@
 # Arma Gedonsky <armagedonsky@hot.ee>, 2023
 # Martin Trigaux, 2023
 # Katrin Kampura, 2023
-# Anna, 2024
-# Siim Raasuke, 2024
-# Stevin Lilla, 2024
+# Anna, 2023
 # 
 msgid ""
 msgstr ""
@@ -26,7 +24,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-26 21:55+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Stevin Lilla, 2024\n"
+"Last-Translator: Anna, 2023\n"
 "Language-Team: Estonian (https://app.transifex.com/odoo/teams/41243/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,13 +35,13 @@ msgstr ""
 #. module: pos_online_payment
 #: model_terms:ir.ui.view,arch_db:pos_online_payment.pay
 msgid "<strong>Error:</strong> The currency is missing or invalid."
-msgstr "<strong>Error:</strong> Valuuta on puudu või vale."
+msgstr ""
 
 #. module: pos_online_payment
 #: model_terms:ir.ui.view,arch_db:pos_online_payment.pay_confirmation
 msgid ""
 "<strong>Error:</strong> There was a problem during the payment process."
-msgstr "<strong>Error:</strong> Tekkis probleem makseprotsessi ajal."
+msgstr ""
 
 #. module: pos_online_payment
 #: model_terms:ir.ui.view,arch_db:pos_online_payment.pay
@@ -52,9 +50,6 @@ msgid ""
 "                            <br/>\n"
 "                            If you believe that it is an error, please contact the website administrator."
 msgstr ""
-"<strong>Sobivat maksemeetodit ei leitud.</strong>\n"
-"                            <br/>\n"
-"                            Kui arvate, et tegu on veaga, palun võtke ühendust veebisaidi administraatoriga."
 
 #. module: pos_online_payment
 #. odoo-python
@@ -62,14 +57,13 @@ msgstr ""
 #, python-format
 msgid "A POS config cannot have more than one online payment method."
 msgstr ""
-"POS-konfiguratsioonil ei saa olla rohkem kui ühte veebimakse meetodit."
 
 #. module: pos_online_payment
 #. odoo-python
 #: code:addons/pos_online_payment/controllers/payment_portal.py:0
 #, python-format
 msgid "A payment option must be specified."
-msgstr "Maksevalik peab olema määratud."
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-python
@@ -77,7 +71,7 @@ msgstr "Maksevalik peab olema määratud."
 #, python-format
 msgid ""
 "A validation payment cannot be used for a Point of Sale online payment."
-msgstr "Kinnitamise makset ei saa kasutada müügikoha veebimakse jaoks."
+msgstr ""
 
 #. module: pos_online_payment
 #: model_terms:ir.ui.view,arch_db:pos_online_payment.pos_payment_method_view_form_inherit_pos_online_payment
@@ -122,7 +116,7 @@ msgstr "Tühista"
 #. module: pos_online_payment
 #: model_terms:ir.ui.view,arch_db:pos_online_payment.pay
 msgid "Cancel payment"
-msgstr "Tühista makse"
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-python
@@ -146,7 +140,7 @@ msgstr ""
 #: code:addons/pos_online_payment/models/pos_payment.py:0
 #, python-format
 msgid "Cannot edit a POS online payment essential data."
-msgstr "POS-i veebimakse põhiteavet ei saa redigeerida."
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-python
@@ -155,12 +149,11 @@ msgstr "POS-i veebimakse põhiteavet ei saa redigeerida."
 msgid ""
 "Could not create an online payment method (company_id=%d, pos_config_id=%d)"
 msgstr ""
-"Veebimakse meetodit ei õnnestunud luua (company_id=%d, pos_config_id=%d)"
 
 #. module: pos_online_payment
 #: model:ir.model.fields,field_description:pos_online_payment.field_pos_payment_method__has_an_online_payment_provider
 msgid "Has An Online Payment Provider"
-msgstr "Omab veebimaksete teenusepakkujat"
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-javascript
@@ -181,19 +174,19 @@ msgstr "Vigased internetimaksed"
 #: code:addons/pos_online_payment/static/src/app/utils/online_payment_popup/online_payment_popup.xml:0
 #, python-format
 msgid "Invite your customer to scan the QR code to pay:"
-msgstr "Kutsuge oma klient skaneerima QR-kood, et maksta:"
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-javascript
 #: code:addons/pos_online_payment/static/src/app/screens/payment_screen/payment_screen.js:0
 #, python-format
 msgid "Invoice could not be generated"
-msgstr "Arvet ei saanud genereerida"
+msgstr ""
 
 #. module: pos_online_payment
 #: model:ir.model.fields,field_description:pos_online_payment.field_pos_order__next_online_payment_amount
 msgid "Next online payment amount to pay"
-msgstr "Järgmine veebimakse summa, mis tuleb maksta"
+msgstr ""
 
 #. module: pos_online_payment
 #: model:ir.model.fields.selection,name:pos_online_payment.selection__pos_payment_method__type__online
@@ -233,17 +226,17 @@ msgstr "Internetimakse pole saadaval"
 #: code:addons/pos_online_payment/static/src/app/screens/payment_screen/payment_screen.js:0
 #, python-format
 msgid "Online payments cannot have a negative amount (%s: %s)."
-msgstr "Veebimaksetel ei saa olla negatiivset summat (%s: %s)."
+msgstr ""
 
 #. module: pos_online_payment
 #: model_terms:ir.ui.view,arch_db:pos_online_payment.pay_confirmation
 msgid "Order ID"
-msgstr "Tellimuse ID"
+msgstr ""
 
 #. module: pos_online_payment
 #: model_terms:ir.ui.view,arch_db:pos_online_payment.pay
 msgid "Order ID:"
-msgstr "Tellimuse ID:"
+msgstr ""
 
 #. module: pos_online_payment
 #: model_terms:ir.ui.view,arch_db:pos_online_payment.pay_confirmation
@@ -256,7 +249,7 @@ msgstr "Tellimuse viide"
 #: code:addons/pos_online_payment/static/src/app/utils/online_payment_popup/online_payment_popup.xml:0
 #, python-format
 msgid "Order id:"
-msgstr "Tellimuse id:"
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-javascript
@@ -264,14 +257,14 @@ msgstr "Tellimuse id:"
 #: code:addons/pos_online_payment/static/src/app/utils/online_payment_popup/online_payment_popup.xml:0
 #, python-format
 msgid "Order reference:"
-msgstr "Tellimuse viide"
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-javascript
 #: code:addons/pos_online_payment/static/src/app/screens/payment_screen/payment_screen.js:0
 #, python-format
 msgid "Order saving issue"
-msgstr "Tellimuse salvestamise viga"
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-python
@@ -305,7 +298,7 @@ msgstr "Maksed"
 #: code:addons/pos_online_payment/static/src/app/customer_display/customer_display_template.xml:0
 #, python-format
 msgid "Please scan the QR code to open the payment page"
-msgstr "Palun skaneerige QR kood, et avada makseleht"
+msgstr ""
 
 #. module: pos_online_payment
 #: model:ir.model,name:pos_online_payment.model_pos_config
@@ -343,14 +336,14 @@ msgstr "Töötleja"
 #: code:addons/pos_online_payment/static/src/app/utils/online_payment_popup/online_payment_popup.xml:0
 #, python-format
 msgid "QR Code to pay"
-msgstr "QR Kood maksmiseks"
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-javascript
 #: code:addons/pos_online_payment/static/src/app/utils/online_payment_popup/online_payment_popup.xml:0
 #, python-format
 msgid "Scan to Pay"
-msgstr "Sakneerige, et maksta"
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-javascript
@@ -364,7 +357,7 @@ msgstr "Server error"
 #: code:addons/pos_online_payment/models/payment_transaction.py:0
 #, python-format
 msgid "The POS online payment (tx.id=%d) could not be saved correctly"
-msgstr "POS-i veebimakset (tx.id=%d) ei õnnestunud õigesti salvestada"
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-python
@@ -374,60 +367,58 @@ msgid ""
 "The POS online payment (tx.id=%d) could not be saved correctly because the "
 "online payment method could not be found"
 msgstr ""
-"POSi veebimakset (tx.id=%d) ei saanud õigesti salvestada, kuna veebimakse "
-"meetodit ei leitud"
 
 #. module: pos_online_payment
 #. odoo-python
 #: code:addons/pos_online_payment/controllers/payment_portal.py:0
 #, python-format
 msgid "The POS session is not opened."
-msgstr "POS sessioon ei ole avatud"
+msgstr ""
 
 #. module: pos_online_payment
 #: model:ir.model.fields,help:pos_online_payment.field_payment_transaction__pos_order_id
 msgid "The Point of Sale order linked to the payment transaction"
-msgstr "Müügikoha tellimus, mis on seotud maksetehinguga"
+msgstr ""
 
 #. module: pos_online_payment
 #: model:ir.model.fields,help:pos_online_payment.field_account_payment__pos_order_id
 msgid "The Point of Sale order linked to this payment"
-msgstr "Müügikoha tellimus, mis on seotud selle maksega"
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-javascript
 #: code:addons/pos_online_payment/static/src/app/screens/payment_screen/payment_screen.js:0
 #, python-format
 msgid "The QR Code for paying could not be generated."
-msgstr "QR-koodi maksmiseks ei saadud genereerida."
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-python
 #: code:addons/pos_online_payment/controllers/payment_portal.py:0
 #, python-format
 msgid "The amount to pay has changed. Please refresh the page."
-msgstr "Makstav summa on muutunud. Palun värskenda lehte."
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-python
 #: code:addons/pos_online_payment/controllers/payment_portal.py:0
 #, python-format
 msgid "The currency is invalid."
-msgstr "Valuuta on väär"
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-javascript
 #: code:addons/pos_online_payment/static/src/app/screens/payment_screen/payment_screen.js:0
 #, python-format
 msgid "The invoice could not be generated."
-msgstr "Arvet ei saanud genereerida."
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-python
 #: code:addons/pos_online_payment/controllers/payment_portal.py:0
 #, python-format
 msgid "The order has been canceled."
-msgstr "Tellimus on tühistatud."
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-javascript
@@ -463,35 +454,35 @@ msgstr ""
 #: code:addons/pos_online_payment/controllers/payment_portal.py:0
 #, python-format
 msgid "The payment token is invalid."
-msgstr "Makse token on kehtetu."
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-python
 #: code:addons/pos_online_payment/models/payment_transaction.py:0
 #, python-format
 msgid "The payment transaction (%d) has a negative amount."
-msgstr "Maksetehingul (%d) on negatiivne summa."
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-python
 #: code:addons/pos_online_payment/controllers/payment_portal.py:0
 #, python-format
 msgid "The provided order or access token is invalid."
-msgstr "Esitatud tellimus või ligipääsutoken on kehtetu."
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-python
 #: code:addons/pos_online_payment/controllers/payment_portal.py:0
 #, python-format
 msgid "The provided partner_id is different than expected."
-msgstr "Esitatud partner_id erineb oodatust."
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-javascript
 #: code:addons/pos_online_payment/static/src/app/screens/payment_screen/payment_screen.js:0
 #, python-format
 msgid "The saved order could not be retrieved."
-msgstr "Salvestatud tellimust ei saadud kätte."
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-javascript
@@ -507,7 +498,7 @@ msgstr ""
 #: code:addons/pos_online_payment/static/src/app/screens/payment_screen/payment_screen.js:0
 #, python-format
 msgid "There are online payments that were missing in your view."
-msgstr "Teie vaates puudusid mõned veebimaksed."
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-javascript
@@ -517,8 +508,6 @@ msgid ""
 "There is a problem with the server. The order cannot be saved and therefore "
 "the online payment is not possible."
 msgstr ""
-"Serveris on probleem. Tellimust ei saa salvestada ja seetõttu ei ole "
-"veebimakse võimalik."
 
 #. module: pos_online_payment
 #. odoo-javascript
@@ -527,7 +516,7 @@ msgstr ""
 msgid ""
 "There is a problem with the server. The order online payment status cannot "
 "be retrieved."
-msgstr "Serveris on probleem. Tellimuse veebimakse olek ei ole kättesaadav."
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-javascript
@@ -537,8 +526,6 @@ msgid ""
 "There is a problem with the server. The order online payment status cannot "
 "be retrieved. Are you sure there is no online payment for this order ?"
 msgstr ""
-"Serveris on probleem. Tellimuse veebimakse olekut ei saa kätte saada. Kas "
-"oled kindel, et selle tellimuse jaoks pole veebimakset?"
 
 #. module: pos_online_payment
 #. odoo-python
@@ -546,14 +533,14 @@ msgstr ""
 #, python-format
 msgid ""
 "There is no online payment method configured for this Point of Sale order."
-msgstr "Selle müügikoha tellimuse jaoks pole veebimakse meetodit seadistatud."
+msgstr ""
 
 #. module: pos_online_payment
 #. odoo-python
 #: code:addons/pos_online_payment/controllers/payment_portal.py:0
 #, python-format
 msgid "There is nothing to pay for this order."
-msgstr "Selle tellimuse eest ei ole midagi maksta."
+msgstr ""
 
 #. module: pos_online_payment
 #: model_terms:ir.ui.view,arch_db:pos_online_payment.pay
@@ -573,9 +560,6 @@ msgid ""
 "To use an online payment method in a POS config, it must have at least one "
 "published payment provider supporting the currency of that POS config."
 msgstr ""
-"Veebimaksmise meetodi kasutamiseks POS-konfiguratsioonis peab sellel olema "
-"vähemalt üks avaldatud makseteenuse pakkuja, kes toetab selle POS-"
-"konfiguratsiooni valuutat."
 
 #. module: pos_online_payment
 #. odoo-python
@@ -587,7 +571,7 @@ msgstr ""
 #. module: pos_online_payment
 #: model_terms:ir.ui.view,arch_db:pos_online_payment.pay_confirmation
 msgid "Transaction Reference"
-msgstr "Tehingu viide"
+msgstr ""
 
 #. module: pos_online_payment
 #: model_terms:ir.ui.view,arch_db:pos_online_payment.pay_confirmation
@@ -604,7 +588,7 @@ msgstr "Tüüp"
 #: code:addons/pos_online_payment/static/src/app/screens/payment_screen/payment_screen.js:0
 #, python-format
 msgid "Updated online payments"
-msgstr "Uuendatud online maksed"
+msgstr ""
 
 #. module: pos_online_payment
 #: model:ir.model.fields,help:pos_online_payment.field_pos_payment_method__is_online_payment
@@ -623,14 +607,14 @@ msgstr "Jah"
 #. module: pos_online_payment
 #: model_terms:ir.ui.view,arch_db:pos_online_payment.pos_payment_method_view_form_inherit_pos_online_payment
 msgid "You have not activated any"
-msgstr "Te ei ole aktiveerinud ühtegi"
+msgstr ""
 
 #. module: pos_online_payment
 #: model_terms:ir.ui.view,arch_db:pos_online_payment.pos_payment_method_view_form_inherit_pos_online_payment
 msgid "payment provider"
-msgstr "makseteenuse pakkuja"
+msgstr ""
 
 #. module: pos_online_payment
 #: model_terms:ir.ui.view,arch_db:pos_online_payment.pos_payment_method_view_form_inherit_pos_online_payment
 msgid "to allow online payments."
-msgstr "et lubada online maksed"
+msgstr ""

@@ -163,7 +163,9 @@ export class DynamicList extends DataPoint {
     }
 
     selectDomain(value) {
-        return this.model.mutex.exec(() => this._selectDomain(value));
+        return this.model.mutex.exec(() => {
+            this.isDomainSelected = value;
+        });
     }
 
     sortBy(fieldName) {
@@ -213,9 +215,7 @@ export class DynamicList extends DataPoint {
             resIds = await this.getResIds(true);
         }
 
-        const duplicated = await this.model.orm.call(this.resModel, "copy_multi", [resIds], {
-            context: this.context,
-        });
+        const duplicated = await this.model.orm.call(this.resModel, "copy_multi", [resIds]);
         if (resIds.length > duplicated.length) {
             this.model.notification.add(_t("Some records could not be duplicated"), {
                 title: _t("Warning"),
@@ -250,8 +250,7 @@ export class DynamicList extends DataPoint {
             );
             this.model.notification.add(msg, { title: _t("Warning") });
         }
-        this._removeRecords(records.map((r) => r.id));
-        await this._load(this.offset, this.limit, this.orderBy, this.domain);
+        await this._removeRecords(records.map((r) => r.id));
         return unlinked;
     }
 
@@ -285,7 +284,6 @@ export class DynamicList extends DataPoint {
             this.model.dialog.add(AlertDialog, {
                 body: _t("No valid record to save"),
                 confirm: () => this.leaveEditMode({ discard: true }),
-                dismiss: () => this.leaveEditMode({ discard: true }),
             });
             return false;
         } else {
@@ -408,10 +406,6 @@ export class DynamicList extends DataPoint {
                 dp[handleField] = dpData[handleField];
             }
         }
-    }
-
-    _selectDomain(value) {
-        this.isDomainSelected = value;
     }
 
     async _toggleArchive(isSelected, state) {

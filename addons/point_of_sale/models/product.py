@@ -37,11 +37,6 @@ class ProductTemplate(models.Model):
         if not self.sale_ok:
             self.available_in_pos = False
 
-    @api.onchange('detailed_type')
-    def _onchange_detailed_type(self):
-        if self.detailed_type == 'combo':
-            self.taxes_id = None
-
     @api.constrains('available_in_pos')
     def _check_combo_inclusions(self):
         for product in self:
@@ -77,16 +72,9 @@ class ProductTemplate(models.Model):
     def _onchange_type(self):
         if self.type == "combo" and self.attribute_line_ids:
             raise UserError(_("Combo products cannot contains variants or attributes"))
-        return super()._onchange_type()
-
 
 class ProductProduct(models.Model):
     _inherit = 'product.product'
-
-    @api.onchange('detailed_type')
-    def _onchange_detailed_type(self):
-        if self.detailed_type == 'combo':
-            self.taxes_id = None
 
     @api.ondelete(at_uninstall=False)
     def _unlink_except_active_pos_session(self):

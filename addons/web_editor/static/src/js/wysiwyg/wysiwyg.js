@@ -178,7 +178,6 @@ export class Wysiwyg extends Component {
                 this.odooEditor.historyPauseSteps();
                 try {
                     this._processAndApplyColor(colorType, props.color, true);
-                    this.odooEditor._computeHistorySelection();
                 } finally {
                     this.odooEditor.historyUnpauseSteps();
                 }
@@ -490,7 +489,6 @@ export class Wysiwyg extends Component {
             preHistoryUndo: () => {
                 this.destroyLinkTools();
             },
-            beforeAnyCommand: this._beforeAnyCommand.bind(this),
             commands: powerboxOptions.commands,
             categories: powerboxOptions.categories,
             plugins: options.editorPlugins,
@@ -504,7 +502,6 @@ export class Wysiwyg extends Component {
             showExtendedTextStylesOptions: options.showExtendedTextStylesOptions,
             getCSSVariableValue: options.getCSSVariableValue,
             convertNumericToUnit: options.convertNumericToUnit,
-            autoActivateContentEditable: this.options.autoActivateContentEditable,
         }, editorCollaborationOptions));
 
         this.odooEditor.addEventListener('contentChanged', function () {
@@ -1296,15 +1293,6 @@ export class Wysiwyg extends Component {
                             .filter('[data-oe-field="name"]'));
                     }
 
-                    // TODO adapt in master: remove this and only use the
-                    //  `_pauseOdooFieldObservers(field)` call.
-                    this.__odooFieldObserversToPause = this.odooFieldObservers.filter(
-                        // Exclude inner translation fields observers. They
-                        // still handle translation synchronization inside the
-                        // targeted field.
-                        observerData => !observerData.field.dataset.oeTranslationInitialSha ||
-                            !field.contains(observerData.field)
-                    );
                     this._pauseOdooFieldObservers();
                     // Tag the date fields to only replace the value
                     // with the original date value once (see mouseDown event)
@@ -1346,11 +1334,7 @@ export class Wysiwyg extends Component {
      * Stop the field changes mutation observers.
      */
     _pauseOdooFieldObservers() {
-        // TODO adapt in master: remove this and directly exclude observers with
-        // targets inside the current field (we use `this.odooFieldObservers`
-        // as fallback for compatibility here).
-        const fieldObserversData = this.__odooFieldObserversToPause || this.odooFieldObservers;
-        for (let observerData of fieldObserversData) {
+        for (let observerData of this.odooFieldObservers) {
             observerData.observer.disconnect();
         }
     }
@@ -1486,7 +1470,7 @@ export class Wysiwyg extends Component {
                 ...this.options.linkOptions,
                 editable: this.odooEditor.editable,
                 link,
-                needLabel: true && !link.querySelector('img'),
+                needLabel: true,
                 focusField: link.innerHTML ? 'url' : '',
                 onSave: (data) => {
                     if (!data) {
@@ -1762,8 +1746,6 @@ export class Wysiwyg extends Component {
             }
             this.odooEditor.unbreakableStepUnactive();
             this.odooEditor.historyStep();
-            // Refocus again to save updates when calling `_onWysiwygBlur`
-            this.odooEditor.editable.focus();
         } else {
             return this.odooEditor.execCommand('insert', element);
         }
@@ -2368,7 +2350,7 @@ export class Wysiwyg extends Component {
                 const bannerElement = parseHTML(this.odooEditor.document, `
                     <div class="o_editor_banner o_not_editable lh-1 d-flex align-items-center alert alert-${alertClass} pb-0 pt-3" role="status" data-oe-protected="true">
                         <i class="fs-4 fa ${iconClass} mb-3" aria-label="${_t(title)}"></i>
-                        <div class="w-100 px-3" data-oe-protected="false">
+                        <div class="w-100 ms-3" data-oe-protected="false">
                             <p><br></p>
                         </div>
                     </div>
@@ -2459,10 +2441,9 @@ export class Wysiwyg extends Component {
                 fontawesome: 'fa-pencil-square-o',
                 isDisabled: () => !this.odooEditor.isSelectionInBlockRoot(),
                 callback: async () => {
-                    const uid = Array.isArray(session.user_id) ? session.user_id[0] : session.user_id;
                     const [user] = await this.orm.read(
                         'res.users',
-                        [uid],
+                        [session.uid],
                         ['signature'],
                     );
                     if (user && user.signature) {
@@ -3565,25 +3546,6 @@ export class Wysiwyg extends Component {
             delete el.dataset.bgSrc;
         } else {
             el.setAttribute('src', newAttachmentSrc);
-            // Also update carousel thumbnail.
-            weUtils.forwardToThumbnail(el);
-        }
-    }
-
-    /**
-     * @private
-     */
-    _beforeAnyCommand() {
-        // Remove any marker of default text in the selection on which the
-        // command is being applied. Note that this needs to be done *before*
-        // the command and not after because some commands (e.g. font-size)
-        // rely on some elements not to have the class to fully work.
-        for (const node of OdooEditorLib.getSelectedNodes(this.$editable[0])) {
-            const el = node.nodeType === Node.TEXT_NODE ? node.parentElement : node;
-            const defaultTextEl = el.closest('.o_default_snippet_text');
-            if (defaultTextEl) {
-                defaultTextEl.classList.remove('o_default_snippet_text');
-            }
         }
     }
 

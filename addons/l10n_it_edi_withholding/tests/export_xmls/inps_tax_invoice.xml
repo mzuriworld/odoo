@@ -81,10 +81,6 @@
                 <PrezzoTotale>350.00</PrezzoTotale>
                 <AliquotaIVA>0.00</AliquotaIVA>
                 <Natura>N2.2</Natura>
-                <AltriDatiGestionali>
-                    <TipoDato>AswCassPre</TipoDato>
-                    <RiferimentoTesto>TC22 (4%)</RiferimentoTesto>
-                </AltriDatiGestionali>
             </DettaglioLinee>
             <DettaglioLinee>
                 <NumeroLinea>2</NumeroLinea>
@@ -96,10 +92,6 @@
                 <PrezzoTotale>300.00</PrezzoTotale>
                 <AliquotaIVA>0.00</AliquotaIVA>
                 <Natura>N2.2</Natura>
-                <AltriDatiGestionali>
-                    <TipoDato>AswCassPre</TipoDato>
-                    <RiferimentoTesto>TC22 (4%)</RiferimentoTesto>
-                </AltriDatiGestionali>
             </DettaglioLinee>
             <DettaglioLinee>
                 <NumeroLinea>3</NumeroLinea>
@@ -111,10 +103,6 @@
                 <PrezzoTotale>50.00</PrezzoTotale>
                 <AliquotaIVA>0.00</AliquotaIVA>
                 <Natura>N2.2</Natura>
-                <AltriDatiGestionali>
-                    <TipoDato>AswCassPre</TipoDato>
-                    <RiferimentoTesto>TC22 (4%)</RiferimentoTesto>
-                </AltriDatiGestionali>
             </DettaglioLinee>
             <DettaglioLinee>
                 <NumeroLinea>4</NumeroLinea>
@@ -126,10 +114,6 @@
                 <PrezzoTotale>50.00</PrezzoTotale>
                 <AliquotaIVA>0.00</AliquotaIVA>
                 <Natura>N2.2</Natura>
-                <AltriDatiGestionali>
-                    <TipoDato>AswCassPre</TipoDato>
-                    <RiferimentoTesto>TC22 (4%)</RiferimentoTesto>
-                </AltriDatiGestionali>
             </DettaglioLinee>
             <DatiRiepilogo>
                 <AliquotaIVA>0.00</AliquotaIVA>

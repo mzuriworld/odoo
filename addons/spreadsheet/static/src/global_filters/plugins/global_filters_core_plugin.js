@@ -4,7 +4,6 @@
  * @typedef {"fixedPeriod"|"relative"|"from_to"} RangeType
  *
  * @typedef {"last_month" | "last_week" | "last_year" | "last_three_years" | "this_month" | "this_quarter" | "this_year"} RelativePeriod
- * @typedef {"quarter" | "month"} FixedPeriods
  *
  * @typedef {Object} FieldMatching
  * @property {string} chain name of the field
@@ -24,8 +23,6 @@
  * @property {string} label
  * @property {RangeType} rangeType
  * @property {RelativePeriod} [defaultValue]
- * @property {FixedPeriods[]} [disabledPeriods]
- *
  *
  * @typedef RelationalGlobalFilter
  * @property {"relation"} type
@@ -41,7 +38,7 @@ export const globalFiltersFieldMatchers = {};
 
 import * as spreadsheet from "@odoo/o-spreadsheet";
 import { CommandResult } from "@spreadsheet/o_spreadsheet/cancelled_reason";
-import { checkFilterValueIsValid } from "@spreadsheet/global_filters/helpers";
+import { checkFiltersTypeValueCombination } from "@spreadsheet/global_filters/helpers";
 import { _t } from "@web/core/l10n/translation";
 import { escapeRegExp } from "@web/core/utils/strings";
 
@@ -55,7 +52,7 @@ export class GlobalFiltersCorePlugin extends spreadsheet.CorePlugin {
     /**
      * Check if the given command can be dispatched
      *
-     * @param {import("@spreadsheet").AllCoreCommand} cmd Command
+     * @param {Object} cmd Command
      */
     allowDispatch(cmd) {
         switch (cmd.type) {
@@ -65,10 +62,7 @@ export class GlobalFiltersCorePlugin extends spreadsheet.CorePlugin {
                 } else if (this._isDuplicatedLabel(cmd.filter.id, cmd.filter.label)) {
                     return CommandResult.DuplicatedFilterLabel;
                 }
-                if (!checkFilterValueIsValid(cmd.filter, cmd.filter.defaultValue)) {
-                    return CommandResult.InvalidValueTypeCombination;
-                }
-                break;
+                return checkFiltersTypeValueCombination(cmd.filter.type, cmd.filter.defaultValue);
             case "REMOVE_GLOBAL_FILTER":
                 if (!this.getGlobalFilter(cmd.id)) {
                     return CommandResult.FilterNotFound;
@@ -78,10 +72,7 @@ export class GlobalFiltersCorePlugin extends spreadsheet.CorePlugin {
                 if (this._isDuplicatedLabel(cmd.filter.id, cmd.filter.label)) {
                     return CommandResult.DuplicatedFilterLabel;
                 }
-                if (!checkFilterValueIsValid(cmd.filter, cmd.filter.defaultValue)) {
-                    return CommandResult.InvalidValueTypeCombination;
-                }
-                break;
+                return checkFiltersTypeValueCombination(cmd.filter.type, cmd.filter.defaultValue);
             case "MOVE_GLOBAL_FILTER": {
                 const index = this.globalFilters.findIndex((filter) => filter.id === cmd.id);
                 if (index === -1) {
@@ -277,11 +268,7 @@ export class GlobalFiltersCorePlugin extends spreadsheet.CorePlugin {
         for (const globalFilter of data.globalFilters || []) {
             if (globalFilter.type === "text" && globalFilter.rangeOfAllowedValues) {
                 globalFilter.rangeOfAllowedValues = this.getters.getRangeFromSheetXC(
-                    // The default sheet id doesn't matter here, the exported range string
-                    // is fully qualified and contains the sheet name.
-                    // The getter expects a valid sheet id though, let's give it the
-                    // first sheet id.
-                    data.sheets[0].id,
+                    "", // there's no default sheet, global filters are cross-sheet
                     globalFilter.rangeOfAllowedValues
                 );
             }

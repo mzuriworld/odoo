@@ -22,17 +22,3 @@ registry.category("web_tour.tours").add("PosSettleOrderIsInvoice", {
             ErrorPopup.clickConfirm(),
         ].flat(),
 });
-
-registry.category("web_tour.tours").add("PosSettleOrderTryInvoice", {
-    test: true,
-    url: "/pos/ui",
-    steps: () =>
-        [
-            ProductScreen.confirmOpeningPopup(),
-            ProductScreen.clickQuotationButton(),
-            ProductScreen.selectFirstOrder(),
-            ProductScreen.clickPayButton(),
-            PaymentScreen.clickInvoiceButton(),
-            PaymentScreen.isInvoiceButtonChecked(),
-        ].flat(),
-});

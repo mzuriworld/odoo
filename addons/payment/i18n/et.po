@@ -3,6 +3,7 @@
 # 	* payment
 # 
 # Translators:
+# Rivo Zängov <eraser@eraser.ee>, 2023
 # Aveli Kannel <aveli@avalah.ee>, 2023
 # Martin Talts <martin.t@avalah.ee>, 2023
 # Algo Kärp <algokarp@gmail.com>, 2023
@@ -20,18 +21,16 @@
 # Katrin Kampura, 2023
 # Leaanika Randmets, 2023
 # Kärt Villako, 2024
-# Birgit Vijar, 2024
-# Stevin Lilla, 2024
 # Anna, 2024
-# Rivo Zängov <eraser@eraser.ee>, 2024
+# Birgit Vijar, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 10:27+0000\n"
+"POT-Creation-Date: 2024-01-29 10:45+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Rivo Zängov <eraser@eraser.ee>, 2024\n"
+"Last-Translator: Birgit Vijar, 2024\n"
 "Language-Team: Estonian (https://app.transifex.com/odoo/teams/41243/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -155,6 +154,11 @@ msgid ""
 msgstr ""
 "<span><i class=\"oi oi-arrow-right\"/> Kuidas seadistada PayPali "
 "konto</span>"
+
+#. module: payment
+#: model_terms:ir.ui.view,arch_db:payment.form
+msgid "<span>Your payment methods</span>"
+msgstr "<span>Sinu maksemeetodid</span>"
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.pay
@@ -379,7 +383,7 @@ msgstr "Asiapay"
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_provider__auth_msg
 msgid "Authorize Message"
-msgstr "Volita sõnum"
+msgstr ""
 
 #. module: payment
 #: model:payment.provider,name:payment.payment_provider_authorize
@@ -394,7 +398,7 @@ msgstr "Authorized"
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_capture_wizard__authorized_amount
 msgid "Authorized Amount"
-msgstr "Volitatud kogus"
+msgstr ""
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.payment_provider_form
@@ -404,7 +408,7 @@ msgstr "Eeldatav alguskuupäev"
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.payment_method_search
 msgid "Available methods"
-msgstr "Saadaval meetodid"
+msgstr ""
 
 #. module: payment
 #. odoo-python
@@ -422,7 +426,7 @@ msgstr "Panga nimi"
 #: model:ir.model.fields,field_description:payment.field_payment_method__brand_ids
 #: model_terms:ir.ui.view,arch_db:payment.payment_method_form
 msgid "Brands"
-msgstr "Brändid"
+msgstr ""
 
 #. module: payment
 #: model:payment.provider,name:payment.payment_provider_buckaroo
@@ -490,7 +494,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payment.payment_capture_wizard_view_form
 #, python-format
 msgid "Capture"
-msgstr "Kinnipidama"
+msgstr ""
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_provider__capture_manually
@@ -513,12 +517,12 @@ msgstr ""
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_transaction__child_transaction_ids
 msgid "Child Transactions"
-msgstr "Alamkanded"
+msgstr ""
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.payment_transaction_form
 msgid "Child transactions"
-msgstr "Alamkanded"
+msgstr ""
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.form
@@ -772,7 +776,7 @@ msgstr ""
 #. module: payment
 #: model:payment.provider,name:payment.payment_provider_flutterwave
 msgid "Flutterwave"
-msgstr "Flutterwave"
+msgstr ""
 
 #. module: payment
 #: model:ir.model.fields.selection,name:payment.selection__payment_method__support_refund__full_only
@@ -1018,7 +1022,7 @@ msgstr "Meetod"
 #. module: payment
 #: model:payment.provider,name:payment.payment_provider_mollie
 msgid "Mollie"
-msgstr "Mollie"
+msgstr ""
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_method__name
@@ -1181,7 +1185,7 @@ msgstr "Paypal"
 #. module: payment
 #: model:ir.model,name:payment.model_payment_capture_wizard
 msgid "Payment Capture Wizard"
-msgstr "Makse kinnipidamise viisard"
+msgstr ""
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_token__payment_details
@@ -1382,7 +1386,7 @@ msgstr "Hind"
 #: model:ir.model.fields,field_description:payment.field_payment_token__provider_code
 #: model:ir.model.fields,field_description:payment.field_payment_transaction__provider_code
 msgid "Provider Code"
-msgstr "Teenusepakkuja kood"
+msgstr ""
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_token__provider_ref
@@ -1635,12 +1639,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:payment.selection__payment_provider__state__test
 #: model_terms:ir.ui.view,arch_db:payment.payment_provider_form
 msgid "Test Mode"
-msgstr "Testrežiim "
-
-#. module: payment
-#: model_terms:ir.ui.view,arch_db:payment.transaction_status
-msgid "Thank you!"
-msgstr "Aitäh!"
+msgstr ""
 
 #. module: payment
 #. odoo-python
@@ -1720,7 +1719,7 @@ msgstr ""
 #. module: payment
 #: model:ir.model.fields,help:payment.field_payment_transaction__reference
 msgid "The internal reference of the transaction"
-msgstr "Tehingu sisemine viitenumber"
+msgstr ""
 
 #. module: payment
 #: model:ir.model.fields,help:payment.field_payment_method__supported_country_ids
@@ -1806,7 +1805,7 @@ msgstr ""
 #. module: payment
 #: model:ir.model.fields,help:payment.field_payment_transaction__provider_reference
 msgid "The provider reference of the transaction"
-msgstr "Tehingu pakkuja viitenumber"
+msgstr ""
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_method__image_payment_form
@@ -1892,12 +1891,12 @@ msgstr ""
 #. module: payment
 #: model_terms:ir.actions.act_window,help:payment.action_payment_transaction
 msgid "There are no transactions to show"
-msgstr "Kuvamiseks pole tehinguid"
+msgstr ""
 
 #. module: payment
 #: model_terms:ir.actions.act_window,help:payment.action_payment_token
 msgid "There is no token created yet."
-msgstr "Tokenit pole veel loodud."
+msgstr ""
 
 #. module: payment
 #. odoo-python
@@ -2109,7 +2108,7 @@ msgstr "Pangaülekanne"
 #. module: payment
 #: model:payment.provider,name:payment.payment_provider_xendit
 msgid "Xendit"
-msgstr "Xendit"
+msgstr ""
 
 #. module: payment
 #. odoo-python
@@ -2134,7 +2133,7 @@ msgstr ""
 #: code:addons/payment/models/payment_provider.py:0
 #, python-format
 msgid "You cannot publish a disabled provider."
-msgstr "Sa ei saa avaldada keelatud pakkujat."
+msgstr ""
 
 #. module: payment
 #. odoo-python
@@ -2250,11 +2249,6 @@ msgid "Your payment has not been processed yet."
 msgstr "Teie makset ei ole veel töödeldud."
 
 #. module: payment
-#: model_terms:ir.ui.view,arch_db:payment.form
-msgid "Your payment methods"
-msgstr ""
-
-#. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.payment_transaction_form
 msgid "ZIP"
 msgstr "Postiindeks"
@@ -2263,6 +2257,16 @@ msgstr "Postiindeks"
 #: model:ir.model.fields,field_description:payment.field_payment_transaction__partner_zip
 msgid "Zip"
 msgstr "Postiindeks"
+
+#. module: payment
+#: model_terms:ir.ui.view,arch_db:payment.transaction_status
+msgid "danger"
+msgstr "oht"
+
+#. module: payment
+#: model_terms:ir.ui.view,arch_db:payment.transaction_status
+msgid "info"
+msgstr "info"
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.payment_provider_search
@@ -2281,6 +2285,11 @@ msgid "provider"
 msgstr "teenusepakkuja"
 
 #. module: payment
+#: model_terms:ir.ui.view,arch_db:payment.transaction_status
+msgid "success"
+msgstr "edukas"
+
+#. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.company_mismatch_warning
 msgid ""
 "to make this\n"
@@ -2288,3 +2297,8 @@ msgid ""
 msgstr ""
 "et sooritada see\n"
 "                   makse."
+
+#. module: payment
+#: model_terms:ir.ui.view,arch_db:payment.transaction_status
+msgid "warning"
+msgstr "hoiatus"

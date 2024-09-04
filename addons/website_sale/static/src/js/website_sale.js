@@ -41,7 +41,6 @@ export const WebsiteSale = publicWidget.Widget.extend(VariantMixin, cartHandlerM
         'mousemove .o_wsale_filmstip_wrapper': '_onMouseMove',
         'click .o_wsale_filmstip_wrapper' : '_onClickHandler',
         'submit': '_onClickConfirmOrder',
-        "change select[name='state_id']": "_onChangeState",
     }),
 
     /**
@@ -97,15 +96,8 @@ export const WebsiteSale = publicWidget.Widget.extend(VariantMixin, cartHandlerM
         });
 
         // This allows conditional styling for the filmstrip
-        const filmstripContainer = this.el.querySelector('.o_wsale_filmstip_container');
-        const filmstripContainerWidth = filmstripContainer
-            ? filmstripContainer.getBoundingClientRect().width : 0;
-        const filmstripWrapper = this.el.querySelector('.o_wsale_filmstip_wrapper');
-        const filmstripWrapperWidth = filmstripWrapper
-            ? filmstripWrapper.getBoundingClientRect().width : 0;
-        const isFilmstripScrollable = filmstripWrapperWidth < filmstripContainerWidth
-        if (isBrowserFirefox() || hasTouch() || isFilmstripScrollable) {
-            filmstripContainer?.classList.add('o_wsale_filmstip_fancy_disabled');
+        if (isBrowserFirefox() || hasTouch()) {
+            this.el.querySelector('.o_wsale_filmstip_container')?.classList.add('o_wsale_filmstip_fancy_disabled');
         }
 
         this.getRedirectOption();
@@ -344,14 +336,15 @@ export const WebsiteSale = publicWidget.Widget.extend(VariantMixin, cartHandlerM
      * @private
      */
     _startZoom: function () {
+        // Do not activate image zoom on hover for mobile devices
         const salePage = document.querySelector(".o_wsale_product_page");
-        if (!salePage || this._getProductImageWidth() === "none") {
+        if (!salePage || uiUtils.isSmall() || this._getProductImageWidth() === "none") {
             return;
         }
         this._cleanupZoom();
         this.zoomCleanup = [];
-        // Zoom on hover (except on mobile)
-        if (salePage.dataset.ecomZoomAuto && !uiUtils.isSmall()) {
+        // Zoom on hover
+        if (salePage.dataset.ecomZoomAuto) {
             const images = salePage.querySelectorAll("img[data-zoom]");
             for (const image of images) {
                 const $image = $(image);
@@ -644,13 +637,6 @@ export const WebsiteSale = publicWidget.Widget.extend(VariantMixin, cartHandlerM
             return;
         }
         return this._changeCountry();
-    },
-    /**
-     * @private
-     * @param {Event} ev
-     */
-    _onChangeState: function (ev) {
-        return Promise.resolve();
     },
     /**
      * @private

@@ -376,7 +376,7 @@ actual arch.
                 err = ValidationError(_(
                     "Error while parsing or validating view:\n\n%(error)s",
                     error=tools.ustr(e),
-                    view=view.key or view.id,
+                    view=self.key or self.id,
                 )).with_traceback(e.__traceback__)
                 err.context = getattr(e, 'context', None)
                 raise err from None
@@ -1772,8 +1772,6 @@ actual arch.
                 pass
             elif any(klass in classes for klass in ('btn-group', 'btn-toolbar', 'btn-addr')):
                 pass
-            elif node.tag == 'field' and node.get('widget') == 'url':
-                pass
             else:
                 msg = ("A simili button must be in tag a/button/select or tag `input` "
                         "with type button/submit/reset or have class in "
@@ -2707,16 +2705,15 @@ class Model(models.AbstractModel):
         """ Return an action to open given records.
             If there's more than one record, it will be a List, otherwise it's a Form.
             Given keyword arguments will overwrite default ones. """
-        match self.ids:  # `self.ids` will silently filter out new records (`NewId`s)
-            case []:
-                length_dependent = {'views': [(False, 'form')]}
-            case [res_id]:
-                length_dependent = {'views': [(False, 'form')], 'res_id': res_id}
-            case ids:
-                length_dependent = {
-                    'views': [(False, 'list'), (False, 'form')],
-                    'domain': [('id', 'in', ids)]
-                }
+        if len(self) == 0:
+            length_dependent = {'views': [(False, 'form')]}
+        elif len(self) == 1:
+            length_dependent = {'views': [(False, 'form')], 'res_id': self.id}
+        else:
+            length_dependent = {
+                'views': [(False, 'list'), (False, 'form')],
+                'domain': [('id', 'in', self.ids)]
+            }
         return {
             'type': 'ir.actions.act_window',
             'res_model': self._name,

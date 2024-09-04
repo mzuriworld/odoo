@@ -12,11 +12,6 @@ class MrpBom(models.Model):
         self.filtered(lambda bom: bom.active)._ensure_bom_is_free()
         return super().toggle_active()
 
-    def write(self, vals):
-        if 'phantom' in self.mapped('type') and vals.get('type', 'phantom') != 'phantom':
-            self._ensure_bom_is_free()
-        return super().write(vals)
-
     def unlink(self):
         self._ensure_bom_is_free()
         return super().unlink()

@@ -23,12 +23,6 @@ $input-border-color: $gray-400;
             width: if($-list, 100%, 50%);
         }
 
-        @if ($-list == false) {
-            [data-ppr="3"] td.oe_product {
-                width: 100%;
-            }
-        }
-
         .modal-dialog {
             table, tbody, tr, td {
                 display: revert;
@@ -425,8 +419,7 @@ a.no-decoration {
     .carousel-outer {
         height: 400px;
         max-height: 90vh;
-        display: flex;
-        align-items: center;
+
         .carousel-inner {
             img {
                 object-fit: contain;
@@ -442,8 +435,8 @@ a.no-decoration {
     }
 
     .carousel-control-prev, .carousel-control-next {
-        top: auto;
-        bottom: auto;
+        height: 70%;
+        top: 15%;
         opacity: 0.5;
         cursor: pointer;
         transition: opacity 0.8s;
@@ -772,7 +765,7 @@ a.no-decoration {
         line-height: $headings-line-height;
     }
 
-    div[itemprop="address"],  .o_address_font_sm {
+    div[itemprop="address"] {
         margin: map-get($spacers, 2) 0;
         font-size: $font-size-sm;
     }
@@ -824,8 +817,4 @@ a.no-decoration {
     a.disabled {
         pointer-events: none;
     }
-}
-
-.accordion-button:not(.collapsed).bg-transparent::after {
-    background-image: escape-svg($accordion-button-icon);
 }

@@ -160,27 +160,24 @@ class HolidaysAllocation(models.Model):
     def _compute_description(self):
         self.check_access_rights('read')
         self.check_access_rule('read')
+
+        is_officer = self.env.user.has_group('hr_holidays.group_hr_holidays_user')
+
         for allocation in self:
-            if not allocation.env.context.get('is_employee_allocation'):
-                allocation.name = allocation.sudo().private_name
-            elif not allocation.holiday_status_id:
-                allocation.name = _("Allocation Request")
-            elif allocation.type_request_unit == 'hour':
-                allocation.name = _(
-                    '%(name)s (%(duration)s hour(s))',
-                    name=allocation.holiday_status_id.name,
-                    duration=allocation.number_of_days * (
-                        allocation.employee_id.sudo().resource_calendar_id.hours_per_day
-                        or allocation.holiday_status_id.company_id.resource_calendar_id.hours_per_day
-                        or HOURS_PER_DAY
-                    ),
-                )
+            if is_officer or allocation.employee_id.user_id == self.env.user or allocation.employee_id.leave_manager_id == self.env.user:
+                title = allocation.sudo().private_name
+                if allocation.env.context.get('is_employee_allocation'):
+                    if allocation.holiday_status_id:
+                        allocation_duration = allocation.number_of_days_display if allocation.type_request_unit != 'hour' else allocation.number_of_hours_display
+                        title = _("%s allocation request (%s %s)",
+                            allocation.holiday_status_id.name,
+                            allocation_duration,
+                            allocation.type_request_unit)
+                    else:
+                        title = _("Allocation Request")
+                allocation.name = title
             else:
-                allocation.name = _(
-                    '%(name)s (%(duration)s day(s))',
-                    name=allocation.holiday_status_id.name,
-                    duration=allocation.number_of_days,
-                )
+                allocation.name = '*****'
 
     def _inverse_description(self):
         is_officer = self.env.user.has_group('hr_holidays.group_hr_holidays_user')
@@ -217,8 +214,7 @@ class HolidaysAllocation(models.Model):
         employee_days_per_allocation = self.employee_id._get_consumed_leaves(self.holiday_status_id, date_from, ignore_future=True)[0]
         for allocation in self:
             allocation.max_leaves = allocation.number_of_hours_display if allocation.type_request_unit == 'hour' else allocation.number_of_days
-            origin = allocation._origin
-            allocation.leaves_taken = employee_days_per_allocation[origin.employee_id][origin.holiday_status_id][origin]['leaves_taken']
+            allocation.leaves_taken = employee_days_per_allocation[allocation.employee_id][allocation.holiday_status_id][allocation]['leaves_taken']
 
     @api.depends('number_of_days')
     def _compute_number_of_days_display(self):
@@ -570,13 +566,11 @@ class HolidaysAllocation(models.Model):
                 and (not self.nextcall or self.nextcall <= accrual_date)):
             return 0
 
-        fake_allocation = self.env['hr.leave.allocation'].with_context(default_date_from=accrual_date).new(origin=self)
+        fake_allocation = self.env['hr.leave.allocation'].new(origin=self)
         fake_allocation.sudo()._process_accrual_plans(accrual_date, log=False)
         if self.type_request_unit in ['hour']:
             return float_round(fake_allocation.number_of_hours_display - self.number_of_hours_display, precision_digits=2)
-        res = round((fake_allocation.number_of_days - self.number_of_days), 2)
-        self._invalidate_cache()
-        return res
+        return round((fake_allocation.number_of_days - self.number_of_days), 2)
 
     ####################################################
     # ORM Overrides methods
@@ -683,52 +677,34 @@ class HolidaysAllocation(models.Model):
 
         self.add_follower(employee_id)
 
-        if 'number_of_days_display' in values\
-                or 'number_of_hours_display' in values\
-                or 'number_of_days' in values:
-            previous_consumed_leaves = self.employee_id._get_consumed_leaves(leave_types=self.holiday_status_id)
-            result = super().write(values)
+        if 'number_of_days_display' not in values and 'number_of_hours_display' not in values:
+            res = super().write(values)
             if 'allocation_type' in values:
                 self._add_lastcalls()
-            consumed_leaves = self.employee_id._get_consumed_leaves(leave_types=self.holiday_status_id)
-            for allocation in self:
-                current_excess = dict(consumed_leaves[1]).get(allocation.employee_id, {}) \
-                    .get(allocation.holiday_status_id, {}).get('excess_days', {})
-                previous_excess = dict(previous_consumed_leaves[1]).get(allocation.employee_id, {}) \
-                    .get(allocation.holiday_status_id, {}).get('excess_days', {})
-                total_current_excess = sum(leave_date['amount'] for leave_date in current_excess.values())
-                total_previous_excess = sum(leave_date['amount'] for leave_date in previous_excess.values())
+            return res
 
-                if total_current_excess <= total_previous_excess:
-                    continue
-                lt = allocation.holiday_status_id
-                if lt.allows_negative and total_current_excess <= lt.max_allowed_negative:
-                    continue
-                raise ValidationError(
-                    _('You cannot reduce the duration below the duration of leaves already taken by the employee.'))
-        else:
-            result = super().write(values)
-            if 'allocation_type' in values:
-                self._add_lastcalls()
+        previous_consumed_leaves = self.employee_id._get_consumed_leaves(leave_types=self.holiday_status_id)
+        result = super().write(values)
+        consumed_leaves = self.employee_id._get_consumed_leaves(leave_types=self.holiday_status_id)
 
-        if not self.linked_request_ids:
-            return result
-        write_vals = {
-            field: values.get(field)
-            for field in [
-                'private_name',
-                'holiday_type',
-                'holiday_status_id',
-                'notes',
-                'number_of_days',
-                'allocation_type',
-                'date_from',
-                'date_to',
-                'accrual_plan_id',
-            ] if field in values
-        }
-        if write_vals:
-            self.linked_request_ids.write(write_vals)
+        if 'allocation_type' in values:
+            self._add_lastcalls()
+        for allocation in self:
+            current_excess = dict(consumed_leaves[1]).get(allocation.employee_id, {}) \
+                .get(allocation.holiday_status_id, {}).get('excess_days', {})
+            previous_excess = dict(previous_consumed_leaves[1]).get(allocation.employee_id, {}) \
+                .get(allocation.holiday_status_id, {}).get('excess_days', {})
+            total_current_excess = sum(map(lambda leave_date: leave_date['amount'], current_excess.values()))
+            total_previous_excess = sum(map(lambda leave_date: leave_date['amount'], previous_excess.values()))
+
+            if total_current_excess <= total_previous_excess:
+                continue
+            lt = allocation.holiday_status_id
+            if lt.allows_negative and total_current_excess <= lt.max_allowed_negative:
+                continue
+            raise ValidationError(
+                _('You cannot reduce the duration below the duration of leaves already taken by the employee.'))
+
         return result
 
     @api.ondelete(at_uninstall=False)
@@ -784,8 +760,6 @@ class HolidaysAllocation(models.Model):
             # In the case we are in holiday_type `employee` and there is only one employee we can keep the same allocation
             # Otherwise we do need to create an allocation for all employees to have a behaviour that is in line
             # with the other holiday_type
-            if allocation.linked_request_ids:
-                continue
             if allocation.state == 'validate' and (allocation.holiday_type in ['category', 'department', 'company'] or
                 (allocation.holiday_type == 'employee' and len(allocation.employee_ids) > 1)):
                 if allocation.holiday_type == 'employee':
@@ -799,11 +773,11 @@ class HolidaysAllocation(models.Model):
 
                 allocation_vals += allocation._prepare_holiday_values(employees)
         if allocation_vals:
-            self.env['hr.leave.allocation'].with_context(
+            children = self.env['hr.leave.allocation'].with_context(
                 mail_notify_force_send=False,
                 mail_activity_automation_skip=True
             ).create(allocation_vals)
-        self.linked_request_ids.filtered(lambda c: c.state != 'validate').action_validate()
+            children.filtered(lambda c: c.validation_type != 'no').action_validate()
 
     def action_refuse(self):
         current_employee = self.env.user.employee_id
@@ -816,6 +790,7 @@ class HolidaysAllocation(models.Model):
             days_taken = days_per_allocation[allocation.employee_id][allocation.holiday_status_id][allocation]['virtual_leaves_taken']
             if days_taken > 0:
                 raise UserError(_('You cannot refuse this allocation request since the employee has already taken leaves for it. Please refuse or delete those leaves first.'))
+
         self.write({'state': 'refuse', 'approver_id': current_employee.id})
         # If a category that created several holidays, cancel all related
         linked_requests = self.mapped('linked_request_ids')
@@ -860,7 +835,7 @@ class HolidaysAllocation(models.Model):
     # before every run, as if it was run from date_from, after an optional change in the allocation value
     # the user can simply confirm and validate the allocation. The record is in correct state for the next
     # call of the cron job.
-    @api.onchange('date_from', 'accrual_plan_id', 'date_to', 'employee_id')
+    @api.onchange('date_from', 'accrual_plan_id', 'date_to')
     def _onchange_date_from(self):
         if not self.date_from or self.allocation_type != 'accrual' or self.state == 'validate' or not self.accrual_plan_id\
            or not self.employee_id:

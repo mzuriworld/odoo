@@ -21,9 +21,13 @@ export class Product extends Component {
         imageURL: { type: String, optional: true },
         archived_combinations: Array,
         exclusions: Object,
+        inclusions: Object,
         parent_exclusions: Object,
         parent_product_tmpl_ids: { type: Array, element: Number, optional: true },
+        currentStep: Number,
+
     };
+    // static step = 0;
 
     //--------------------------------------------------------------------------
     // Handlers

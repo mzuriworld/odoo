@@ -194,14 +194,14 @@ msgstr "Tareas por estado"
 #: code:addons/spreadsheet_dashboard_hr_timesheet/data/files/tasks_dashboard.json:0
 #, python-format
 msgid "Time to Assign"
-msgstr "Tiempo para asignar"
+msgstr "Tiempo hasta asignación"
 
 #. module: spreadsheet_dashboard_hr_timesheet
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_hr_timesheet/data/files/tasks_dashboard.json:0
 #, python-format
 msgid "Time to Close"
-msgstr "Tiempo para cerrar"
+msgstr "Tiempo hasta cierre"
 
 #. module: spreadsheet_dashboard_hr_timesheet
 #. odoo-javascript

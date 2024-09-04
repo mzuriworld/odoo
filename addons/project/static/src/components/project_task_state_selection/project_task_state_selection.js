@@ -72,13 +72,20 @@ export class ProjectTaskStateSelection extends StateSelectionField {
     }
 
     get options() {
-        const labels = new Map(super.options);
-        const states = ["1_canceled", "1_done"];
+        const options = [
+            ["1_canceled", _t("Canceled")],
+            ["1_done", _t("Done")],
+        ];
         const currentState = this.props.record.data[this.props.name];
         if (currentState != "04_waiting_normal") {
-            states.unshift("01_in_progress", "02_changes_requested", "03_approved");
+            return [
+                ["01_in_progress", _t("In Progress")],
+                ["02_changes_requested", _t("Changes Requested")],
+                ["03_approved", _t("Approved")],
+                ...options,
+            ];
         }
-        return states.map((state) => [state, labels.get(state)]);
+        return options;
     }
 
     get availableOptions() {
@@ -87,8 +94,8 @@ export class ProjectTaskStateSelection extends StateSelectionField {
     }
 
     get label() {
-        const waitOption = super.options.findLast(([state, _]) => state === "04_waiting_normal");
-        const fullSelection = [...this.options, waitOption];
+        const fullSelection = [...this.options];
+        fullSelection.push(["04_waiting_normal", "Waiting"]);
         return formatSelection(this.currentValue, {
             selection: fullSelection,
         });

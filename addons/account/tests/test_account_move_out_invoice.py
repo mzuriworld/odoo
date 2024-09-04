@@ -1791,11 +1791,6 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
     def test_out_invoice_create_refund(self):
         self.invoice.action_post()
 
-        bank1 = self.env['res.partner.bank'].create({
-            'acc_number': 'BE43798822936101',
-            'partner_id': self.partner_a.id,
-        })
-
         move_reversal = self.env['account.move.reversal'].with_context(active_model="account.move", active_ids=self.invoice.ids).create({
             'date': fields.Date.from_string('2019-02-01'),
             'reason': 'no reason',
@@ -1856,7 +1851,6 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
             'state': 'draft',
             'ref': 'Reversal of: %s, %s' % (self.invoice.name, move_reversal.reason),
             'payment_state': 'not_paid',
-            'partner_bank_id': bank1.id,
         })
 
         move_reversal = self.env['account.move.reversal'].with_context(active_model="account.move", active_ids=self.invoice.ids).create({
@@ -4206,66 +4200,4 @@ class TestAccountMoveOutInvoiceOnchanges(AccountTestInvoicingCommon):
             {'product_id': product_no_xx_tax.id, 'tax_ids': tax_x.ids},
             {'product_id': product_no_branch_tax.id, 'tax_ids': (tax_a + tax_b).ids},
             {'product_id': product_no_tax.id, 'tax_ids': []},
-        ])
-
-    def test_discount_allocation_account_on_invoice_currency_change(self):
-        # Ensure aml of 'discount' display_type is correctly recomputed when changing the currency
-        discount_account = self.company_data['default_account_expense'].copy()
-        self.company_data['company'].account_discount_expense_allocation_id = discount_account
-        self.env['res.currency.rate'].create({
-            'name': '2024-01-01',
-            'rate': 0.20,
-            'currency_id': self.currency_data['currency'].id,
-            'company_id': self.company_data['company'].id,
-        })
-        # create an invoice in a foreign currency and a 5% discount
-        invoice = self.env['account.move'].create({
-            'move_type': 'out_invoice',
-            'partner_id': self.partner_a.id,
-            'currency_id': self.currency_data['currency'].id,
-            'invoice_line_ids': [
-                Command.create({
-                    'product_id': self.product_a.id,
-                    'price_unit': 1000.0,
-                    'quantity': 1,
-                    'discount': 5,
-                })
-            ],
-        })
-        product_line_account = invoice.line_ids.filtered(lambda x: x.product_id).account_id
-        self.assertRecordValues(invoice.line_ids.filtered(lambda l: l.display_type == 'discount'), [
-            {
-                'account_id': product_line_account.id,
-                'tax_ids': [],
-                'amount_currency': -50.0,
-                'debit': 0.0,
-                'credit': 250.0,
-            },
-            {
-                'account_id': discount_account.id,
-                'tax_ids': [],
-                'amount_currency': 50.0,
-                'debit': 250.0,
-                'credit': 0.0,
-            },
-        ])
-        move_form = Form(invoice)
-        # change the currency of the invoice to the currency of the company
-        invoice.currency_id = self.company_data['currency'].id
-        move_form.save()
-        self.assertRecordValues(invoice.line_ids.filtered(lambda l: l.display_type == 'discount'), [
-            {
-                'account_id': product_line_account.id,
-                'tax_ids': [],
-                'amount_currency': -50.0,    # amount_currency should not change
-                'debit': 0.0,
-                'credit': 50.0,
-            },
-            {
-                'account_id': discount_account.id,
-                'tax_ids': [],
-                'amount_currency': 50.0,    # amount_currency should not change
-                'debit': 50.0,
-                'credit': 0.0,
-            },
         ])

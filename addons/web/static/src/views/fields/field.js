@@ -53,9 +53,7 @@ export function fieldVisualFeedback(field, record, fieldName, fieldInfo) {
     return {
         readonly,
         required,
-        invalid: field.isValid
-            ? !field.isValid(record, fieldName, fieldInfo)
-            : record.isFieldInvalid(fieldName),
+        invalid: record.isFieldInvalid(fieldName),
         empty,
     };
 }

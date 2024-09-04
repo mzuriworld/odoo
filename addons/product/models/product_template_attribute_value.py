@@ -47,6 +47,14 @@ class ProductTemplateAttributeValue(models.Model):
         help="Make this attribute value not compatible with "
              "other values of the product or some attribute values of optional and accessory products.")
 
+    include_for = fields.One2many(
+        comodel_name='product.template.attribute.inclusion',
+        inverse_name='product_template_attribute_value_id',
+        string="Include for",
+        help="Make this attribute value MANDATORY with "
+             "other values of the product or some attribute values of optional and accessory products.")
+
+
     # related fields: product template and product attribute
     product_tmpl_id = fields.Many2one(
         related='attribute_line_id.product_tmpl_id', store=True, index=True)
@@ -61,6 +69,7 @@ class ProductTemplateAttributeValue(models.Model):
     display_type = fields.Selection(related='product_attribute_value_id.display_type')
     color = fields.Integer(string="Color", default=_get_default_color)
     image = fields.Image(related='product_attribute_value_id.image')
+    catalogue_number = fields.Char(string="Catalogue number", required=False, translate=False)
 
     _sql_constraints = [
         ('attribute_value_unique',

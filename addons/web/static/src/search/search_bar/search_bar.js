@@ -327,11 +327,9 @@ export class SearchBar extends Component {
         this.inputRef.el.focus();
     }
 
-    resetState(options = { focus: true }) {
+    resetState() {
         this.computeState({ expanded: [], focusedIndex: 0, query: "", subItems: [] });
-        if (options.focus) {
-            this.inputRef.el.focus();
-        }
+        this.inputRef.el.focus();
     }
 
     /**
@@ -567,7 +565,7 @@ export class SearchBar extends Component {
      */
     onWindowClick(ev) {
         if (this.items.length && !this.root.el.contains(ev.target)) {
-            this.resetState({ focus: false });
+            this.resetState();
         }
     }
 

@@ -1,4 +1,4 @@
-from odoo import models, _
+from odoo import models
 from odoo.addons.account.models.chart_template import template
 
 
@@ -8,7 +8,7 @@ class AccountChartTemplate(models.AbstractModel):
     @template('ci')
     def _get_ci_template_data(self):
         return {
-            'name': _('SYSCOHADA for Companies'),
+            'name': 'Syscohada for Ivory Coast',
             'parent': 'syscohada',
             'code_digits': '6',
         }

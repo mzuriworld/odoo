@@ -550,9 +550,7 @@ class ProcurementGroup(models.Model):
         moves_domain = [
             ('state', 'in', ['confirmed', 'partially_available']),
             ('product_uom_qty', '!=', 0.0),
-            '|',
-                ('reservation_date', '<=', fields.Date.today()),
-                ('picking_type_id.reservation_method', '=', 'at_confirm'),
+            ('reservation_date', '<=', fields.Date.today())
         ]
         if company_id:
             moves_domain = expression.AND([[('company_id', '=', company_id)], moves_domain])

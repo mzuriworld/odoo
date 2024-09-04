@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 <template id="report_saleorder_document">
-    <t t-call="web.external_layout">
+  <t t-set="company" t-value="doc.company_id"/>
+    <t t-call="web.external_layout_bold">
         <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)" />
+
         <t t-set="forced_vat" t-value="doc.fiscal_position_id.foreign_vat"/> <!-- So that it appears in the footer of the report instead of the company VAT if it's set -->
+
+<!--        <div t-attf-class="article o_report_layout_bold o_company_#{doc.company_id.id}_layout {{  'o_report_layout_background' if doc.company_id.layout_background in ['Geometric', 'Custom']  else  '' }}" t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % doc.company_id.layout_background_image.decode('utf-8') if doc.company_id.layout_background_image and doc.company_id.layout_background == 'Custom' else ('/base/static/img/bg_background_template.jpg' if doc.company_id.layout_background == 'Geometric' else '') }});" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">-->
+<!--            <t t-call="web.address_layout"/>-->
+<!--            <t t-out="0"/>-->
+<!--        </div>-->
         <t t-set="address">
             <div t-field="doc.partner_id"
                 t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
@@ -176,14 +183,12 @@
                 <p t-if="not is_html_empty(doc.payment_term_id.note)">
                     <span t-field="doc.payment_term_id.note">The payment should also be transmitted with love</span>
                 </p>
-                <div class="oe_structure"/>
                 <p t-if="doc.fiscal_position_id and not is_html_empty(doc.fiscal_position_id.sudo().note)"
                     id="fiscal_position_remark">
                     <strong>Fiscal Position Remark:</strong>
                     <span t-field="doc.fiscal_position_id.sudo().note">No further requirements for this payment</span>
                 </p>
             </div>
-            <div class="oe_structure"/>
         </div>
     </t>
 </template>

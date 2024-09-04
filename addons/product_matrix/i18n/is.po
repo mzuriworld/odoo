@@ -2,16 +2,12 @@
 # This file contains the translation of the following modules:
 # 	* product_matrix
 # 
-# Translators:
-# Kristófer Arnþórsson, 2024
-# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-26 21:55+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Kristófer Arnþórsson, 2024\n"
 "Language-Team: Icelandic (https://app.transifex.com/odoo/teams/41243/is/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -58,14 +54,14 @@ msgstr ""
 #: code:addons/product_matrix/static/src/xml/product_matrix_dialog.xml:0
 #, python-format
 msgid "Confirm"
-msgstr "Staðfesta"
+msgstr ""
 
 #. module: product_matrix
 #. odoo-javascript
 #: code:addons/product_matrix/static/src/xml/product_matrix_dialog.xml:0
 #, python-format
 msgid "Discard"
-msgstr "Hætta við"
+msgstr ""
 
 #. module: product_matrix
 #: model:product.attribute,name:product_matrix.product_attribute_gender
@@ -97,12 +93,12 @@ msgstr ""
 #. module: product_matrix
 #: model:ir.model,name:product_matrix.model_product_template
 msgid "Product"
-msgstr "Vara"
+msgstr ""
 
 #. module: product_matrix
 #: model:ir.model,name:product_matrix.model_product_template_attribute_value
 msgid "Product Template Attribute Value"
-msgstr "Eiginleikavirði vörusniðmáts"
+msgstr ""
 
 #. module: product_matrix
 #: model:product.attribute.value,name:product_matrix.product_attribute_value_color_4
@@ -117,7 +113,7 @@ msgstr ""
 #. module: product_matrix
 #: model:product.attribute,name:product_matrix.product_attribute_size
 msgid "Size"
-msgstr "Stærð"
+msgstr ""
 
 #. module: product_matrix
 #: model_terms:ir.ui.view,arch_db:product_matrix.matrix

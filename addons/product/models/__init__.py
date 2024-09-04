@@ -23,6 +23,7 @@ from . import product_supplierinfo
 from . import product_tag
 from . import product_template_attribute_line
 from . import product_template_attribute_exclusion
+from . import product_template_attribute_inclusion
 from . import product_template_attribute_value
 from . import res_company
 from . import res_config_settings

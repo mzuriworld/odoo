@@ -37,10 +37,12 @@ export class ProductConfiguratorDialog extends Component {
 
     setup() {
         this.title = _t("Configure your product");
+//        console.log("tukej");
         this.rpc = useService("rpc");
         this.state = useState({
             products: [],
             optionalProducts: [],
+            currentStep: 0,
         });
 
         useSubEnv({
@@ -216,8 +218,12 @@ export class ProductConfiguratorDialog extends Component {
      * @param {Boolean} multiIdsAllowed - Whether multiple `product.template.attribute.value` can be selected.
      */
     async _updateProductTemplateSelectedPTAV(productTmplId, ptalId, ptavId, multiIdsAllowed) {
+
         const product = this._findProduct(productTmplId);
         let selectedIds = product.attribute_lines.find(ptal => ptal.id === ptalId).selected_attribute_value_ids;
+
+
+
         if (multiIdsAllowed) {
             const ptavID = parseInt(ptavId);
             if (!selectedIds.includes(ptavID)){
@@ -225,6 +231,7 @@ export class ProductConfiguratorDialog extends Component {
             } else {
                 selectedIds = selectedIds.filter(ptav => ptav !== ptavID);
             }
+            console.log("Selected PTAv tu: PTAL:" + ptalId + ", PTAV:" + ptavID);
 
         } else {
             selectedIds = [parseInt(ptavId)];
@@ -241,6 +248,8 @@ export class ProductConfiguratorDialog extends Component {
                 product.archived_combinations = product.archived_combinations.concat([combination]);
                 this._checkExclusions(product);
             }
+            this._checkInclusions(product);
+            this.state.currentStep++;  // Update to show the next attribute
         }
     }
 
@@ -257,6 +266,67 @@ export class ProductConfiguratorDialog extends Component {
             ptal => ptal.selected_attribute_value_ids.includes(ptavId)
         ).customValue = customValue;
     }
+
+    _checkInclusions(product, checked=undefined) {
+        const combination = this._getCombination(product);
+//        console.log("Tu mamy product: " + JSON.stringify(product));
+//        console.log(product);
+        const inclusions = product.inclusions;
+//        const parentExclusions = product.parent_exclusions;
+//        const archivedCombinations = product.archived_combinations;
+//        const parentCombination = this._getParentsCombination(product);
+//        const childProducts = this._getChildProducts(product.product_tmpl_id)
+//        const ptavList = product.attribute_lines.flat().flatMap(ptal => ptal.attribute_values)
+
+
+//        ptavList.map(ptav => ptav.excluded = false); // Reset all the values
+
+        if (inclusions) {
+            for(const ptavId of combination) {
+                for(const includedPtavId of inclusions[ptavId]) {
+                    let selectedIds = product.attribute_lines.find(ptal => ptal.attribute_values.find(ptav => ptav.id === includedPtavId)).selected_attribute_value_ids;
+                    selectedIds.push(includedPtavId);
+                    product.attribute_lines.find(ptal => ptal.attribute_values.find(ptav => ptav.id === includedPtavId)).selected_attribute_value_ids = selectedIds;
+                }
+            }
+        }
+//        if (parentCombination) {
+//            for(const ptavId of parentCombination) {
+//                for(const excludedPtavId of (parentExclusions[ptavId]||[])) {
+//                    ptavList.find(ptav => ptav.id === excludedPtavId).excluded = true;
+//                }
+//            }
+//        }
+//        if (archivedCombinations) {
+//            for(const excludedCombination of archivedCombinations) {
+//                const ptavCommon = excludedCombination.filter((ptav) => combination.includes(ptav));
+//                if (ptavCommon.length === combination.length) {
+//                    for(const excludedPtavId of ptavCommon) {
+//                        ptavList.find(ptav => ptav.id === excludedPtavId).excluded = true;
+//                    }
+//                } else if (ptavCommon.length === (combination.length - 1)) {
+//                    // In this case we only need to disable the remaining ptav
+//                    const disabledPtavId = excludedCombination.find(
+//                        (ptav) => !combination.includes(ptav)
+//                    );
+//                    const excludedPtav = ptavList.find(ptav => ptav.id === disabledPtavId)
+//                    if (excludedPtav) {
+//                        excludedPtav.excluded = true;
+//                    }
+//                }
+//            }
+//        }
+//        const checkedProducts = checked || [];
+//        for(const optionalProductTmpl of childProducts) {
+//             // if the product is not checked for exclusions
+//            if (!checkedProducts.includes(optionalProductTmpl)) {
+//                checkedProducts.push(optionalProductTmpl); // remember that this product is checked
+//                this._checkExclusions(optionalProductTmpl, checkedProducts);
+//            }
+//        }
+    }
+
+
 
     /**
      * Check the exclusions of a given product and his child.

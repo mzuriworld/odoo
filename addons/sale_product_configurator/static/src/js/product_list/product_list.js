@@ -10,7 +10,9 @@ export class ProductList extends Component {
     static props = {
         products: Array,
         areProductsOptional: { type: Boolean, optional: true },
+        step: Number,
     };
+    // static step = 0;
     static defaultProps = {
         areProductsOptional: false,
     };
@@ -21,6 +23,7 @@ export class ProductList extends Component {
      * @return {String} - The sum of all items in the list, in the currency of the `sale.order`.
      */
     getFormattedTotal() {
+//        console.log(this.props.step);
         return formatCurrency(
             this.props.products.reduce(
                 (totalPrice, product) => totalPrice + product.price * product.quantity, 0

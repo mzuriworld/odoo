@@ -1,2 +1,3 @@
-from . import hr_expense
+# -*- coding: utf-8 -*-
+
 from . import project_project

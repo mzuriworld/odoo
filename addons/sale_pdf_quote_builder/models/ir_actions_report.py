@@ -2,6 +2,8 @@
 
 import base64
 import io
+import json
+import logging
 
 from PyPDF2 import PdfFileWriter, PdfFileReader
 from PyPDF2.generic import NameObject, createStringObject
@@ -9,7 +11,7 @@ from PyPDF2.generic import NameObject, createStringObject
 from odoo import models
 from odoo.tools import format_amount, format_date, format_datetime, pdf
 
-
+_logger = logging.getLogger(__name__)
 class IrActionsReport(models.Model):
     _inherit = 'ir.actions.report'
 
@@ -29,6 +31,7 @@ class IrActionsReport(models.Model):
                 has_header = bool(header_record.sale_header)
                 has_footer = bool(footer_record.sale_footer)
                 included_product_docs = self.env['product.document']
+
                 doc_line_id_mapping = {}
                 for line in order.order_line:
                     product_product_docs = line.product_id.product_document_ids
@@ -40,6 +43,7 @@ class IrActionsReport(models.Model):
                     included_product_docs = included_product_docs | doc_to_include
                     doc_line_id_mapping.update({doc.id: line.id for doc in doc_to_include})
 
+                # self._get_form_fields_mapping(order, doc_line_id_mapping)
                 if (not has_header and not included_product_docs and not has_footer):
                     continue
 
@@ -99,9 +103,13 @@ class IrActionsReport(models.Model):
         Note: order.ensure_one()
         """
         order.ensure_one()
+        # _logger.info("PDFPDFPDFPDPF  processing order.partner_id: " + str(dir(order.partner_id)))
         env = self.with_context(use_babel=True).env
         tz = order.partner_id.tz or self.env.user.tz or 'UTC'
         lang_code = order.partner_id.lang or self.env.user.lang
+        city = order.partner_id.city or ''
+        street = order.partner_id.street or ''
+        street2 = order.partner_id.street2 or ''
         form_fields_mapping = {
             'name': order.name,
             'partner_id__name': order.partner_id.name,
@@ -111,7 +119,12 @@ class IrActionsReport(models.Model):
             'delivery_date': format_datetime(env, order.commitment_date, tz=tz),
             'validity_date': format_date(env, order.validity_date, lang_code=lang_code),
             'client_order_ref': order.client_order_ref or '',
+            'partner_id__contact_address_inline_without_name': order.partner_id.contact_address_inline.replace(order.partner_id.name + ', ', '', 1),
+            'partner_id__address__street': city + ", " + street + " " + street2,
+            'partner_id__address__zip': order.partner_id.zip or '',
+            'partner_id__phone': order.partner_id.phone or '',
         }
+        # print("order: " + order)
 
         # Adding fields from each line, prefixed by the line_id to avoid conflicts
         lines_with_doc_ids = set(doc_line_id_mapping.values())

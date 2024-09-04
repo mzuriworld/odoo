@@ -162,7 +162,7 @@ class HrExpense(models.Model):
         string="Is currency_id different from the company_currency_id",
         compute='_compute_is_multiple_currency',
     )
-    currency_rate = fields.Float(compute='_compute_currency_rate', digits=(16, 9), readonly=True, tracking=True)
+    currency_rate = fields.Float(compute='_compute_currency_rate', digits=(12, 6), readonly=True, tracking=True)
     label_currency_rate = fields.Char(compute='_compute_currency_rate', readonly=True)
 
     # Account fields
@@ -179,8 +179,7 @@ class HrExpense(models.Model):
         comodel_name='account.account',
         string="Account",
         compute='_compute_account_id', precompute=True, store=True, readonly=False,
-        check_company=True,
-        domain="[('account_type', 'not in', ('asset_receivable', 'liability_payable', 'asset_cash', 'liability_credit_card'))]",
+        domain="[('account_type', 'not in', ('asset_receivable', 'liability_payable', 'asset_cash', 'liability_credit_card')), ('company_id', '=', company_id)]",
         help="An expense account is expected",
     )
     tax_ids = fields.Many2many(
@@ -650,7 +649,7 @@ class HrExpense(models.Model):
         expenses_with_amount = self.filtered(lambda expense: not (
             expense.currency_id.is_zero(expense.total_amount_currency)
             or expense.company_currency_id.is_zero(expense.total_amount)
-            or (expense.product_id and not float_round(expense.quantity, precision_rounding=expense.product_uom_id.rounding))
+            or not float_round(expense.quantity, precision_rounding=expense.product_uom_id.rounding)
         ))
 
         if any(expense.state != 'draft' or expense.sheet_id for expense in expenses_with_amount):
@@ -707,7 +706,8 @@ class HrExpense(models.Model):
                 ('state', '=', 'draft'),
                 ('sheet_id', '=', False),
                 ('employee_id', '=', self.env.user.employee_id.id),
-            ]).filtered(lambda expense: expense.is_editable)
+                ('is_editable', '=', True),
+            ])
 
         if not expenses:
             raise UserError(_('You have no expense to report'))
@@ -793,10 +793,9 @@ class HrExpense(models.Model):
         if not payment_method_line:
             raise UserError(_("You need to add a manual payment method on the journal (%s)", journal.name))
         move_lines = []
-        tax_data = self.env['account.tax']._compute_taxes(
-            [self._convert_to_tax_base_line_dict(price_unit=self.total_amount_currency, currency=self.currency_id)],
-            include_caba_tags=(self.payment_mode == 'company_account')
-        )
+        tax_data = self.env['account.tax']._compute_taxes([
+            self._convert_to_tax_base_line_dict(price_unit=self.total_amount_currency, currency=self.currency_id)
+        ])
         rate = abs(self.total_amount_currency / self.total_amount) if self.total_amount else 1.0
         base_line_data, to_update = tax_data['base_lines_to_update'][0]  # Add base line
         amount_currency = to_update['price_subtotal']

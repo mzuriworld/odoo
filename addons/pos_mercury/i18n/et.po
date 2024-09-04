@@ -12,7 +12,6 @@
 # Maidu Targama <m.targama@gmail.com>, 2023
 # Arma Gedonsky <armagedonsky@hot.ee>, 2023
 # Leaanika Randmets, 2023
-# Anna, 2024
 # Stevin Lilla, 2024
 # 
 msgid ""
@@ -162,7 +161,7 @@ msgstr ""
 #: code:addons/pos_mercury/static/src/overrides/components/payment_screen/payment_screen.js:0
 #, python-format
 msgid "Handling transaction..."
-msgstr "Haldame tehingut . . ."
+msgstr ""
 
 #. module: pos_mercury
 #: model:ir.model.fields,field_description:pos_mercury.field_pos_mercury_configuration__id
@@ -343,28 +342,28 @@ msgstr "Vantivi tehing kassas"
 #: code:addons/pos_mercury/static/src/overrides/components/payment_screen/payment_screen.js:0
 #, python-format
 msgid "Refunds not supported"
-msgstr "Tagastused pole toetatud"
+msgstr ""
 
 #. module: pos_mercury
 #. odoo-javascript
 #: code:addons/pos_mercury/static/src/overrides/components/payment_screen/payment_screen.js:0
 #, python-format
 msgid "Reversal failed, sending VoidSale..."
-msgstr "Tühistamine ebaõnnestus, saadetakse VoidSale..."
+msgstr ""
 
 #. module: pos_mercury
 #. odoo-javascript
 #: code:addons/pos_mercury/static/src/overrides/components/payment_screen/payment_screen.js:0
 #, python-format
 msgid "Reversal succeeded"
-msgstr "Tagasipööramine õnnestus"
+msgstr ""
 
 #. module: pos_mercury
 #. odoo-javascript
 #: code:addons/pos_mercury/static/src/overrides/components/payment_screen/payment_screen.js:0
 #, python-format
 msgid "Sending reversal..."
-msgstr "Saadame tagasipööret..."
+msgstr ""
 
 #. module: pos_mercury
 #. odoo-javascript
@@ -465,7 +464,7 @@ msgstr "Vantiv viitenumber"
 #: code:addons/pos_mercury/static/src/overrides/components/payment_screen/payment_screen.js:0
 #, python-format
 msgid "VoidSale succeeded"
-msgstr "VoidSale õnnestus"
+msgstr ""
 
 #. module: pos_mercury
 #. odoo-javascript

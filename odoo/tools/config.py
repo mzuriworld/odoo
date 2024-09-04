@@ -556,12 +556,13 @@ class configmanager(object):
         return opt
 
     def _warn_deprecated_options(self):
-        if self.options.get('longpolling_port', 0):
+        longpolling_port = self.options.pop('longpolling_port', 0)
+        if longpolling_port:
             warnings.warn(
                 "The longpolling-port is a deprecated alias to "
                 "the gevent-port option, please use the latter.",
                 DeprecationWarning)
-            self.options['gevent_port'] = self.options.pop('longpolling_port')
+            self.options['gevent_port'] = longpolling_port
 
         for old_option_name, new_option_name in [
             ('geoip_database', 'geoip_city_db'),

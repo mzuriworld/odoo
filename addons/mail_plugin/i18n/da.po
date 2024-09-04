@@ -473,7 +473,7 @@ msgstr "Log ud"
 #: code:addons/mail_plugin/controllers/mail_plugin.py:0
 #, python-format
 msgid "No Access"
-msgstr "Ingen adgang"
+msgstr ""
 
 #. module: mail_plugin
 #. odoo-javascript

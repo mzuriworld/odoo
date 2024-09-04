@@ -91,7 +91,6 @@ class Http(models.AbstractModel):
             "uid": session_uid,
             "is_system": user._is_system() if session_uid else False,
             "is_admin": user._is_admin() if session_uid else False,
-            "is_public": user._is_public(),
             "is_internal_user": is_internal_user,
             "user_context": user_context,
             "db": self.env.cr.dbname,
@@ -171,7 +170,6 @@ class Http(models.AbstractModel):
         session_info = {
             'is_admin': user._is_admin() if session_uid else False,
             'is_system': user._is_system() if session_uid else False,
-            'is_public': user._is_public(),
             'is_website_user': user._is_public() if session_uid else False,
             'user_id': user.id if session_uid else False,
             'is_frontend': True,

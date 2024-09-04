@@ -196,14 +196,11 @@ export const PublicWidget = Class.extend(mixins.PropertiesMixin, ServicesMixin, 
      */
     destroy: function () {
         mixins.PropertiesMixin.destroy.call(this);
-        if (this.$el) {
-            this._undelegateEvents();
-
-            // If not done with a selector (attached to existing DOM), then
-            // remove the elements added to the DOM.
-            if (!this.selector) {
-                this.$el.remove();
-            }
+        this._undelegateEvents();
+        // If not done with a selector, then
+        // remove the elements added to the DOM.
+        if (!this.selector && this.$el) {
+            this.$el.remove();
         }
     },
 

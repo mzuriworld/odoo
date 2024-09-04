@@ -3,11 +3,10 @@
 import json
 from odoo.tests import tagged
 from odoo.addons.bus.tests.common import WebsocketCase
-from odoo.addons.mail.tests.common import MailCommon
 
 
 @tagged("post_install", "-at_install")
-class TestGuestFeature(WebsocketCase, MailCommon):
+class TestGuestFeature(WebsocketCase):
     def test_channel_seen_as_guest(self):
         guest = self.env["mail.guest"].create({"name": "Guest"})
         partner = self.env["res.partner"].create({"name": "John"})
@@ -35,7 +34,7 @@ class TestGuestFeature(WebsocketCase, MailCommon):
         self.assertEqual(guest_member.seen_message_id, channel.message_ids[0])
 
     def test_subscribe_to_guest_channel(self):
-        self._reset_bus()
+        self.env["bus.bus"].search([]).unlink()
         guest = self.env["mail.guest"].create({"name": "Guest"})
         guest_websocket = self.websocket_connect()
         self.subscribe(guest_websocket, [f"mail.guest_{guest._format_auth_cookie()}"], guest.id)
@@ -52,7 +51,7 @@ class TestGuestFeature(WebsocketCase, MailCommon):
             group_id=None, name="General"
         )
         channel.add_members(guest_ids=[guest.id])
-        self._reset_bus()
+        self.env["bus.bus"].search([]).unlink()
         guest_websocket = self.websocket_connect()
         self.subscribe(guest_websocket, [f"mail.guest_{guest._format_auth_cookie()}"], guest.id)
         self.env["bus.bus"]._sendone(channel, "lambda", {"foo": "bar"})

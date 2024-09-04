@@ -399,10 +399,10 @@ export function addInternalNote(note) {
                 mobile: true,
             },
             {
-                content: "click internal note button",
+                content: "click customer note button",
                 trigger: '.control-buttons .control-button span:contains("Internal Note")',
             },
-            ...( note ?  TextAreaPopup.inputText(note) : []),
+            TextAreaPopup.inputText(note),
             TextAreaPopup.clickConfirm(),
         ].flat()
     );
@@ -421,13 +421,4 @@ export function checkOrderlinesNumber(number) {
             },
         },
     ];
-}
-
-export function checkTaxAmount(number) {
-    return inLeftSide([
-        {
-            content: `check order tax amount`,
-            trigger: `.subentry:contains("${number}")`,
-        },
-    ]);
 }

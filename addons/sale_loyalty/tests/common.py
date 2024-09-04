@@ -2,11 +2,8 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from collections import defaultdict
-
-from odoo import Command
-from odoo.exceptions import ValidationError
-
 from odoo.addons.sale.tests.test_sale_product_attribute_value_config import TestSaleProductAttributeValueCommon
+from odoo.exceptions import ValidationError
 
 
 class TestSaleCouponCommon(TestSaleProductAttributeValueCommon):
@@ -69,12 +66,6 @@ class TestSaleCouponCommon(TestSaleProductAttributeValueCommon):
             'price_include': False,
         })
 
-        cls.tax_group = cls.env['account.tax'].create({
-            'name': "tax_group",
-            'amount_type': 'group',
-            'children_tax_ids': [Command.set((cls.tax_10pc_incl + cls.tax_10pc_base_incl).ids)],
-        })
-
         #products
         cls.product_A = cls.env['product.product'].create({
             'name': 'Product A',
@@ -95,13 +86,6 @@ class TestSaleCouponCommon(TestSaleProductAttributeValueCommon):
             'list_price': 100,
             'sale_ok': True,
             'taxes_id': [(6, 0, [])],
-        })
-
-        cls.product_D = cls.env['product.product'].create({
-            'name': 'Product D',
-            'list_price': 100,
-            'sale_ok': True,
-            'taxes_id': [(6, 0, [cls.tax_group.id])],
         })
 
         cls.product_gift_card = cls.env['product.product'].create({

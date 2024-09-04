@@ -1479,7 +1479,6 @@ class Website(models.Model):
         return action
 
     def button_go_website(self, path='/', mode_edit=False):
-        # TODO: adapt in master as 'mode_edit' is always set to False
         self._force()
         if mode_edit:
             # If the user gets on a translated page (e.g /fr) the editor will
@@ -1619,15 +1618,6 @@ class Website(models.Model):
                 if f'data-v{asset_type}="{asset_version}"' in snippet:
                     return True
         return False
-
-    def _check_user_can_modify(self, record):
-        """ Verify that the current user can modify the given record.
-
-        :param record: record on which to perform the check
-        :raise AccessError: if the operation is forbidden
-        """
-        record.check_access_rights('write')
-        record.check_access_rule('write')
 
     def _disable_unused_snippets_assets(self):
         snippet_assets = self.env['ir.asset'].with_context(active_test=False).search_fetch(

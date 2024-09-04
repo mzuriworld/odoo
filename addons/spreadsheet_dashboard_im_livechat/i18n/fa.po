@@ -34,28 +34,28 @@ msgstr "رتبه‌ی متوسط"
 #: code:addons/spreadsheet_dashboard_im_livechat/data/files/livechat_dashboard.json:0
 #, python-format
 msgid "Avg. Session Duration"
-msgstr "میانگین مدت زمان جلسه"
+msgstr ""
 
 #. module: spreadsheet_dashboard_im_livechat
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_im_livechat/data/files/livechat_dashboard.json:0
 #, python-format
 msgid "Avg. Time to Answer"
-msgstr "میانگین زمان پاسخ"
+msgstr ""
 
 #. module: spreadsheet_dashboard_im_livechat
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_im_livechat/data/files/livechat_dashboard.json:0
 #, python-format
 msgid "Avg. session duration"
-msgstr "میانگین مدت زمان جلس"
+msgstr ""
 
 #. module: spreadsheet_dashboard_im_livechat
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_im_livechat/data/files/livechat_dashboard.json:0
 #, python-format
 msgid "Avg. time to answer"
-msgstr "میانگین زمان پاسخ"
+msgstr ""
 
 #. module: spreadsheet_dashboard_im_livechat
 #. odoo-javascript
@@ -70,14 +70,14 @@ msgstr "جاری"
 #: code:addons/spreadsheet_dashboard_im_livechat/data/files/livechat_dashboard.json:0
 #, python-format
 msgid "Daily Sessions"
-msgstr "جلسات روزانه"
+msgstr ""
 
 #. module: spreadsheet_dashboard_im_livechat
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_im_livechat/data/files/livechat_dashboard.json:0
 #, python-format
 msgid "KPI"
-msgstr "شاخص کلیدی عملکرد"
+msgstr ""
 
 #. module: spreadsheet_dashboard_im_livechat
 #: model:spreadsheet.dashboard,name:spreadsheet_dashboard_im_livechat.spreadsheet_dashboard_livechat
@@ -89,7 +89,7 @@ msgstr "گفتگوی زنده"
 #: code:addons/spreadsheet_dashboard_im_livechat/data/files/livechat_dashboard.json:0
 #, python-format
 msgid "Livechat Support Statistics by Operator"
-msgstr "آمار پشتیبانی چت زنده بر اساس اپراتور"
+msgstr ""
 
 #. module: spreadsheet_dashboard_im_livechat
 #. odoo-javascript
@@ -135,14 +135,14 @@ msgstr "جلسات"
 #: code:addons/spreadsheet_dashboard_im_livechat/data/files/livechat_dashboard.json:0
 #, python-format
 msgid "Sessions by Operator"
-msgstr "جلسات بر اساس اپراتور"
+msgstr ""
 
 #. module: spreadsheet_dashboard_im_livechat
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_im_livechat/data/files/livechat_dashboard.json:0
 #, python-format
 msgid "Top Operators"
-msgstr "عملگرهای برتر"
+msgstr ""
 
 #. module: spreadsheet_dashboard_im_livechat
 #. odoo-javascript
@@ -150,21 +150,21 @@ msgstr "عملگرهای برتر"
 #: code:addons/spreadsheet_dashboard_im_livechat/data/files/livechat_dashboard.json:0
 #, python-format
 msgid "last period"
-msgstr "دوره قبلی"
+msgstr ""
 
 #. module: spreadsheet_dashboard_im_livechat
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_im_livechat/data/files/livechat_dashboard.json:0
 #, python-format
 msgid "sessions count - current"
-msgstr "تعداد نشست‌ها یا جلسات"
+msgstr ""
 
 #. module: spreadsheet_dashboard_im_livechat
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_im_livechat/data/files/livechat_dashboard.json:0
 #, python-format
 msgid "sessions count - previous"
-msgstr " تعداد نشست‌ها یا جلسات مربوط به دوره‌ی قبلی"
+msgstr ""
 
 #. module: spreadsheet_dashboard_im_livechat
 #. odoo-javascript

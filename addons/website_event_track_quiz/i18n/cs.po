@@ -269,7 +269,7 @@ msgstr "Nechte účastníky resetovat kvíz a zkusit to znovu."
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,comment:website_event_track_quiz.event_7_track_1_question_1_1
 msgid "Lumbers need first to be cut from trees!"
-msgstr "Dřevo je třeba nejprve nařezat ze stromů!"
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.leaderboard_search_bar
@@ -279,7 +279,7 @@ msgstr "Mobilní sub-navigace"
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_13_question_0_2
 msgid "Mud Wall"
-msgstr "Bahenní stěna"
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_1_question_0_1
@@ -299,12 +299,12 @@ msgstr "Ne"
 #. module: website_event_track_quiz
 #: model_terms:ir.actions.act_window,help:website_event_track_quiz.event_quiz_question_action
 msgid "No Quiz Question yet!"
-msgstr "Zatím žádná kvízová otázka!"
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model_terms:ir.actions.act_window,help:website_event_track_quiz.event_quiz_action
 msgid "No Quiz added yet!"
-msgstr "Zatím žádný přidaný kvíz!"
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_leaderboard
@@ -321,24 +321,24 @@ msgstr "Počet bodů"
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
 #, python-format
 msgid "Oopsie, you did not score any point on this quiz."
-msgstr "Jejda, v tomto kvízu jste nezískali žádný bod."
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_1_question_0_2
 msgid "Open Source Apps"
-msgstr "Open Source aplikace"
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,comment:website_event_track_quiz.event_7_track_1_question_0_2
 msgid "OpenWood is not an Open Source congres about Apps."
-msgstr "OpenWood není open source kongres o aplikacích."
+msgstr ""
 
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
 #, python-format
 msgid "Point"
-msgstr "Bod"
+msgstr ""
 
 #. module: website_event_track_quiz
 #. odoo-javascript
@@ -351,7 +351,7 @@ msgstr "Body"
 #. module: website_event_track_quiz
 #: model:event.quiz,name:website_event_track_quiz.event_7_track_13_quiz
 msgid "Pretty. Ugly. Lovely."
-msgstr "Pěkně. Ošklivě. Půvabně."
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__question_id
@@ -367,15 +367,13 @@ msgid ""
 "Question \"%s\" must have 1 correct answer and at least 1 incorrect answer "
 "to be valid."
 msgstr ""
-"Otázka \"%s\" musí mít 1 správnou odpověď a alespoň 1 špatnou odpověď, aby "
-"byla platná."
 
 #. module: website_event_track_quiz
 #. odoo-python
 #: code:addons/website_event_track_quiz/models/event_quiz.py:0
 #, python-format
 msgid "Question \"%s\" must have 1 correct answer to be valid."
-msgstr "Otázka \"%s\" musí mít 1 správnou odpověď, aby byla platná."
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model:ir.model,name:website_event_track_quiz.model_event_quiz_answer
@@ -440,7 +438,7 @@ msgstr "Resetovat"
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_5_question_1_2
 msgid "Scotch tape"
-msgstr "Lepicí páska"
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.leaderboard_search_bar
@@ -460,7 +458,7 @@ msgstr "Hledat uživatele"
 #. module: website_event_track_quiz
 #: model:event.quiz,name:website_event_track_quiz.event_7_track_5_quiz
 msgid "Securing your Lumber during transport"
-msgstr "Zabezpečení vašeho řeziva během přepravy"
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz_answer__sequence
@@ -471,7 +469,7 @@ msgstr "Sekvence"
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_13_question_0_1
 msgid "Steel Wall"
-msgstr "Ocelová stěna"
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_1_question_1_1
@@ -488,7 +486,7 @@ msgstr "Zúčastněte se kvízu"
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
 #, python-format
 msgid "The correct answer was:"
-msgstr "Správná odpověď byla:"
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_leaderboard
@@ -519,7 +517,7 @@ msgstr "Tento kvíz je již hotový. Opakování není možné."
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_5_question_1_1
 msgid "Tie-down straps and other wooden blocks"
-msgstr "Stahovací popruhy a jiné dřevěné bloky"
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_view_search
@@ -534,7 +532,7 @@ msgstr "Vazba Téma / Návštěvník"
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_5_question_0
 msgid "Transporting lumber from stores to your house is safe."
-msgstr "Převoz řeziva z obchodů do vašeho domu je bezpečný."
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,text_value:website_event_track_quiz.event_7_track_1_question_1_0
@@ -544,7 +542,7 @@ msgstr ""
 #. module: website_event_track_quiz
 #: model:ir.model.fields,field_description:website_event_track_quiz.field_event_quiz__repeatable
 msgid "Unlimited Tries"
-msgstr "Neomezené pokusy"
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.top3_visitor_card
@@ -554,12 +552,12 @@ msgstr "úroveň uživatele"
 #. module: website_event_track_quiz
 #: model:event.quiz.answer,comment:website_event_track_quiz.event_7_track_5_question_1_2
 msgid "Well, it could work but you will need a lot of tape!"
-msgstr "No, mohlo by to fungovat, ale budete potřebovat hodně pásky!"
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model:event.quiz,name:website_event_track_quiz.event_7_track_1_quiz
 msgid "What This Event Is All About"
-msgstr "O čem tato událost je"
+msgstr ""
 
 #. module: website_event_track_quiz
 #: model:event.quiz.question,name:website_event_track_quiz.event_7_track_5_question_1
@@ -610,18 +608,18 @@ msgstr "např. otestujte si své znalosti"
 #. module: website_event_track_quiz
 #: model_terms:ir.ui.view,arch_db:website_event_track_quiz.event_quiz_question_view_form
 msgid "e.g. What is Joe's favorite motto?"
-msgstr "např. Jaké je Joeovo oblíbené motto?"
+msgstr ""
 
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
 #, python-format
 msgid "point!"
-msgstr "bod!"
+msgstr ""
 
 #. module: website_event_track_quiz
 #. odoo-javascript
 #: code:addons/website_event_track_quiz/static/src/xml/quiz_templates.xml:0
 #, python-format
 msgid "points!"
-msgstr "body!"
+msgstr ""

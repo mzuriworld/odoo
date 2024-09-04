@@ -7,21 +7,20 @@
 # Thor Arne Hvidsten <thor.arne.hvidsten@gmail.com>, 2024
 # Cécile Collart <cco@odoo.com>, 2024
 # Henning Fyllingsnes, 2024
-# Lars Aam <lars.aam@vikenfiber.no>, 2024
 # Lars Petter Lilleng, 2024
+# Lars Aam <lars.aam@vikenfiber.no>, 2024
 # Jorunn D. Newth, 2024
 # Marius Stedjan <marius@stedjan.com>, 2024
 # Joar Horvei, 2024
 # Martin Trigaux, 2024
-# Rune Restad, 2024
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-13 10:26+0000\n"
+"POT-Creation-Date: 2024-01-05 12:31+0000\n"
 "PO-Revision-Date: 2023-10-26 23:09+0000\n"
-"Last-Translator: Rune Restad, 2024\n"
+"Last-Translator: Martin Trigaux, 2024\n"
 "Language-Team: Norwegian Bokmål (https://app.transifex.com/odoo/teams/41243/nb/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -618,9 +617,12 @@ msgid "My Activity Deadline"
 msgstr "MIn aktivitets tidsfrist"
 
 #. module: repair
+#. odoo-python
+#: code:addons/repair/models/repair.py:0
 #: model:ir.model.fields.selection,name:repair.selection__repair_order__state__draft
 #: model_terms:ir.ui.view,arch_db:repair.stock_repair_type_kanban
 #: model_terms:ir.ui.view,arch_db:repair.view_repair_order_form_filter
+#, python-format
 msgid "New"
 msgstr "Ny"
 
@@ -759,7 +761,7 @@ msgstr "Prioritet"
 #. module: repair
 #: model:ir.model.fields,field_description:repair.field_repair_order__procurement_group_id
 msgid "Procurement Group"
-msgstr "Anskaffelsesgruppe"
+msgstr "Gruppering anskaffelser"
 
 #. module: repair
 #: model:ir.model,name:repair.model_product_template
@@ -783,11 +785,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:repair.view_repair_order_form
 msgid "Product Moves"
 msgstr "Produktbevegelser"
-
-#. module: repair
-#: model:ir.model,name:repair.model_stock_move_line
-msgid "Product Moves (Stock Move Line)"
-msgstr ""
 
 #. module: repair
 #: model:ir.model.fields,field_description:repair.field_repair_order__product_qty

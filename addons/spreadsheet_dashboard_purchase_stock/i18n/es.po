@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Wil Odoo, 2023
+# Carolina Fernández, 2024
 # Pedro M. Baeza <pedro.baeza@tecnativa.com>, 2024
 # Larissa Manderfeld, 2024
 # 
@@ -53,14 +54,14 @@ msgstr "Importe comprado"
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Average Order"
-msgstr "Pedido medio"
+msgstr "Pedido promedio"
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Average order"
-msgstr "Pedido medio"
+msgstr "Promedio de pedidos"
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
@@ -254,7 +255,7 @@ msgstr "Comprado"
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Qty Ordered"
-msgstr "Ctd. pedida"
+msgstr "Ctd. Ordenada"
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
@@ -289,7 +290,7 @@ msgstr "Responsable"
 #: code:addons/spreadsheet_dashboard_purchase_stock/data/files/purchase_dashboard.json:0
 #, python-format
 msgid "Scheduled on"
-msgstr "Programado el"
+msgstr "Planificado para"
 
 #. module: spreadsheet_dashboard_purchase_stock
 #. odoo-javascript
