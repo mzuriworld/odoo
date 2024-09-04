@@ -1,0 +1,49 @@
+#. module: mzuri_repairs
+#: model:ir.model,name:mzuri_repairs.model_repair_order
+msgid "Repair Order"
+msgstr "Заказ на ремонт"
+
+#. module: mzuri_repairs
+#: field:repair.order,team
+msgid "Team"
+msgstr "Команда"
+
+#. module: mzuri_repairs
+#: field:repair.order,state
+msgid "State"
+msgstr "Состояние"
+
+#. module: mzuri_repairs
+#: field:repair.order,priority
+msgid "Priority"
+msgstr "Приоритет"
+
+#. module: mzuri_repairs
+#: field:repair.order,product_id
+msgid "Product"
+msgstr "Продукт"
+
+#. module: mzuri_repairs
+#: field:repair.order,partner_id
+msgid "Customer"
+msgstr "Клиент"
+
+#. module: mzuri_repairs
+#: field:repair.order,schedule_date
+msgid "Scheduled Date"
+msgstr "Запланированная дата"
+
+#. module: mzuri_repairs
+#: field:repair.order,user_id
+msgid "Assigned to"
+msgstr "Назначено"
+
+#. module: mzuri_repairs
+#: field:repair.order,activity_state
+msgid "Activity State"
+msgstr "Состояние деятельности"
+
+#. module: mzuri_repairs
+#: field:repair.order,activity_ids
+msgid "Activities"
+msgstr "Деятельности"

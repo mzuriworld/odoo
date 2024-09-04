@@ -1,0 +1,121 @@
+#. module: mzuri_repairs
+#: model_terms:ir.ui.view,arch_db:mzuri_repairs.view_repair_order_kanban
+msgid "<b>Assigned to:</b>"
+msgstr "<b>Przypisano do:</b>"
+
+#. module: mzuri_repairs
+#: model_terms:ir.ui.view,arch_db:mzuri_repairs.view_repair_order_kanban
+msgid "<b>Customer:</b>"
+msgstr "<b>Klient:</b>"
+
+#. module: mzuri_repairs
+#: model_terms:ir.ui.view,arch_db:mzuri_repairs.view_repair_order_kanban
+msgid "<b>Product:</b>"
+msgstr "<b>Produkt:</b>"
+
+#. module: mzuri_repairs
+#: model_terms:ir.ui.view,arch_db:mzuri_repairs.view_repair_order_kanban
+msgid "<b>Scheduled Date:</b>"
+msgstr "<b>Planowana data:</b>"
+
+#. module: mzuri_repairs
+#: model_terms:ir.ui.view,arch_db:mzuri_repairs.view_repair_order_kanban
+msgid "<b>Team:</b>"
+msgstr "<b>Zespół:</b>"
+
+#. module: mzuri_repairs
+#: model_terms:ir.ui.view,arch_db:mzuri_repairs.view_repair_order_kanban
+msgid "Delete"
+msgstr "Usuń"
+
+#. module: mzuri_repairs
+#: model_terms:ir.ui.view,arch_db:mzuri_repairs.view_repair_order_kanban
+msgid "Edit..."
+msgstr "Edytuj..."
+
+#. module: mzuri_repairs
+#: model_terms:ir.ui.view,arch_db:mzuri_repairs.view_repair_order_form_mzuri
+msgid "File Name"
+msgstr "Nazwa pliku"
+
+#. module: mzuri_repairs
+#: model_terms:ir.actions.act_window,help:mzuri_repairs.action_repair_order_tree
+msgid ""
+"In a repair order, you can detail the components you remove,\n"
+"                    add or replace and record the time you spent on the different\n"
+"                    operations."
+msgstr ""
+"W zleceniu naprawy możesz opisać usunięte, dodane lub wymienione komponenty\n"
+"                    oraz zarejestrować czas poświęcony na różne operacje."
+
+#. module: mzuri_repairs
+#: model_terms:ir.actions.act_window,help:mzuri_repairs.action_repair_order_tree
+msgid "No repair order found. Let's create one!"
+msgstr "Nie znaleziono zlecenia naprawy. Utwórzmy jedno!"
+
+#. module: mzuri_repairs
+#: model:ir.model.fields,help:mzuri_repairs.field_repair_order__repair_photo_ids
+msgid "Photos related to the actual repair process"
+msgstr "Zdjęcia związane z rzeczywistym procesem naprawy"
+
+#. module: mzuri_repairs
+#: model:ir.model.fields,help:mzuri_repairs.field_repair_order__request_photo_ids
+msgid "Photos related to the initial repair request"
+msgstr "Zdjęcia związane z początkowym zgłoszeniem naprawy"
+
+#. module: mzuri_repairs
+#: model_terms:ir.ui.view,arch_db:mzuri_repairs.view_repair_order_tree
+msgid "Quantity"
+msgstr "Ilość"
+
+#. module: mzuri_repairs
+#: model:ir.model,name:mzuri_repairs.model_repair_order
+msgid "Repair Order"
+msgstr "Zlecenie naprawy"
+
+#. module: mzuri_repairs
+#: model:ir.actions.act_window,name:mzuri_repairs.action_repair_order_tree
+msgid "Repair Orders"
+msgstr "Zlecenia naprawy"
+
+#. module: mzuri_repairs
+#: model:ir.model.fields,field_description:mzuri_repairs.field_repair_order__repair_photo_ids
+#: model_terms:ir.ui.view,arch_db:mzuri_repairs.view_repair_order_form_mzuri
+msgid "Repair Photos"
+msgstr "Zdjęcia naprawy"
+
+#. module: mzuri_repairs
+#: model_terms:ir.ui.view,arch_db:mzuri_repairs.view_repair_order_tree
+msgid "Repairs order"
+msgstr "Zlecenie naprawy"
+
+#. module: mzuri_repairs
+#: model:ir.model.fields,field_description:mzuri_repairs.field_repair_order__request_photo_ids
+#: model_terms:ir.ui.view,arch_db:mzuri_repairs.view_repair_order_form_mzuri
+msgid "Request Photos"
+msgstr "Zdjęcia zgłoszenia"
+
+#. module: mzuri_repairs
+#: model:ir.model.fields,help:mzuri_repairs.field_repair_order__team
+msgid "Select the team handling the repair."
+msgstr "Wybierz zespół zajmujący się naprawą."
+
+#. module: mzuri_repairs
+#: model:ir.model.fields,field_description:mzuri_repairs.field_repair_order__team
+msgid "Team"
+msgstr "Zespół"
+
+#. module: mzuri_repairs
+#: model_terms:ir.ui.view,arch_db:mzuri_repairs.view_repair_order_form_mzuri
+msgid "Type"
+msgstr "Typ"
+
+#. module: mzuri_repairs
+#: model_terms:ir.ui.view,arch_db:mzuri_repairs.view_repair_order_tree
+msgid "Unit of Measure"
+msgstr "Jednostka miary"
+
+#. module: mzuri_repairs
+#: model_terms:ir.ui.view,arch_db:mzuri_repairs.view_repair_order_form_mzuri
+msgid "Uploaded On"
+msgstr "Przesłano"

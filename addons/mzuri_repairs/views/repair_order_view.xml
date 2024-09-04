@@ -1,0 +1,32 @@
+<odoo>
+    <data>
+        <record id="view_repair_order_form_mzuri" model="ir.ui.view">
+            <field name="name">repair.order.form.mzuri</field>
+            <field name="model">repair.order</field>
+            <field name="inherit_id" ref="repair.view_repair_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/notebook/page[@name='parts']" position="after">
+                    <page string="Request Photos" name="request_photos">
+                        <field name="request_photo_ids" widget="many2many_binary" options="{'widget': 'm2m_binary'}">
+                            <tree string="Request Photos">
+                                <field name="name" string="File Name"/>
+                                <field name="mimetype" string="Type"/>
+                                <field name="create_date" string="Uploaded On"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Repair Photos" name="repair_photos">
+                        <field name="repair_photo_ids" widget="many2many_binary" options="{'widget': 'm2m_binary'}">
+                            <tree string="Repair Photos">
+                                <field name="name" string="File Name"/>
+                                <field name="mimetype" string="Type"/>
+                                <field name="create_date" string="Uploaded On"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+
