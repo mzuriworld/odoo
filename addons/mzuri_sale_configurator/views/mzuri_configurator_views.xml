@@ -1,0 +1,51 @@
+<!--<odoo>-->
+<!--    <record id="view_order_form_configurator" model="ir.ui.view">-->
+<!--        <field name="name">sale.order.form.configurator</field>-->
+<!--        <field name="model">sale.order</field>-->
+<!--        <field name="inherit_id" ref="sale.view_order_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='order_line']/form//group" position="inside">-->
+<!--                <group string="Product Configuration aaa">-->
+<!--                    <field name="configurator_attributes">-->
+<!--                        <tree string="Configurator Attributes">-->
+<!--                            <field name="attribute_id"/>-->
+<!--                            <field name="value_id"/>-->
+<!--                        </tree>-->
+<!--                        <form string="Configurator Attribute">-->
+<!--                            <group>-->
+<!--                                <field name="attribute_id"/>-->
+<!--                                <field name="value_id"/>-->
+<!--                            </group>-->
+<!--                        </form>-->
+<!--                    </field>-->
+<!--                </group>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+<!--</odoo>-->
+
+<odoo>
+    <record id="view_order_form_configurator" model="ir.ui.view">
+        <field name="name">sale.order.form.configurator</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/form//group" position="inside">
+                <group string="Mzuri world" attrs="{'invisible': [('show_configurator', '=', False)]}">
+                    <field name="configurator_attributes">
+                        <tree string="Configurator Attributes">
+                            <field name="attribute_id"/>
+                            <field name="value_id"/>
+                        </tree>
+                        <form string="Configurator Attribute">
+                            <group>
+                                <field name="attribute_id"/>
+                                <field name="value_id"/>
+                            </group>
+                        </form>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

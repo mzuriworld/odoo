@@ -1,0 +1,10 @@
+<odoo>
+    <menuitem id="product_configurator_menu" name="Product Configurator" parent="sales_team.menu_sale_root" sequence="10"/>
+    <menuitem id="product_configurator_step_menu" name="Steps" parent="product_configurator_menu" action="action_product_configurator_step"/>
+
+    <record id="action_product_configurator_step" model="ir.actions.act_window">
+        <field name="name">Product Configurator Steps</field>
+        <field name="res_model">product.configurator.step</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

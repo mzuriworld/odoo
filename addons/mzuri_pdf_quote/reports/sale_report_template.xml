@@ -1,0 +1,127 @@
+<odoo>
+    <!-- Szablon dla Mzuri -->
+    <template id="sale_order_report_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <!-- Nagłówek -->
+                <div class="header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <img src="/mzuri_pdf_quote/static/src/img/mzuri_logo.png" alt="Mzuri Logo" style="width: 150px;"/>
+                    </div>
+                    <div>
+                        <h3>MZURI WORLD sp. z o.o.</h3>
+                        <p>Śmielin, ul. Stawowa 1</p>
+                        <p>89-110 Sadki</p>
+                    </div>
+                </div>
+
+                <!-- Dane klienta -->
+                <div class="customer_info" style="margin-top: 20px;">
+                    <p><strong><span t-field="o.partner_id.name"/></strong></p>
+                    <p><span t-field="o.partner_id.street"/> <span t-field="o.partner_id.street2"/></p>
+                    <p><span t-field="o.partner_id.zip"/> <span t-field="o.partner_id.city"/></p>
+                    <p>Numer oferty: <span t-field="o.name"/></p>
+                </div>
+
+                <!-- Tabela z produktami -->
+                <div class="product_table" style="margin-top: 40px;">
+                    <table class="table table-sm o_main_table">
+                        <thead>
+                            <tr>
+                                <th>Produkt</th>
+                                <th>Ilość</th>
+                                <th>Cena jednostkowa</th>
+                                <th>Wartość</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="o.order_line" t-as="line">
+                                <td><span t-field="line.product_id.display_name"/></td>
+                                <td class="text-center"><span t-field="line.product_uom_qty" t-options='{"widget": "float", "precision": 2}'/></td>
+                                <td class="text-right"><span t-field="line.price_unit" t-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
+                                <td class="text-right"><span t-field="line.price_subtotal" t-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" class="text-right"><strong>Suma:</strong></td>
+                                <td class="text-right"><span t-field="o.amount_total" t-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <!-- Stopka -->
+                <div class="footer" style="position: absolute; bottom: 20px; width: 100%; text-align: center;">
+                    <p>MZURI WORLD sp. z o.o. | www.mzuriworld.com</p>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Szablon dla dilera -->
+    <template id="sale_order_report_dealer_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <!-- Nagłówek -->
+                <div class="header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <img src="/mzuri_pdf_quote/static/src/img/mzuri_logo.png" alt="Mzuri Logo" style="width: 150px;"/>
+                    </div>
+                    <div>
+                        <img t-if="o.dealer_id.logo" t-att-src="'data:image/png;base64,%s' % (o.dealer_id.logo)" alt="Dealer Logo" style="width: 100px; float: right;"/>
+                    </div>
+                </div>
+
+                <!-- Dane klienta -->
+                <div class="customer_info" style="margin-top: 20px;">
+                    <p><strong>Imię i nazwisko klienta: <span t-field="o.partner_id.name"/></strong></p>
+                    <p>Adres klienta: <span t-field="o.partner_id.street"/> <span t-field="o.partner_id.street2"/></p>
+                    <p><span t-field="o.partner_id.zip"/> <span t-field="o.partner_id.city"/></p>
+                    <p>Numer oferty: <span t-field="o.name"/></p>
+                </div>
+
+                <!-- Dane dealera -->
+                <div class="dealer_info" style="text-align: right;">
+                    <p><strong>Autoryzowany Dealer Mzuri</strong></p>
+                    <p><span t-field="o.dealer_id.name"/></p>
+                    <p><span t-field="o.dealer_id.street"/> <span t-field="o.dealer_id.street2"/></p>
+                    <p><span t-field="o.dealer_id.zip"/> <span t-field="o.dealer_id.city"/></p>
+                </div>
+
+                <!-- Tabela z produktami -->
+                <div class="product_table" style="margin-top: 40px;">
+                    <table class="table table-sm o_main_table">
+                        <thead>
+                            <tr>
+                                <th>Produkt</th>
+                                <th>Ilość</th>
+                                <th>Cena jednostkowa</th>
+                                <th>Wartość</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="o.order_line" t-as="line">
+                                <td><span t-field="line.product_id.display_name"/></td>
+                                <td class="text-center"><span t-field="line.product_uom_qty" t-options='{"widget": "float", "precision": 2}'/></td>
+                                <td class="text-right"><span t-field="line.price_unit" t-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
+                                <td class="text-right"><span t-field="line.price_subtotal" t-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" class="text-right"><strong>Suma:</strong></td>
+                                <td class="text-right"><span t-field="o.amount_total" t-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <!-- Stopka -->
+                <div class="footer" style="position: absolute; bottom: 20px; width: 100%; text-align: center;">
+                    <p>MZURI WORLD sp. z o.o. | www.mzuriworld.com</p>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

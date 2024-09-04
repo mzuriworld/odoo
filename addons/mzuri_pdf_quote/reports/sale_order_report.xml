@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <!-- Raport dla firmy Mzuri -->
+        <report
+            id="action_report_sale_order_mzuri"
+            model="sale.order"
+            string="Sale Order Mzuri"
+            report_type="qweb-pdf"
+            name="mzuri_pdf_quote.sale_order_report_document"
+            file="mzuri_pdf_quote.sale_order_report_document"
+            print_report_name="'Oferta Mzuri - %s' % (object.name)"
+            />
+
+        <!-- Raport dla dealera -->
+        <report
+            id="action_report_sale_order_dealer"
+            model="sale.order"
+            string="Sale Order Dealer"
+            report_type="qweb-pdf"
+            name="mzuri_pdf_quote.sale_order_report_dealer_document"
+            file="mzuri_pdf_quote.sale_order_report_dealer_document"
+            print_report_name="'Oferta Dealer - %s' % (object.name)"
+            />
+    </data>
+</odoo>

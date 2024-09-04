@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Override the original Kanban view with a new one grouped by state -->
+        <record id="view_repair_order_kanban" model="ir.ui.view">
+            <field name="name">repair.order.kanban</field>
+            <field name="model">repair.order</field>
+            <!-- If you are replacing the existing Kanban view, ensure this line matches the original view -->
+            <field name="inherit_id" ref="repair.view_repair_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="replace">
+                    <kanban default_group_by="state" sample="1" class="o_kanban_dashboard o_repair_order_kanban" create="0">
+                        <!-- Use group_expand to show all possible states -->
+                        <field name="state" options="{'group_expand': [('draft', 'New'), ('confirmed', 'Confirmed'), ('under_repair', 'Under Repair'), ('done', 'Repaired'), ('cancel', 'Cancelled')]}"/>
+                        <field name="priority"/>
+                        <field name="product_id"/>
+                        <field name="team"/>
+                        <field name="partner_id"/>
+                        <field name="user_id"/>
+                        <field name="activity_ids"/>
+                        <field name="activity_state"/>
+                        <field name="schedule_date"/>
+                        <progressbar field="activity_state" colors='{"planned": "info", "today": "warning", "overdue": "danger"}'/>
+
+                        <templates>
+                            <!-- Kanban Tooltip -->
+                            <t t-name="kanban-tooltip">
+                                <ul class="oe_kanban_tooltip">
+                                    <li t-if="record.partner_id.raw_value"><b>Customer:</b> <t t-esc="record.partner_id.value"/></li>
+                                    <li t-if="record.user_id.raw_value"><b>Assigned to:</b> <t t-esc="record.user_id.value"/></li>
+                                </ul>
+                            </t>
+
+                            <!-- Kanban Menu -->
+                            <t t-name="kanban-menu">
+                                <t t-if="widget.editable"><a role="menuitem" type="edit" class="dropdown-item">Edit...</a></t>
+                                <t t-if="widget.deletable"><a role="menuitem" type="delete" class="dropdown-item">Delete</a></t>
+                            </t>
+
+                            <!-- Kanban Box -->
+                            <t t-name="kanban-box">
+                                <div t-attf-class="oe_kanban_card oe_kanban_global_click oe_semantic_html_override"
+                                     t-att-class="[
+                                        (record.state == 'draft' and record.under_warranty and (Date.now() - Date.parse(record.create_date.raw_value)) / (1000 * 60 * 60 * 24) &gt; 7 and (Date.now() - Date.parse(record.create_date)) / (1000 * 60 * 60 * 24) &lt; 21) ? 'o_kanban_card_warning' : '',
+                                        (record.state == 'draft' and record.under_warranty and (Date.now() - Date.parse(record.create_date.raw_value)) / (1000 * 60 * 60 * 24) &gt; 21) ? 'o_kanban_card_danger' : ''
+                                    ]">
+                                    <div class="oe_kanban_content" tooltip="kanban-tooltip">
+                                        <div class="o_kanban_record_top">
+                                            <b class="o_kanban_record_title"><field name="name"/></b>
+                                        </div>
+                                        <div class="o_kanban_record_body">
+                                            <span t-if="record.team.raw_value"><b>Team:</b> <field name="team"/></span><br/>
+                                            <span t-if="record.product_id.raw_value"><b>Product:</b> <field name="product_id"/><br/></span>
+                                            <span t-if="record.schedule_date.raw_value"><b>Scheduled Date:</b> <field name="schedule_date"/><br/></span>
+                                        </div>
+                                        <div class="o_kanban_record_bottom">
+                                            <div class="oe_kanban_bottom_left">
+                                                <field name="priority" widget="priority"/>
+                                                <div class="o_kanban_inline_block ml4 mr4">
+                                                    <field name="activity_ids" widget="kanban_activity"/>
+                                                </div>
+                                            </div>
+                                            <div class="oe_kanban_bottom_right">
+                                                <field name="user_id" widget="many2one_avatar_user"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"/>
+                                </div>
+                            </t>
+                        </templates>
+                    </kanban>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<odoo>-->
+<!--    <data>-->
+<!--        &lt;!&ndash; Override the original Kanban view with a new one grouped by state &ndash;&gt;-->
+<!--        <record id="view_repair_kanban" model="ir.ui.view">-->
+<!--            <field name="name">repair.order.kanban</field>-->
+<!--            <field name="model">repair.order</field>-->
+<!--            <field name="inherit_id" ref="repair.view_repair_kanban"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//kanban" position="replace">-->
+<!--                    <kanban default_group_by="state" sample="1" class="o_kanban_dashboard o_repair_order_kanban" create="0">-->
+<!--                        &lt;!&ndash; Use group_expand to show all possible states &ndash;&gt;-->
+<!--                        <field name="state" options="{'group_expand': True}"/>-->
+<!--                        <field name="priority"/>-->
+<!--                        <field name="product_id"/>-->
+<!--                        <field name="team"/>-->
+<!--                        <field name="partner_id"/>-->
+<!--                        <field name="user_id"/>-->
+<!--                        <field name="activity_ids"/>-->
+<!--                        <field name="activity_state"/>-->
+<!--                        <field name="schedule_date"/>-->
+<!--                        <progressbar field="activity_state" colors='{"planned": "info", "today": "warning", "overdue": "danger"}'/>-->
+
+<!--                        <templates>-->
+<!--                            &lt;!&ndash; Kanban Tooltip &ndash;&gt;-->
+<!--                            <t t-name="kanban-tooltip">-->
+<!--                                <ul class="oe_kanban_tooltip">-->
+<!--                                    <li t-if="record.partner_id.raw_value"><b>Customer:</b> <t t-esc="record.partner_id.value"/></li>-->
+<!--                                    <li t-if="record.user_id.raw_value"><b>Assigned to:</b> <t t-esc="record.user_id.value"/></li>-->
+<!--                                </ul>-->
+<!--                            </t>-->
+
+<!--                            &lt;!&ndash; Kanban Menu &ndash;&gt;-->
+<!--                            <t t-name="kanban-menu">-->
+<!--                                <t t-if="widget.editable"><a role="menuitem" type="edit" class="dropdown-item">Edit...</a></t>-->
+<!--                                <t t-if="widget.deletable"><a role="menuitem" type="delete" class="dropdown-item">Delete</a></t>-->
+<!--                            </t>-->
+
+<!--                            &lt;!&ndash; Kanban Box &ndash;&gt;-->
+<!--                            <t t-name="kanban-box">-->
+<!--                                <div t-attf-class="oe_kanban_card oe_kanban_global_click oe_semantic_html_override">-->
+<!--                                    <div class="oe_kanban_content" tooltip="kanban-tooltip">-->
+<!--                                        <div class="o_kanban_record_top">-->
+<!--                                            <b class="o_kanban_record_title"><field name="name"/></b>-->
+<!--                                        </div>-->
+<!--                                        <div class="o_kanban_record_body">-->
+<!--                                            <span t-if="record.team.raw_value"><b>Team:</b> <field name="team"/></span><br/>-->
+<!--                                            <span t-if="record.product_id.raw_value"><b>Product:</b> <field name="product_id"/><br/></span>-->
+<!--                                            <span t-if="record.schedule_date.raw_value"><b>Scheduled Date:</b> <field name="schedule_date"/><br/></span>-->
+<!--                                        </div>-->
+<!--                                        <div class="o_kanban_record_bottom">-->
+<!--                                            <div class="oe_kanban_bottom_left">-->
+<!--                                                <field name="priority" widget="priority"/>-->
+<!--                                                <div class="o_kanban_inline_block ml4 mr4">-->
+<!--                                                    <field name="activity_ids" widget="kanban_activity"/>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="oe_kanban_bottom_right">-->
+<!--                                                <field name="user_id" widget="many2one_avatar_user"/>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="clearfix"/>-->
+<!--                                </div>-->
+<!--                            </t>-->
+<!--                        </templates>-->
+<!--                    </kanban>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--    </data>-->
+<!--</odoo>-->
+
+
+
+
+
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<odoo>-->
+<!--    <data>-->
+
+<!--        &lt;!&ndash; Define the missing action &ndash;&gt;-->
+<!--        <record id="action_repair_order_form" model="ir.actions.act_window">-->
+<!--            <field name="name">Repair Order Form</field>-->
+<!--            <field name="res_model">repair.order</field>-->
+<!--            <field name="view_mode">form</field>-->
+<!--            <field name="context">{}</field>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; Define the missing action for Repair Reports &ndash;&gt;-->
+<!--        <record id="repair_request_action_reports" model="ir.actions.act_window">-->
+<!--            <field name="name">Repair Reports</field>-->
+<!--            <field name="res_model">repair.order</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="context">{}</field>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; Kanban view similar to Maintenance module &ndash;&gt;-->
+<!--        <record id="view_repair_order_kanban" model="ir.ui.view">-->
+<!--            <field name="name">repair.order.kanban</field>-->
+<!--            <field name="model">repair.order</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <kanban class="o_kanban_dashboard o_repair_order_kanban" create="0">-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="state"/>-->
+<!--                    <field name="product_id"/>-->
+<!--                    <field name="partner_id"/>-->
+<!--                    <field name="schedule_date"/>-->
+<!--                    <field name="user_id"/>-->
+
+<!--                    <templates>-->
+<!--                        &lt;!&ndash; Menu items for Kanban view similar to Maintenance &ndash;&gt;-->
+<!--                        <t t-name="kanban-menu">-->
+<!--                            <div class="container">-->
+<!--                                <div class="row">-->
+<!--                                    <div class="col-6 o_kanban_card_manage_section o_kanban_manage_view">-->
+<!--                                        <h5 role="menuitem" class="o_kanban_card_manage_title">-->
+<!--                                            <span>Repairs</span>-->
+<!--                                        </h5>-->
+<!--                                        <div role="menuitem">-->
+<!--                                            <a name="%(action_repair_order_tree)d" type="action">-->
+<!--                                                All-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                        <div role="menuitem">-->
+<!--                                            <a name="%(action_repair_order_tree)d" type="action" context="{'search_default_draft': 1}">-->
+<!--                                                To Do-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                        <div role="menuitem">-->
+<!--                                            <a name="%(action_repair_order_tree)d" type="action" context="{'search_default_progress': 1}">-->
+<!--                                                In Progress-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                        <div role="menuitem">-->
+<!--                                            <a name="%(action_repair_order_tree)d" type="action" context="{'search_default_done': 1}">-->
+<!--                                                Done-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-6 o_kanban_card_manage_section o_kanban_manage_new">-->
+<!--                                        <h5 role="menuitem" class="o_kanban_card_manage_title">-->
+<!--                                            <span>Reporting</span>-->
+<!--                                        </h5>-->
+<!--                                        <div role="menuitem">-->
+<!--                                            <a name="%(repair_request_action_reports)d" type="action">-->
+<!--                                                Repair Reports-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div t-if="widget.editable" class="o_kanban_card_manage_settings row">-->
+<!--                                    <div class="col-8" role="menuitem" aria-haspopup="true">-->
+<!--                                        <ul role="menu" class="oe_kanban_colorpicker" data-field="color"/>-->
+<!--                                    </div>-->
+<!--                                    <div role="menuitem" class="col-4">-->
+<!--                                        <a type="edit" class="dropdown-item">Configuration</a>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </t>-->
+
+<!--                        &lt;!&ndash; Kanban box similar to Maintenance &ndash;&gt;-->
+<!--                        <t t-name="kanban-box">-->
+<!--                            <div t-attf-class="o_kanban_card #{!selection_mode ? kanban_color(record.color.raw_value) : ''}">-->
+<!--                                <div t-attf-class="o_kanban_card_header">-->
+<!--                                    <div class="o_kanban_card_header_title">-->
+<!--                                        <div class="o_primary">-->
+<!--                                            <a name="%(action_repair_order_form)d" type="action">-->
+<!--                                                <field name="name"/>-->
+<!--                                            </a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="container o_kanban_card_content">-->
+<!--                                    <div class="row">-->
+<!--                                        <div class="col-6 o_kanban_primary_left">-->
+<!--                                            <button class="btn btn-primary" name="%(action_repair_order_tree)d" type="action" context="{'search_default_draft': 1}">-->
+<!--                                                <t t-esc="record.state.raw_value == 'draft' and 'To Do' or record.state.raw_value == 'confirmed' and 'In Progress' or record.state.raw_value == 'done' and 'Done'"/>-->
+<!--                                            </button>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-6 o_kanban_primary_right">-->
+<!--                                            <div t-if="record.state.raw_value == 'confirmed'">-->
+<!--                                                <a name="%(action_repair_order_tree)d" type="action" context="{'search_default_progress': 1}">-->
+<!--                                                    <t t-esc="record.state.raw_value == 'confirmed' and 'Scheduled'"/>-->
+<!--                                                </a>-->
+<!--                                            </div>-->
+<!--                                            <div t-if="record.state.raw_value == 'done'">-->
+<!--                                                <a name="%(action_repair_order_tree)d" type="action" context="{'search_default_done': 1}">-->
+<!--                                                    <t t-esc="record.state.raw_value == 'done' and 'Completed'"/>-->
+<!--                                                </a>-->
+<!--                                            </div>-->
+<!--                                            <div t-if="record.state.raw_value == 'cancel'">-->
+<!--                                                <a name="%(action_repair_order_tree)d" type="action" context="{'search_default_cancel': 1}">-->
+<!--                                                    <t t-esc="record.state.raw_value == 'cancel' and 'Cancelled'"/>-->
+<!--                                                </a>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </t>-->
+<!--                    </templates>-->
+<!--                </kanban>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; Update action to include new kanban view &ndash;&gt;-->
+<!--        <record id="action_repair_order_tree" model="ir.actions.act_window">-->
+<!--            <field name="name">Repair Orders</field>-->
+<!--            <field name="res_model">repair.order</field>-->
+<!--            <field name="view_mode">kanban,tree,form,graph,pivot,activity</field>-->
+<!--            <field name="search_view_id" ref="repair.view_repair_order_form_filter"/>-->
+<!--            <field name="help" type="html">-->
+<!--                <p class="o_view_nocontent_smiling_face">-->
+<!--                    No repair order found. Let's create one!-->
+<!--                </p>-->
+<!--                <p>-->
+<!--                    In a repair order, you can detail the components you remove,-->
+<!--                    add or replace and record the time you spent on the different-->
+<!--                    operations.-->
+<!--                </p>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--    </data>-->
+<!--</odoo>-->

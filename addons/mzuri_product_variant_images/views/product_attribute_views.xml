@@ -1,0 +1,68 @@
+<odoo>
+    <record id="mzuri_product_variant_images.attribute_image_view_tree" model="ir.ui.view">
+        <field name="name">product.template.attribute.value.tree</field>
+        <field name="model">product.template.attribute.value</field>
+        <field name="inherit_id" ref="product.product_template_attribute_value_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="image" widget="image"/>
+            </xpath>
+        </field>
+    </record>
+
+<!--    <record id="mzuri_product_variant_images.attribute_image_view_form_line" model="ir.ui.view">-->
+<!--        <field name="name">product.template.attribute.value.form.inherit</field>-->
+<!--        <field name="model">product.template.attribute.value</field>-->
+<!--        <field name="inherit_id" ref="product.product_template_attribute_value_view_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='attribute_id']" position="after">-->
+<!--                <field name="image" widget="image"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+</odoo>
+
+
+
+<!--<odoo>-->
+<!--    <record id="view_product_template_form_variant_images" model="ir.ui.view">-->
+<!--        <field name="name">product.template.form.variant.images</field>-->
+<!--        <field name="model">product.template.attribute.value</field>-->
+<!--        <field name="inherit_id" ref="product.product_template_form_view"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//page[@name='inventory']" position="after">-->
+<!--                <page name="variant_images" string="Variant Images">-->
+<!--                    <group>-->
+<!--                        <field name="attribute_image_ids">-->
+<!--                            <tree string="Attribute Images">-->
+<!--                                <field name="attribute_id"/>-->
+<!--                                <field name="value_id"/>-->
+<!--                                <field name="image" widget="image"/>-->
+<!--                            </tree>-->
+<!--                            <form string="Attribute Image">-->
+<!--                                <group>-->
+<!--                                    <field name="attribute_id"/>-->
+<!--                                    <field name="value_id"/>-->
+<!--                                    <field name="image" widget="image"/>-->
+<!--                                </group>-->
+<!--                            </form>-->
+<!--                        </field>-->
+<!--                    </group>-->
+<!--                </page>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="view_product_product_form_variant_image" model="ir.ui.view">-->
+<!--        <field name="name">product.product.form.variant.image</field>-->
+<!--        <field name="model">product.product</field>-->
+<!--        <field name="inherit_id" ref="product.product_product_form_view"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='attribute_value_ids']" position="after">-->
+<!--                <field name="variant_image" widget="image"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+<!--</odoo>-->

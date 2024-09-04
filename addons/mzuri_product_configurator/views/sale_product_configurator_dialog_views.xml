@@ -1,0 +1,29 @@
+<odoo>
+    <template id="view_product_configurator_dialog" inherit_id="sale_product_configurator.dialog">
+        <xpath expr="//div[@class='o_product_configurator_dialog']" position="inside">
+            <div class="attribute-select-wrapper">
+                <!-- Dodaj atrybuty produktu tutaj -->
+            </div>
+        </xpath>
+    </template>
+</odoo>
+
+
+<!--<odoo>-->
+<!--    <data>-->
+<!--        <record id="view_product_configurator_dialog" model="ir.ui.view">-->
+<!--            <field name="name">sale.product.configurator.dialog</field>-->
+<!--            <field name="model">product.configurator</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="Product Configurator">-->
+<!--                    <group>-->
+<!--                        <field name="product_tmpl_id" widget="many2one"/>-->
+<!--                        <div class="attribute-select-wrapper">-->
+<!--                            &lt;!&ndash; Miejsce na atrybuty produktu &ndash;&gt;-->
+<!--                        </div>-->
+<!--                    </group>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--    </data>-->
+<!--</odoo>-->

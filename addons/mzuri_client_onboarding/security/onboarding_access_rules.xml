@@ -1,0 +1,8 @@
+<odoo>
+    <record id="res_partner_onboarding_rule" model="ir.rule">
+        <field name="name">Public User Onboarding Access</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="domain_force">[('onboarding_token', '!=', False)]</field>
+        <field name="groups" eval="[(4, ref('base.group_public'))]"/>
+    </record>
+</odoo>

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!--<odoo>-->
+<!--    <record id="email_template_customer_onboarding" model="mail.template">-->
+<!--        <field name="name">Customer Onboarding Email</field>-->
+<!--        <field name="model_id" ref="base.model_res_partner"/>-->
+<!--        <field name="subject">Welcome, please confirm your details and provide consent</field>-->
+<!--        <field name="email_from">${(user.email_formatted or '')|safe}</field>-->
+<!--        <field name="email_to">${(object.email or '')|safe}</field>-->
+<!--        <field name="body_html" type="html">-->
+<!--            <![CDATA[-->
+<!--            <p>Dear ${object.name},</p>-->
+<!--            <p>Thank you for joining us. Please confirm your details and provide consent for communication:</p>-->
+<!--            <ul>-->
+<!--                <li>Name: ${object.name}</li>-->
+<!--                <li>Email: ${object.email}</li>-->
+<!--                <li>Phone: ${object.phone}</li>-->
+<!--            </ul>-->
+<!--            <p>Please click the link below to confirm your details and provide consent:</p>-->
+<!--            <p><a href="${object.get_onboarding_url()}">Confirm Details and Provide Consent</a></p>-->
+<!--            <p>Thank you!</p>-->
+<!--            ]]>-->
+<!--        </field>-->
+<!--    </record>-->
+<!--</odoo>-->
+
+<odoo>
+    <record id="email_template_customer_onboarding" model="mail.template">
+        <field name="name">Customer Onboarding Email</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="subject">Welcome, please confirm your details</field>
+        <field name="email_to">{{(object.email or '')}}</field>
+        <field name="email_from">{{(object.company_id.email or 'cmr@mzuri-agro.eu')}}</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p style="box-sizing:border-box;margin: 0px; padding: 0px; font-size: 13px;">
+                    Dear
+                    <span t-if="object.parent_id">
+                        <strong t-out="object.name">[Customer Name]</strong> (<strong t-out="object.parent_id.name">[Parent Company]</strong>),
+                    </span>
+                    <span t-else="">
+                        <strong t-out="object.name">[Customer Name]</strong>,
+                    </span>
+                    <br/><br/>
+                    We are excited to welcome you to our service. Please confirm your details:
+                    <br/><br/>
+                    <strong>Your details:</strong>
+                    <ul style="margin-left: 15px;">
+                        <li><strong>Name:</strong> <span t-out="object.name">[Customer Name]</span></li>
+                        <li><strong>Email:</strong> <span t-out="object.email">[Customer Email]</span></li>
+                        <li><strong>Phone:</strong> <span t-out="object.phone">[Customer Phone]</span></li>
+                    </ul>
+                    <br/>
+                    To confirm your details and provide consent, please click the link below:
+                    <br/><br/>
+                    <a t-att-href="object.get_onboarding_url()" style="background-color: #4CAF50; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; border-radius: 5px;">
+                        Confirm Your Details
+                    </a>
+                    <br/><br/>
+                    Please do not hesitate to contact us if you have any questions.
+                    <br/><br/>
+                    <span t-if="object.create_uid.signature">
+                        <t t-out="object.create_uid.signature">Best regards,<br/>[User Signature]</t>
+                    </span>
+                </p>
+            </div>
+<!--            <p>Dear {{object.name}},</p>-->
+<!--            <p>Thank you for joining us. Please confirm your details and provide consent for communication:</p>-->
+<!--            <ul>-->
+<!--                <li>Name: {{object.name}}</li>-->
+<!--                <li>Email: {{object.email}}</li>-->
+<!--                <li>Phone: {{object.phone}}</li>-->
+<!--            </ul>-->
+<!--            <p>Please click the link below to confirm your details and provide consent:</p>-->
+<!--            <p><a href="{{object.get_onboarding_url()}}">Confirm Details and Provide Consent</a></p>-->
+<!--            <p>Thank you!</p>-->
+        </field>
+    </record>
+</odoo>

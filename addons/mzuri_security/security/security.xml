@@ -1,0 +1,27 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Group for Dealers -->
+        <record id="group_dealer_user" model="res.groups">
+            <field name="name">Dealer User</field>
+            <field name="category_id" ref="base.module_category_user_type"/>
+        </record>
+
+        <!-- Group for Mzuri Managers -->
+        <record id="group_mzuri_manager" model="res.groups">
+            <field name="name">Mzuri Manager</field>
+            <field name="category_id" ref="base.module_category_user_type"/>
+        </record>
+
+        <!-- Group for Mzuri Order Processors -->
+        <record id="group_mzuri_order_processor" model="res.groups">
+            <field name="name">Mzuri Order Processor</field>
+            <field name="category_id" ref="base.module_category_user_type"/>
+        </record>
+
+        <!-- Group for Mzuri Service Analysts -->
+        <record id="group_mzuri_service_analyst" model="res.groups">
+            <field name="name">Mzuri Service Analyst</field>
+            <field name="category_id" ref="base.module_category_user_type"/>
+        </record>
+    </data>
+</odoo>

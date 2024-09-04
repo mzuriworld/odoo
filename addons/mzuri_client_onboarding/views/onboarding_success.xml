@@ -1,0 +1,40 @@
+<!--<odoo>-->
+<!--    <template id="onboarding_success_page" name="Onboarding Success">-->
+<!--        <t t-call="web.layout">-->
+<!--            <div class="container mt16 mb16">-->
+<!--                <div class="oe_structure">-->
+<!--                    <h1>Thank You, <t t-esc="partner.name"/>!</h1>-->
+<!--                    <p>Your details and preferences have been successfully confirmed.</p>-->
+<!--                    <p>We appreciate your cooperation. If you have any questions, feel free to contact us.</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </t>-->
+<!--    </template>-->
+<!--</odoo>-->
+
+<odoo>
+    <template id="onboarding_success_page" name="Onboarding Success">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <section class="s_text_cover o_colored_level" data-snippet="s_text_cover" style="background-image: none;">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="o_colored_level o_cc o_cc4 col-lg-5 pt160 pb160 px-5">
+                                <h1 class="display-3">Thank You, <t t-esc="partner.name"/>!</h1>
+                                <p class="lead">
+                                    Your details and preferences have been successfully confirmed.
+                                </p>
+                                <p>
+                                    We appreciate your cooperation. If you have any questions, feel free to contact us.
+                                </p>
+                                <a class="btn btn-primary mt16" href="/">Go to Homepage</a>
+                            </div>
+                            <div class="o_not_editable o_colored_level o_cc o_cc1 pt160 pb160 col-lg-7 d-none d-md-block oe_img_bg o_bg_img_center" style="background-image: url('/web/image/792-12611f53/mapa%20%C5%9Bwiat.webp'); background-position: 100% 0px;">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+</odoo>

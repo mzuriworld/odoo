@@ -1,0 +1,35 @@
+<!--<odoo>-->
+<!--    <template id="onboarding_token_invalid" name="Invalid or Expired Token">-->
+<!--        <t t-call="web.layout">-->
+<!--            <div class="container mt16 mb16">-->
+<!--                <div class="oe_structure">-->
+<!--                    <h1>Link Invalid or Expired</h1>-->
+<!--                    <p>It seems that the link you used is either invalid or has already been used.</p>-->
+<!--                    <p>If you believe this is an error, please contact our support team.</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </t>-->
+<!--    </template>-->
+<!--</odoo>-->
+
+<odoo>
+    <template id="onboarding_token_invalid" name="Invalid or Expired Token">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <section class="s_cover parallax s_parallax_is_fixed bg-black-50 pt256 pb256" data-scroll-background-ratio="1" data-snippet="s_cover">
+                    <span class="s_parallax_bg oe_img_bg" style="background-image: url('/web/image/website.s_cover_default_image'); background-position: 50% 0;"/>
+                    <div class="o_we_bg_filter bg-black-50"/>
+                    <div class="container s_allow_columns">
+                        <h1 style="text-align: center;">Link Invalid or Expired</h1>
+                        <p class="lead" style="text-align: center;">
+                            The link you have used is either invalid or has already been used. Please contact our support team if you need further assistance.
+                        </p>
+                        <p style="text-align: center;">
+                            <a class="btn btn-primary" href="/">Go to Homepage</a>
+                        </p>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+</odoo>

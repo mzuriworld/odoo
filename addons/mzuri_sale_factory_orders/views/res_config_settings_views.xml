@@ -1,0 +1,66 @@
+<!--<odoo>-->
+<!--    <data>-->
+<!--        &lt;!&ndash; Inherit the purchase settings view to add a default supplier field &ndash;&gt;-->
+<!--        <record id="res_config_settings_view_form_inherit_purchase_custom" model="ir.ui.view">-->
+<!--            <field name="name">res.config.settings.view.form.inherit.purchase.custom</field>-->
+<!--            <field name="model">res.config.settings</field>-->
+<!--            <field name="inherit_id" ref="purchase.res_config_settings_view_form_purchase"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                &lt;!&ndash; Insert new setting block after the Products block &ndash;&gt;-->
+<!--                <xpath expr="//block[@name='matrix_setting_container']" position="after">-->
+<!--                    <block title="Default Supplier" name="default_supplier_setting_container">-->
+<!--                        <div class="row mt16 o_settings_container">-->
+<!--                            <div class="col-12 col-lg-6 o_setting_box">-->
+<!--                                <div class="o_setting_left_pane">-->
+<!--                                    &lt;!&ndash; Field will appear on the left pane &ndash;&gt;-->
+<!--                                    <field name="default_supplier_id" widget="many2one" options="{'no_open': True}"/>-->
+<!--                                </div>-->
+<!--                                <div class="o_setting_right_pane">-->
+<!--                                    <label for="default_supplier_id"/>-->
+<!--                                    <p class="text-muted">Set the default supplier for all purchase orders.</p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </block>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--    </data>-->
+<!--</odoo>-->
+
+
+
+
+<!--&lt;!&ndash;<odoo>&ndash;&gt;-->
+<!--&lt;!&ndash;    <data>&ndash;&gt;-->
+<!--&lt;!&ndash;        &lt;!&ndash; Inherit the purchase settings view to add a default supplier field &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        <record id="res_config_settings_view_form_inherit_purchase_custom" model="ir.ui.view">&ndash;&gt;-->
+<!--&lt;!&ndash;            <field name="name">res.config.settings.view.form.inherit.purchase.custom</field>&ndash;&gt;-->
+<!--&lt;!&ndash;            <field name="model">res.config.settings</field>&ndash;&gt;-->
+<!--&lt;!&ndash;            &lt;!&ndash; Inherit the correct view using its external ID &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;            <field name="inherit_id" ref="purchase.res_config_settings_view_form_purchase"/>&ndash;&gt;-->
+<!--&lt;!&ndash;            <field name="arch" type="xml">&ndash;&gt;-->
+<!--&lt;!&ndash;                &lt;!&ndash; Use XPath to locate the Products block &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                <xpath expr="//block[@name='matrix_setting_container']" position="after">&ndash;&gt;-->
+<!--&lt;!&ndash;                    &lt;!&ndash; New block for default supplier setting &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                    <block title="Default Supplier" name="default_supplier_setting_container">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div class="app_settings_block" data-string="Settings">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="row mt16 o_settings_container">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <div class="col-12 col-lg-6 o_setting_box">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <div class="o_setting_left_pane">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        &lt;!&ndash; Field for default supplier &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <field name="default_supplier_id"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <div class="o_setting_right_pane">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <label for="default_supplier_id"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <p class="text-muted">Set the default supplier for all purchase orders.</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </block>&ndash;&gt;-->
+<!--&lt;!&ndash;                </xpath>&ndash;&gt;-->
+<!--&lt;!&ndash;            </field>&ndash;&gt;-->
+<!--&lt;!&ndash;        </record>&ndash;&gt;-->
+<!--&lt;!&ndash;    </data>&ndash;&gt;-->
+<!--&lt;!&ndash;</odoo>&ndash;&gt;-->

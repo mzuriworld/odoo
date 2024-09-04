@@ -1,0 +1,33 @@
+<!--<odoo>-->
+<!--    <record id="view_sale_order_form_pdf_preview" model="ir.ui.view">-->
+<!--        <field name="name">sale.order.form.pdf.preview</field>-->
+<!--        <field name="model">sale.order</field>-->
+<!--        <field name="inherit_id" ref="sale.view_order_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            &lt;!&ndash; Zastąpienie przycisku "Preview" &ndash;&gt;-->
+<!--            <xpath expr="//button[@name='action_preview_sale_order']" position="attributes">-->
+<!--                <attribute name="name">action_report_saleorder</attribute>-->
+<!--                <attribute name="string">Create PDF</attribute>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+<!--</odoo>-->
+
+
+<odoo>
+    <record id="view_sale_order_form_pdf_preview" model="ir.ui.view">
+        <field name="name">sale.order.form.pdf.preview</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Zastąpienie przycisku "Preview" -->
+            <xpath expr="//button[@name='action_preview_sale_order']" position="attributes">
+                <attribute name="name">sale.action_report_saleorder</attribute>
+                <attribute name="string">Podgląd PDF</attribute>
+                <attribute name="type">action</attribute>
+                <attribute name="class">btn-secondary</attribute>
+                <attribute name="report_name">sale.report_saleorder</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

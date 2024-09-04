@@ -1,0 +1,59 @@
+<!--<odoo>-->
+<!--    <record id="action_send_onboarding_email" model="ir.actions.server">-->
+<!--        <field name="name">Send Onboarding Email</field>-->
+<!--        <field name="model_id" ref="base.model_res_partner"/>-->
+<!--        <field name="state">email</field>-->
+<!--        <field name="email_to">${object.email}</field>-->
+<!--        <field name="subject">Welcome to our system, ${object.name}</field>-->
+<!--        <field name="body_html" type="html">-->
+<!--            <![CDATA[-->
+<!--            <p>Hello ${object.name},</p>-->
+<!--            <p>Please confirm your details and provide consent by clicking the link below:</p>-->
+<!--            <p><a href="${object.get_onboarding_url()}">Confirm Details and Provide Consent</a></p>-->
+<!--            <p>Thank you!</p>-->
+<!--            ]]>-->
+<!--        </field>-->
+<!--        <field name="binding_model_id" ref="base.model_res_partner"/>-->
+<!--        <field name="binding_type">action</field>-->
+<!--    </record>-->
+<!--</odoo>-->
+<odoo>
+    <record id="action_send_onboarding_email" model="ir.actions.server">
+        <field name="name">Send Onboarding Email</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="state">code</field>
+        <field name="code">
+            if record.email:
+                _logger.info("Attempting to send onboarding email to partner: %s", record.name)
+                template = env.ref('mzuri_client_onboarding.email_template_customer_onboarding')
+                env['mail.template'].browse(template.id).send_mail(record.id, force_send=True)
+        </field>
+    </record>
+</odoo>
+
+<!--<odoo>-->
+<!--    <record id="action_send_onboarding_email" model="ir.actions.server">-->
+<!--        <field name="name">Send Onboarding Email</field>-->
+<!--        <field name="model_id" ref="base.model_res_partner"/>-->
+<!--        <field name="state">code</field>-->
+<!--        <field name="code">-->
+<!--            import logging-->
+<!--            logger = logging.getLogger('odoo.addons.mzuri_client_onboarding')-->
+<!--            logger.info("Attempting to send onboarding email to partner: %s", record.name)-->
+
+<!--            if record.email:-->
+<!--                template = env.ref('mzuri_client_onboarding.email_template_customer_onboarding')-->
+<!--                if template:-->
+<!--                    logger.info("Email template found, sending email to: %s", record.email)-->
+<!--                    env['mail.template'].browse(template.id).send_mail(record.id, force_send=True)-->
+<!--                    logger.info("Email sent successfully to: %s", record.email)-->
+<!--                else:-->
+<!--                    logger.error("Email template not found.")-->
+<!--            else:-->
+<!--                logger.error("No email address found for partner: %s", record.name)-->
+<!--        </field>-->
+<!--        <field name="binding_model_id" ref="base.model_res_partner"/>-->
+<!--        <field name="binding_type">action"</field>-->
+<!--        <field name="trigger">on_create</field> &lt;!&ndash; Wyzwalacz na stworzenie nowego rekordu &ndash;&gt;-->
+<!--    </record>-->
+<!--</odoo>-->

@@ -1,0 +1,31 @@
+# Translation for mzuri_contact_extensions
+msgid ""
+msgstr ""
+"Project-Id-Version: mzuri_contact_extensions\n"
+"POT-Creation-Date: 2024-08-16 12:00+0000\n"
+"PO-Revision-Date: 2024-08-16 12:00+0000\n"
+"Language-Team: Polish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: mzuri_contact_extensions
+#: model:ir.ui.view,field:name,res.partner.form.inherit.product
+msgid "Zainteresowania"
+msgstr "Zainteresowania"
+
+#. module: mzuri_contact_extensions
+#: model:ir.ui.view,field:name,res.partner.form.inherit.product
+msgid "Posiadane/Park Maszynowy"
+msgstr "Posiadane/Park Maszynowy"
+
+#. module: mzuri_contact_extensions
+#: field:res.partner,product_interest_ids
+msgid "Zainteresowania"
+msgstr "Zainteresowania"
+
+#. module: mzuri_contact_extensions
+#: field:res.partner,product_owned_ids
+msgid "Posiadane/Park Maszynowy"
+msgstr "Posiadane/Park Maszynowy"

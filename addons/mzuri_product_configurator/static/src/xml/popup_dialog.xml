@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="custom_module.DuplicateProductDialog">
+        <Dialog size="'md'" title="title" modalRef="modalRef">
+            <table class="table">
+                <thead>
+                </thead>
+                <tbody>
+                    <t t-foreach="this.props.orders" t-as="item" t-key="item.order_id">
+                        <div class="d-flex align-items-start flex-column mb-3">
+                            <tr>
+                                <td>
+                                    <p>
+                                        The product
+                                        <t t-out="item.product_info" />
+                                        is already reserved for this customer under order number
+                                        <span t-esc="item.order_number" />
+                                        with a quantity of
+                                        <strong>
+                                            <t t-out="item.product_qty" />
+                                        </strong>
+                                        . Please confirm if you still want to add this line item to the order
+                                        <button class="btn btn-primary me-1" t-on-click="() => this.addProduct(item.id)">
+                                            Add
+                                        </button>
+                                        <button class="btn btn-primary ms-1" t-on-click="() => this.removeProduct(item.id)">
+                                            Remove
+                                        </button>
+                                    </p>
+                                </td>
+                            </tr>
+                        </div>
+                    </t>
+                </tbody>
+            </table>
+        </Dialog>
+    </t>
+</templates>

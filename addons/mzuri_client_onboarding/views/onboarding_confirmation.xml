@@ -1,0 +1,191 @@
+<!--<odoo>-->
+<!--    <template id="onboarding_confirmation_page" name="Onboarding Confirmation">-->
+<!--        <t t-call="web.layout">-->
+<!--            <div class="container mt16 mb16">-->
+<!--                <div class="oe_structure">-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-12">-->
+<!--                            <t t-if="partner">-->
+<!--                                <h1>Welcome, <t t-esc="partner.name"/></h1>-->
+<!--                                <p>Your onboarding process is almost complete. Please review your information and confirm your preferences.</p>-->
+<!--                                <p>-->
+<!--                                    <strong>Name:</strong> <t t-esc="partner.name"/><br/>-->
+<!--                                    <strong>Email:</strong> <t t-esc="partner.email"/><br/>-->
+<!--                                    <strong>Phone:</strong> <t t-esc="partner.phone"/><br/>-->
+<!--                                </p>-->
+<!--                                <form action="/customer/onboarding/confirm" method="post">-->
+<!--                                    <input type="hidden" name="partner_id" t-att-value="partner.id"/>-->
+<!--                                    <input type="hidden" name="token" t-att-value="request.params.get('token')"/>-->
+<!--                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>-->
+
+<!--                                    <div class="form-group">-->
+<!--                                        <label>-->
+<!--                                            <input type="checkbox" name="consent_email" t-att-checked="'checked' if partner.consent_email else ''"/>-->
+<!--                                            I consent to receive communication via Email.-->
+<!--                                        </label>-->
+<!--                                    </div>-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label>-->
+<!--                                            <input type="checkbox" name="consent_phone" t-att-checked="'checked' if partner.consent_phone else ''"/>-->
+<!--                                            I consent to receive communication via Phone.-->
+<!--                                        </label>-->
+<!--                                    </div>-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label>-->
+<!--                                            <input type="checkbox" name="consent_sms" t-att-checked="'checked' if partner.consent_sms else ''"/>-->
+<!--                                            I consent to receive communication via SMS.-->
+<!--                                        </label>-->
+<!--                                    </div>-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label>-->
+<!--                                            <input type="checkbox" name="consent_data_processing" t-att-checked="'checked' if partner.consent_data_processing else ''"/>-->
+<!--                                            I consent to the processing of my personal data.-->
+<!--                                        </label>-->
+<!--                                    </div>-->
+
+<!--                                    <button type="submit" class="btn btn-primary mt16">Confirm Details and Preferences</button>-->
+<!--                                </form>-->
+<!--                            </t>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </t>-->
+<!--    </template>-->
+<!--</odoo>-->
+
+
+<!--<odoo>-->
+<!--    <template id="onboarding_confirmation_page" name="Onboarding Confirmation">-->
+<!--        <t t-call="website.layout">-->
+<!--            <div id="wrap" class="oe_structure">-->
+<!--                <section class="s_text_cover o_full_screen_height" data-snippet="s_text_cover" style="">-->
+<!--                    <div class="container-fluid">-->
+<!--                        <div class="row">-->
+<!--                            <div class="o_colored_level o_cc o_cc4 col-lg-5 pt160 pb160 px-5">-->
+<!--                                <t t-if="partner">-->
+<!--                                    <h1 style="text-align: center;">Welcome, <t t-esc="partner.name"/></h1>-->
+<!--                                    <p class="lead" style="text-align: center;">-->
+<!--                                        Your onboarding process is almost complete. Please review your information and confirm your preferences.-->
+<!--                                    </p>-->
+<!--                                    <p>-->
+<!--                                        <strong>Name:</strong> <t t-esc="partner.name"/><br/>-->
+<!--                                        <strong>Email:</strong> <t t-esc="partner.email"/><br/>-->
+<!--                                        <strong>Phone:</strong> <t t-esc="partner.phone"/><br/>-->
+<!--                                    </p>-->
+<!--                                    <form action="/customer/onboarding/confirm" method="post">-->
+<!--                                        <input type="hidden" name="partner_id" t-att-value="partner.id"/>-->
+<!--                                        <input type="hidden" name="token" t-att-value="request.params.get('token')"/>-->
+<!--                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>-->
+
+<!--                                        <div class="form-group">-->
+<!--                                            <label>-->
+<!--                                                <input type="checkbox" name="consent_email" t-att-checked="'checked' if partner.consent_email else ''"/>-->
+<!--                                                I consent to receive communication via Email.-->
+<!--                                            </label>-->
+<!--                                        </div>-->
+<!--                                        <div class="form-group">-->
+<!--                                            <label>-->
+<!--                                                <input type="checkbox" name="consent_phone" t-att-checked="'checked' if partner.consent_phone else ''"/>-->
+<!--                                                I consent to receive communication via Phone.-->
+<!--                                            </label>-->
+<!--                                        </div>-->
+<!--                                        <div class="form-group">-->
+<!--                                            <label>-->
+<!--                                                <input type="checkbox" name="consent_sms" t-att-checked="'checked' if partner.consent_sms else ''"/>-->
+<!--                                                I consent to receive communication via SMS.-->
+<!--                                            </label>-->
+<!--                                        </div>-->
+<!--                                        <div class="form-group">-->
+<!--                                            <label>-->
+<!--                                                <input type="checkbox" name="consent_data_processing" t-att-checked="'checked' if partner.consent_data_processing else ''"/>-->
+<!--                                                I consent to the processing of my personal data.-->
+<!--                                            </label>-->
+<!--                                        </div>-->
+
+<!--                                        <button type="submit" class="btn btn-primary mt16">Confirm Details and Preferences</button>-->
+<!--                                    </form>-->
+<!--                                </t>-->
+<!--                                <t t-else="">-->
+<!--                                    <h1 style="text-align: center;">Onboarding Confirmation</h1>-->
+<!--                                    <p class="lead" style="text-align: center;">-->
+<!--                                        This is the onboarding confirmation page. You can edit this page using the website editor.-->
+<!--                                    </p>-->
+<!--                                </t>-->
+<!--                            </div>-->
+<!--                            <div class="o_not_editable o_colored_level o_cc o_cc1 pt160 pb160 oe_img_bg col-lg-7 d-none d-md-block" style="background-image: url('/web/image/website.s_text_cover_default_image'); background-position: 100% 0;"/>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </section>-->
+<!--            </div>-->
+<!--        </t>-->
+<!--    </template>-->
+<!--</odoo>-->
+
+<odoo>
+    <template id="onboarding_confirmation_page" name="Onboarding Confirmation">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <section class="s_text_cover o_colored_level" data-snippet="s_text_cover" style="background-image: none;">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="o_colored_level o_cc o_cc4 col-lg-5 pt160 pb160 px-5">
+                                <t t-if="partner">
+                                    <h1 class="display-3">Welcome, <t t-esc="partner.name"/></h1>
+                                    <p class="lead">
+                                        Your onboarding process is almost complete. Please review your information and confirm your preferences.
+                                    </p>
+                                    <p>
+                                        <strong>Name:</strong> <t t-esc="partner.name"/><br/>
+                                        <strong>Email:</strong> <t t-esc="partner.email"/><br/>
+                                        <strong>Phone:</strong> <t t-esc="partner.phone"/><br/>
+                                    </p>
+                                    <form action="/customer/onboarding/confirm" method="post">
+                                        <input type="hidden" name="partner_id" t-att-value="partner.id"/>
+                                        <input type="hidden" name="token" t-att-value="request.params.get('token')"/>
+                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                                        <div class="form-group">
+                                            <label>
+                                                <input type="checkbox" name="consent_email" t-att-checked="'checked' if partner.consent_email else ''"/>
+                                                I consent to receive communication via Email.
+                                            </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>
+                                                <input type="checkbox" name="consent_phone" t-att-checked="'checked' if partner.consent_phone else ''"/>
+                                                I consent to receive communication via Phone.
+                                            </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>
+                                                <input type="checkbox" name="consent_sms" t-att-checked="'checked' if partner.consent_sms else ''"/>
+                                                I consent to receive communication via SMS.
+                                            </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>
+                                                <input type="checkbox" name="consent_data_processing" t-att-checked="'checked' if partner.consent_data_processing else ''"/>
+                                                I consent to the processing of my personal data.
+                                            </label>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary mt16">Confirm Details and Preferences</button>
+                                    </form>
+                                </t>
+                                <t t-else="">
+                                    <h1 class="display-3">Onboarding Confirmation</h1>
+                                    <p class="lead">
+                                        This is the onboarding confirmation page. You can edit this page using the website editor.
+                                    </p>
+                                </t>
+                            </div>
+                            <div class="o_not_editable o_colored_level o_cc o_cc1 pt160 pb160 col-lg-7 d-none d-md-block oe_img_bg o_bg_img_center" style="background-image: url('/web/image/792-12611f53/mapa%20%C5%9Bwiat.webp'); background-position: 100% 0px;">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+</odoo>

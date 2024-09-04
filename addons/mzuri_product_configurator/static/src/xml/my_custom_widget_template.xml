@@ -1,0 +1,7 @@
+<templates id="template" xml:space="preserve">
+    <t t-name="MyCustomWidgetTemplate">
+        <div class="o_form_field o_form_field_widget o_field_widget o_required_modifier">
+            <div class="attribute-select-wrapper"/>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="sale_product_configurator.dialog">
+        <div class="o_product_configurator_dialog">
+            <Dialog title="Configure your product" size="large" onDiscard="onDiscard" onConfirm="onConfirm">
+                <div t-if="state.products.length">
+                    <div class="o_product_attributes">
+                        <div class="attribute" t-foreach="state.products[0].attribute_lines" t-as="line" t-key="line.id">
+                            <div class="attribute_label">
+                                <label t-esc="line.attribute_name"/>
+                            </div>
+                            <div class="attribute_values">
+                                <t t-if="line.attribute_values.length > 0">
+                                    <select t-att-data-id="line.id" t-on-change="_onAttributeChange">
+                                        <option t-foreach="line.attribute_values" t-as="value" t-key="value.id" t-att-value="value.id" t-esc="value.name"/>
+                                    </select>
+                                </t>
+                                <t t-else="">
+                                    <input type="text" t-att-data-id="line.id" t-model="line.custom_value"/>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Dialog>
+        </div>
+    </t>
+</templates>

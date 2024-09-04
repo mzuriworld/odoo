@@ -1,0 +1,89 @@
+<odoo>
+    <record id="view_product_configurator_form" model="ir.ui.view">
+        <field name="name">product.configurator.form</field>
+        <field name="model">product.configurator</field>
+        <field name="arch" type="xml">
+            <form string="Product Configurator">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="product_tmpl_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Attributes">
+                            <field name="attribute_line_ids">
+                                <tree editable="bottom">
+                                    <field name="attribute_id"/>
+                                    <field name="value_ids"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_product_configurator_tree" model="ir.ui.view">
+        <field name="name">product.configurator.tree</field>
+        <field name="model">product.configurator</field>
+        <field name="arch" type="xml">
+            <tree string="Product Configurators">
+                <field name="name"/>
+                <field name="product_tmpl_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="product_configurator_action" model="ir.actions.act_window">
+        <field name="name">Product Configurators</field>
+        <field name="res_model">product.configurator</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_product_configurator" name="Product Configurator" parent="base.menu_custom" sequence="10"/>
+    <menuitem id="menu_product_configurator_configurators" name="Configurators" parent="menu_product_configurator" action="product_configurator_action"/>
+</odoo>
+<!--<odoo>-->
+<!--    <record id="view_product_configurator_form" model="ir.ui.view">-->
+<!--        <field name="name">product.configurator.form</field>-->
+<!--        <field name="model">product.configurator</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Product Configurator">-->
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <field name="name"/>-->
+<!--                        <field name="product_tmpl_id"/>-->
+<!--                        <field name="attribute_line_ids">-->
+<!--                            <tree string="Attributes">-->
+<!--                                <field name="attribute_id"/>-->
+<!--                                <field name="value_id"/>-->
+<!--                            </tree>-->
+<!--                        </field>-->
+<!--                        <field name="configuration_code" readonly="1"/>-->
+<!--                    </group>-->
+<!--                </sheet>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="view_product_configurator_tree" model="ir.ui.view">-->
+<!--        <field name="name">product.configurator.tree</field>-->
+<!--        <field name="model">product.configurator</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree string="Product Configurators">-->
+<!--                <field name="name"/>-->
+<!--                <field name="product_tmpl_id"/>-->
+<!--                <field name="configuration_code"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="action_product_configurator" model="ir.actions.act_window">-->
+<!--        <field name="name">Product Configurators</field>-->
+<!--        <field name="res_model">product.configurator</field>-->
+<!--        <field name="view_mode">tree,form</field>-->
+<!--    </record>-->
+
+<!--    <menuitem id="product_configurator_menu" name="Product Configurator" parent="sale.sale_menu_root" sequence="10"/>-->
+<!--    <menuitem id="product_configurator_submenu" name="Configurator" parent="product_configurator_menu" action="action_product_configurator"/>-->
+<!--</odoo>-->

@@ -1,0 +1,25 @@
+<odoo>
+    <!-- Rejestracja strony Onboarding Confirmation -->
+    <record id="website_onboarding_confirmation_page" model="website.page">
+        <field name="name">Onboarding Confirmation</field>
+        <field name="url">/customer/onboarding/confirmation</field>
+        <field name="view_id" ref="mzuri_client_onboarding.onboarding_confirmation_page"/>
+        <field name="website_id" ref="website.default_website"/>
+    </record>
+
+    <!-- Rejestracja strony Onboarding Success -->
+    <record id="website_onboarding_success_page" model="website.page">
+        <field name="name">Onboarding Success</field>
+        <field name="url">/customer/onboarding/success</field>
+        <field name="view_id" ref="mzuri_client_onboarding.onboarding_success_page"/>
+        <field name="website_id" ref="website.default_website"/>
+    </record>
+
+    <!-- Rejestracja strony Invalid Token -->
+    <record id="website_onboarding_token_invalid_page" model="website.page">
+        <field name="name">Invalid or Expired Token</field>
+        <field name="url">/customer/onboarding/invalid_token</field>
+        <field name="view_id" ref="mzuri_client_onboarding.onboarding_token_invalid"/>
+        <field name="website_id" ref="website.default_website"/>
+    </record>
+</odoo>

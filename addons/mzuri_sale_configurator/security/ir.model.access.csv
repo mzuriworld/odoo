@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_sale_configurator_step,access_product_sale_configurator_step,model_product_sale_configurator_step,,1,1,1,1
