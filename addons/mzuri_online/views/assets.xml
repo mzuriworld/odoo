@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Inherit the user_menu template from the web module -->
+    <template id="remove_odoo_account_link" inherit_id="web.UserMenu" name="Remove Odoo Account Link">
+        <xpath expr="//t[@t-call='web.user_menu_footprint']" position="replace">
+            <!-- Do nothing here to remove the footprint (My Odoo.com account link) -->
+        </xpath>
+    </template>
+</odoo>

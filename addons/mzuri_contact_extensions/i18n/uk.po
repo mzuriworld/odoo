@@ -1,9 +1,10 @@
-# Translation for mzuri_contact_extensions
 msgid ""
 msgstr ""
-"Project-Id-Version: mzuri_contact_extensions\n"
-"POT-Creation-Date: 2024-08-16 12:00+0000\n"
-"PO-Revision-Date: 2024-08-16 12:00+0000\n"
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-08 13:07+0000\n"
+"PO-Revision-Date: 2024-09-08 13:07+0000\n"
+"Last-Translator: \n"
 "Language-Team: Ukrainian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -11,21 +12,38 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. module: mzuri_contact_extensions
-#: model:ir.ui.view,field:name,res.partner.form.inherit.product
+#: model:ir.model,name:mzuri_contact_extensions.model_res_partner
+msgid "Contact"
+msgstr "Контакт"
+
+#. module: mzuri_contact_extensions
+#: model_terms:ir.ui.view,arch_db:mzuri_contact_extensions.view_order_tree_with_add_to_park
+msgid "Dodaj do Parku Maszynowego"
+msgstr "Додати до Парку Машин"
+
+#. module: mzuri_contact_extensions
+#: model_terms:ir.ui.view,arch_db:mzuri_contact_extensions.view_partner_form_inherit_product
+msgid "Kopiuj produkty z zamówienia sprzedaży"
+msgstr "Копіювати товари із замовлення"
+
+#. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner__product_owned_ids
+msgid "Posiadane/Park Maszynowy"
+msgstr "Машинний Парк"
+
+#. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_interest__product_id
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_owned__product_id
+msgid "Product"
+msgstr "Продукт"
+
+#. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_product_product__serial_number
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_owned__serial_number
+msgid "Serial Number"
+msgstr "Серійний Номер"
+
+#. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner__product_interest_ids
 msgid "Zainteresowania"
 msgstr "Інтереси"
-
-#. module: mzuri_contact_extensions
-#: model:ir.ui.view,field:name,res.partner.form.inherit.product
-msgid "Posiadane/Park Maszynowy"
-msgstr "Власне/Машинний парк"
-
-#. module: mzuri_contact_extensions
-#: field:res.partner,product_interest_ids
-msgid "Zainteresowania"
-msgstr "Інтереси"
-
-#. module: mzuri_contact_extensions
-#: field:res.partner,product_owned_ids
-msgid "Posiadane/Park Maszynowy"
-msgstr "Власне/Машинний парк"

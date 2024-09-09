@@ -8,10 +8,12 @@
     """,
     'category': 'Contacts',
     'author': 'Piotr Wawrzyniak',
-    'depends': ['base', 'product'],
+    'depends': ['base', 'product', 'sale'],
     'data': [
         'security/ir.model.access.csv',
         'views/res_partner_views.xml',
+        'views/sale_order_view.xml',
+        # 'views/sale_order_tree_view.xml',
     ],
     'installable': True,
     'application': False,

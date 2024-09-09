@@ -16,10 +16,42 @@
                     <field name="product_owned_ids">
                         <tree editable="bottom">
                             <field name="product_id"/>
+                            <field name="serial_number" attrs="{'readonly': [('serial_number', '!=', False)]}"/>
                         </tree>
                     </field>
+                    <button class="oe_highlight" type="object"
+                            name="action_view_sale_order"
+                    groups="sales_team.group_sale_salesman"
+                    string="Kopiuj produkty z zamówienia sprzedaży">
+                    </button>
                 </page>
             </notebook>
         </field>
     </record>
 </odoo>
+
+<!--<odoo>-->
+<!--    <record id="view_partner_form_inherit_product" model="ir.ui.view">-->
+<!--        <field name="name">res.partner.form.inherit.product</field>-->
+<!--        <field name="model">res.partner</field>-->
+<!--        <field name="inherit_id" ref="base.view_partner_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <notebook position="inside">-->
+<!--                <page string="Zainteresowania">-->
+<!--                    <field name="product_interest_ids">-->
+<!--                        <tree editable="bottom">-->
+<!--                            <field name="product_id"/>-->
+<!--                        </tree>-->
+<!--                    </field>-->
+<!--                </page>-->
+<!--                <page string="Posiadane/Park Maszynowy">-->
+<!--                    <field name="product_owned_ids">-->
+<!--                        <tree editable="bottom">-->
+<!--                            <field name="product_id"/>-->
+<!--                        </tree>-->
+<!--                    </field>-->
+<!--                </page>-->
+<!--            </notebook>-->
+<!--        </field>-->
+<!--    </record>-->
+<!--</odoo>-->

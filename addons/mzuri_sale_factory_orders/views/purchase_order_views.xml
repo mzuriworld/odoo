@@ -1,9 +1,78 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<odoo>-->
+<!--    <data>-->
+<!--&lt;!&ndash;        &lt;!&ndash; Dziedziczymy istniejący widok drzewa zamówienia zakupu &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        <record id="view_purchase_order_line_tree_inherit" model="ir.ui.view">&ndash;&gt;-->
+<!--&lt;!&ndash;            <field name="name">purchase.order.line.tree.inherit</field>&ndash;&gt;-->
+<!--&lt;!&ndash;            <field name="model">purchase.order.line</field>&ndash;&gt;-->
+<!--&lt;!&ndash;            <field name="inherit_id" ref="purchase.view_purchase_order_line_tree"/>&ndash;&gt;-->
+<!--&lt;!&ndash;            <field name="arch" type="xml">&ndash;&gt;-->
+<!--&lt;!&ndash;                &lt;!&ndash; Zmieniamy sposób wyświetlania produktu w widoku listy &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                <xpath expr="//field[@name='product_id']" position="replace">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <field name="product_id" string="Product (Catalogue No.)" widget="many2one" options="{'no_create': True}">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <attribute name="t-att-title">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <t t-esc="record.product_id.name"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            (<t t-esc="record.product_id.product_tmpl_id.product_properties"/>)&ndash;&gt;-->
+<!--&lt;!&ndash;                        </attribute>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </field>&ndash;&gt;-->
+<!--&lt;!&ndash;                </xpath>&ndash;&gt;-->
+<!--&lt;!&ndash;            </field>&ndash;&gt;-->
+<!--&lt;!&ndash;        </record>&ndash;&gt;-->
+
+<!--        &lt;!&ndash; Dziedziczymy istniejący widok formularza zamówienia zakupu &ndash;&gt;-->
+<!--<record id="view_purchase_order_line_form_inherit" model="ir.ui.view">-->
+<!--    <field name="name">purchase.order.line.form.inherit</field>-->
+<!--    <field name="model">purchase.order.line</field>-->
+<!--    <field name="inherit_id" ref="purchase.purchase_order_line_form2"/>-->
+<!--    <field name="arch" type="xml">-->
+<!--        &lt;!&ndash; Zmieniamy sposób wyświetlania produktu na listę z numerem katalogowym &ndash;&gt;-->
+<!--        <xpath expr="//field[@name='product_id']" position="replace">-->
+<!--            <field name="product_id" string="Product (Catalogue No.)" widget="many2one" options="{'no_create': True}">-->
+<!--                <attribute name="widget">many2one</attribute>-->
+<!--                <attribute name="options">{'no_create': True}</attribute>-->
+<!--            </field>-->
+<!--        </xpath>-->
+
+<!--        &lt;!&ndash; Dodajemy pole pokazujące numer katalogowy &ndash;&gt;-->
+<!--        <xpath expr="//field[@name='product_id']" position="after">-->
+<!--            <field name="product_tmpl_id.product_properties" string="Catalogue No." readonly="1"/>-->
+<!--        </xpath>-->
+<!--    </field>-->
+<!--</record>-->
+
+
+
+<!--    </data>-->
+<!--</odoo>-->
+
+
 <odoo>
     <record id="view_purchase_order_form_inherit_sales_factory" model="ir.ui.view">
         <field name="name">purchase.order.form.inherit.sales.factory</field>
         <field name="model">purchase.order</field>
         <field name="inherit_id" ref="purchase.purchase_order_form"/>
         <field name="arch" type="xml">
+<!--            <xpath expr="//field[@name='product_id']" position="after">-->
+<!--                <button string="Configure Product"-->
+<!--        type="button"-->
+<!--        name="configure_product_button"-->
+<!--        class="oe_highlight configure_product_button"-->
+<!--        data-product-id="product_id"-->
+<!--        data-order-line-id="id"-->
+<!--        data-qty="product_qty"-->
+<!--        data-partner-id="order_id.partner_id.id"/>-->
+
+
+
+
+
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='product_id']" position="after">-->
+<!--                <field name="product_config" widget="char"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='price_unit']" position="before">-->
+<!--                <button name="action_view_configurator" type="object" string="Configure Product" class="btn-primary"/>-->
+<!--            </xpath>-->
             <sheet>
                 <group>
                     <field name="sale_order_id"/>
@@ -12,6 +81,7 @@
 <!--             <xpath expr="//field[@name='partner_id']" position="attributes">-->
 <!--                    <attribute name="readonly">1</attribute>-->
 <!--                </xpath>-->
+
         </field>
     </record>
 

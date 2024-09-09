@@ -1,0 +1,14 @@
+<!-- In mzuri_stock/views/actions.xml -->
+<odoo>
+    <record id="action_serial_number_assignments" model="ir.actions.act_window">
+        <field name="name">Serial Number Assignments</field>
+        <field name="res_model">serial.number.wizard</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_serial_number_wizard_form"/>
+        <field name="help" type="html">
+            <p>
+                Manage all serial numbers assigned to products during transfer.
+            </p>
+        </field>
+    </record>
+</odoo>

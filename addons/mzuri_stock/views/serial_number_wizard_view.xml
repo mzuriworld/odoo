@@ -1,0 +1,47 @@
+<!-- In mzuri_stock/views/serial_number_wizard_view.xml -->
+<odoo>
+    <record id="view_serial_number_wizard_form" model="ir.ui.view">
+        <field name="name">serial.number.wizard.form</field>
+        <field name="model">serial.number.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Serial Number Assignment">
+                <group>
+                    <field name="product_id"/>
+                    <field name="serial_number"/>
+                </group>
+                <footer>
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_serial_number_wizard_tree" model="ir.ui.view">
+        <field name="name">serial.number.wizard.tree</field>
+        <field name="model">serial.number.wizard</field>
+        <field name="arch" type="xml">
+            <tree string="Serial Number Assignments">
+                <field name="product_id"/>
+                <field name="serial_number"/>
+            </tree>
+        </field>
+    </record>
+</odoo>
+
+        <!--<odoo>-->
+<!--    <record id="view_product_serial_number_wizard_form" model="ir.ui.view">-->
+<!--        <field name="name">product.serial.number.wizard.form</field>-->
+<!--        <field name="model">product.serial.number.wizard</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Enter Serial Number">-->
+<!--                <group>-->
+<!--                    <field name="serial_number" />-->
+<!--                </group>-->
+<!--                <footer>-->
+<!--                    <button name="assign_serial_number" type="object" string="Assign" class="btn-primary"/>-->
+<!--                    <button string="Cancel" class="btn-secondary" special="cancel"/>-->
+<!--                </footer>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+<!--</odoo>-->

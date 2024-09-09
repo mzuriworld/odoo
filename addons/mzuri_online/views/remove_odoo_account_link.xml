@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data inherit_id="web.user_menu_primary"> <!-- Update the inherit_id to the correct template ID -->
+        <!-- Locate the item using its class and remove it -->
+        <xpath expr="//a[contains(@class, 'oe_user_menu_open_account')]" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+    </data>
+</odoo>
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<odoo>-->
+<!--    <data inherit_id="web.menu_primary"> &lt;!&ndash; Use the correct inherit_id &ndash;&gt;-->
+<!--        &lt;!&ndash; Locate the item using its class and remove it &ndash;&gt;-->
+<!--        <xpath expr="//a[contains(@class, 'oe_user_menu_open_account')]" position="attributes">-->
+<!--            <attribute name="t-if">False</attribute>-->
+<!--        </xpath>-->
+<!--    </data>-->
+<!--</odoo>-->

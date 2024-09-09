@@ -1,0 +1,14 @@
+<odoo>
+    <record id="view_sale_order_tree_inherit_mzuri_contact_extension" model="ir.ui.view">
+        <field name="name">sale.order.tree.inherit.mzuri_contact_extension</field>
+        <field name="model">sale.order.line</field>
+        <field name="arch" type="xml">
+            <tree string="Zamówienia Sprzedaży">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="date_order"/>
+                <field name="amount_total"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

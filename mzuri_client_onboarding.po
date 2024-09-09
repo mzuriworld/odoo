@@ -1,0 +1,235 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mzuri_client_onboarding
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-21 19:15+0000\n"
+"PO-Revision-Date: 2024-08-21 19:15+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mzuri_client_onboarding
+#: model_terms:ir.ui.view,arch_db:mzuri_client_onboarding.onboarding_confirmation_page
+msgid ""
+"<br/>\n"
+"                                        <strong>Email:</strong>"
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model_terms:ir.ui.view,arch_db:mzuri_client_onboarding.onboarding_confirmation_page
+msgid ""
+"<br/>\n"
+"                                        <strong>Phone:</strong>"
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model:mail.template,body_html:mzuri_client_onboarding.email_template_customer_onboarding
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                <p style=\"box-sizing:border-box;margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    Dear\n"
+"                    <span t-if=\"object.parent_id\">\n"
+"                        <strong t-out=\"object.name\">[Customer Name]</strong> (<strong t-out=\"object.parent_id.name\">[Parent Company]</strong>),\n"
+"                    </span>\n"
+"                    <span t-else=\"\">\n"
+"                        <strong t-out=\"object.name\">[Customer Name]</strong>,\n"
+"                    </span>\n"
+"                    <br><br>\n"
+"                    We are excited to welcome you to our service. Please confirm your details:\n"
+"                    <br><br>\n"
+"                    <strong>Your details:</strong>\n"
+"                    <ul style=\"margin-left: 15px;\">\n"
+"                        <li><strong>Name:</strong> <span t-out=\"object.name\">[Customer Name]</span></li>\n"
+"                        <li><strong>Email:</strong> <span t-out=\"object.email\">[Customer Email]</span></li>\n"
+"                        <li><strong>Phone:</strong> <span t-out=\"object.phone\">[Customer Phone]</span></li>\n"
+"                    </ul>\n"
+"                    <br>\n"
+"                    To confirm your details and provide consent, please click the link below:\n"
+"                    <br><br>\n"
+"                    <a t-att-href=\"object.get_onboarding_url()\" style=\"background-color: #4CAF50; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; border-radius: 5px;\">\n"
+"                        Confirm Your Details\n"
+"                    </a>\n"
+"                    <br><br>\n"
+"                    Please do not hesitate to contact us if you have any questions.\n"
+"                    <br><br>\n"
+"                    <span t-if=\"object.create_uid.signature\">\n"
+"                        <t t-out=\"object.create_uid.signature\">Best regards,<br>[User Signature]</t>\n"
+"                    </span>\n"
+"                </p>\n"
+"            </div>\n"
+"<!--            <p>Dear {{object.name}},</p>-->\n"
+"<!--            <p>Thank you for joining us. Please confirm your details and provide consent for communication:</p>-->\n"
+"<!--            <ul>-->\n"
+"<!--                <li>Name: {{object.name}}</li>-->\n"
+"<!--                <li>Email: {{object.email}}</li>-->\n"
+"<!--                <li>Phone: {{object.phone}}</li>-->\n"
+"<!--            </ul>-->\n"
+"<!--            <p>Please click the link below to confirm your details and provide consent:</p>-->\n"
+"<!--            <p><a href=\"{{object.get_onboarding_url()}}\">Confirm Details and Provide Consent</a></p>-->\n"
+"<!--            <p>Thank you!</p>-->\n"
+"        "
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model_terms:ir.ui.view,arch_db:mzuri_client_onboarding.onboarding_confirmation_page
+msgid "<strong>Name:</strong>"
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model_terms:ir.ui.view,arch_db:mzuri_client_onboarding.view_res_partner_form_inherit_onboarding
+msgid "Client Consent"
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model_terms:ir.ui.view,arch_db:mzuri_client_onboarding.onboarding_confirmation_page
+msgid "Confirm Details and Preferences"
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model:ir.model.fields,field_description:mzuri_client_onboarding.field_res_partner__consent_data_processing
+#: model:ir.model.fields,field_description:mzuri_client_onboarding.field_res_users__consent_data_processing
+msgid "Consent to Data Processing"
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model:ir.model.fields,field_description:mzuri_client_onboarding.field_res_partner__consent_email
+#: model:ir.model.fields,field_description:mzuri_client_onboarding.field_res_users__consent_email
+msgid "Consent to Email Contact"
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model:ir.model.fields,field_description:mzuri_client_onboarding.field_res_partner__consent_phone
+#: model:ir.model.fields,field_description:mzuri_client_onboarding.field_res_users__consent_phone
+msgid "Consent to Phone Contact"
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model:ir.model.fields,field_description:mzuri_client_onboarding.field_res_partner__consent_sms
+#: model:ir.model.fields,field_description:mzuri_client_onboarding.field_res_users__consent_sms
+msgid "Consent to SMS Contact"
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model:ir.model,name:mzuri_client_onboarding.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model:mail.template,name:mzuri_client_onboarding.email_template_customer_onboarding
+msgid "Customer Onboarding Email"
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model_terms:ir.ui.view,arch_db:mzuri_client_onboarding.onboarding_success_page
+#: model_terms:ir.ui.view,arch_db:mzuri_client_onboarding.onboarding_token_invalid
+msgid "Go to Homepage"
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model_terms:ir.ui.view,arch_db:mzuri_client_onboarding.onboarding_confirmation_page
+msgid "I consent to receive communication via Email."
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model_terms:ir.ui.view,arch_db:mzuri_client_onboarding.onboarding_confirmation_page
+msgid "I consent to receive communication via Phone."
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model_terms:ir.ui.view,arch_db:mzuri_client_onboarding.onboarding_confirmation_page
+msgid "I consent to receive communication via SMS."
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model_terms:ir.ui.view,arch_db:mzuri_client_onboarding.onboarding_confirmation_page
+msgid "I consent to the processing of my personal data."
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model_terms:ir.ui.view,arch_db:mzuri_client_onboarding.onboarding_token_invalid
+msgid "Link Invalid or Expired"
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model:ir.model.fields,field_description:mzuri_client_onboarding.field_res_partner__onboarding_completed
+#: model:ir.model.fields,field_description:mzuri_client_onboarding.field_res_users__onboarding_completed
+msgid "Onboarding Completed"
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model_terms:ir.ui.view,arch_db:mzuri_client_onboarding.onboarding_confirmation_page
+msgid "Onboarding Confirmation"
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model:ir.model.fields,field_description:mzuri_client_onboarding.field_res_partner__onboarding_token
+#: model:ir.model.fields,field_description:mzuri_client_onboarding.field_res_users__onboarding_token
+msgid "Onboarding Token"
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model:ir.model.fields,field_description:mzuri_client_onboarding.field_res_partner__onboarding_token_expiry
+#: model:ir.model.fields,field_description:mzuri_client_onboarding.field_res_users__onboarding_token_expiry
+msgid "Onboarding Token Expiry"
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model:ir.model.fields,field_description:mzuri_client_onboarding.field_res_partner__onboarding_token_used
+#: model:ir.model.fields,field_description:mzuri_client_onboarding.field_res_users__onboarding_token_used
+msgid "Onboarding Token Used"
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model_terms:ir.ui.view,arch_db:mzuri_client_onboarding.onboarding_success_page
+msgid "Thank You,"
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model_terms:ir.ui.view,arch_db:mzuri_client_onboarding.onboarding_token_invalid
+msgid ""
+"The link you have used is either invalid or has already been used. Please "
+"contact our support team if you need further assistance."
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model_terms:ir.ui.view,arch_db:mzuri_client_onboarding.onboarding_confirmation_page
+msgid ""
+"This is the onboarding confirmation page. You can edit this page using the "
+"website editor."
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model_terms:ir.ui.view,arch_db:mzuri_client_onboarding.onboarding_success_page
+msgid ""
+"We appreciate your cooperation. If you have any questions, feel free to "
+"contact us."
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model_terms:ir.ui.view,arch_db:mzuri_client_onboarding.onboarding_confirmation_page
+msgid "Welcome,"
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model:mail.template,subject:mzuri_client_onboarding.email_template_customer_onboarding
+msgid "Welcome, please confirm your details"
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model_terms:ir.ui.view,arch_db:mzuri_client_onboarding.onboarding_success_page
+msgid "Your details and preferences have been successfully confirmed."
+msgstr ""
+
+#. module: mzuri_client_onboarding
+#: model_terms:ir.ui.view,arch_db:mzuri_client_onboarding.onboarding_confirmation_page
+msgid ""
+"Your onboarding process is almost complete. Please review your information "
+"and confirm your preferences."
+msgstr ""

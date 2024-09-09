@@ -1,0 +1,32 @@
+<!--<odoo>-->
+<!--    <record id="view_purchase_order_line_form_inherit" model="ir.ui.view">-->
+<!--        <field name="name">purchase.order.line.form.inherit</field>-->
+<!--        <field name="model">purchase.order.line</field>-->
+<!--        <field name="inherit_id" ref="purchase.purchase_order_line_form2"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='product_id']" position="after">-->
+<!--                <button name="action_view_configurator" type="object" string="Configure Product" class="btn-primary"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+<!--</odoo>-->
+
+<odoo>
+    <record id="view_purchase_order_line_form_inherit_configurator" model="ir.ui.view">
+        <field name="name">purchase.order.line.form.configurator</field>
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_line_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <button name="open_configurator_js"
+        string="Configure Product 1"
+        type="button"
+        class="oe_highlight"
+        data-action="purchase_order_line_configurator.openConfigurator"
+        data-args="{'productId': product_id, 'orderLineId': id, 'defaultQty': product_qty, 'defaultPartnerId': order_id.partner_id.id}"/>
+
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

@@ -8,8 +8,9 @@
     """,
     'category': 'Sales',
     'author': 'Piotr Wawrzyniak',
-    'depends': ['sale', 'purchase'],
+    'depends': ['sale', 'purchase', 'sale_product_configurator'],
     'data': [
+        # 'security/ir.model.access.csv',
         'views/purchase_order_views.xml',
         'views/sale_order_views.xml',
         'views/purchase_order_line.xml',
@@ -17,9 +18,16 @@
     ],
     'assets': {
         'web.assets_backend': [
-            'mzuri_sale_factory_orders/static/src/js/purchase_order_line_configurator.js',
+            'mzuri_sale_factory_orders/static/src/js/product_configurator_widget.js',
+            'sale_product_configurator/static/src/js/product_configurator_dialog.js',
         ],
     },
+
+    # 'assets': {
+    #     'web.assets_backend': [
+    #         'mzuri_sale_factory_orders/static/src/js/purchase_order_line_configurator.js',
+    #     ],
+    # },
     'installable': True,
     'application': False,
 }

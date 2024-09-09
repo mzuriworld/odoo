@@ -1,0 +1,7 @@
+<!-- In mzuri_stock/views/menu.xml -->
+<odoo>
+    <menuitem id="menu_serial_number_assignments"
+              name="Serial Number Assignments"
+              parent="stock.menu_stock_root"
+              action="action_serial_number_assignments"/>
+</odoo>

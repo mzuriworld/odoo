@@ -1,0 +1,119 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mzuri_contact_extensions
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-08 13:07+0000\n"
+"PO-Revision-Date: 2024-09-08 13:07+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mzuri_contact_extensions
+#: model:ir.model,name:mzuri_contact_extensions.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_interest__create_uid
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_owned__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_interest__create_date
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_owned__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_interest__display_name
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_owned__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: mzuri_contact_extensions
+#: model_terms:ir.ui.view,arch_db:mzuri_contact_extensions.view_order_tree_with_add_to_park
+msgid "Dodaj do Parku Maszynowego"
+msgstr ""
+
+#. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_interest__id
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_owned__id
+msgid "ID"
+msgstr ""
+
+#. module: mzuri_contact_extensions
+#: model_terms:ir.ui.view,arch_db:mzuri_contact_extensions.view_partner_form_inherit_product
+msgid "Kopiuj produkty z zamówienia sprzedaży"
+msgstr ""
+
+#. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_interest__write_uid
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_owned__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_interest__write_date
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_owned__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_interest__partner_id
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_owned__partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: mzuri_contact_extensions
+#: model:ir.model,name:mzuri_contact_extensions.model_res_partner_product_interest
+msgid "Partner Product Interest"
+msgstr ""
+
+#. module: mzuri_contact_extensions
+#: model:ir.model,name:mzuri_contact_extensions.model_res_partner_product_owned
+msgid "Partner Product Owned"
+msgstr ""
+
+#. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner__product_owned_ids
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_users__product_owned_ids
+#: model_terms:ir.ui.view,arch_db:mzuri_contact_extensions.view_partner_form_inherit_product
+msgid "Posiadane/Park Maszynowy"
+msgstr ""
+
+#. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_interest__product_id
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_owned__product_id
+msgid "Product"
+msgstr ""
+
+#. module: mzuri_contact_extensions
+#: model:ir.model,name:mzuri_contact_extensions.model_product_product
+msgid "Product Variant"
+msgstr ""
+
+#. module: mzuri_contact_extensions
+#: model:ir.model,name:mzuri_contact_extensions.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_product_product__serial_number
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_owned__serial_number
+msgid "Serial Number"
+msgstr ""
+
+#. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner__product_interest_ids
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_users__product_interest_ids
+#: model_terms:ir.ui.view,arch_db:mzuri_contact_extensions.view_partner_form_inherit_product
+msgid "Zainteresowania"
+msgstr ""

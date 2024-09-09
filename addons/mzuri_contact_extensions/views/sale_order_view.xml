@@ -1,0 +1,19 @@
+<odoo>
+    <record id="view_order_tree_with_add_to_park" model="ir.ui.view">
+        <field name="name">sale.order.tree.with.add.to.park</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <!-- Dodanie przycisku 'Dodaj do Parku Maszynowego' do widoku listy -->
+           <xpath expr="//tree" position="inside">
+                <header>
+                    <button name="action_add_products_to_park"
+                            type="object"
+                            string="Dodaj do Parku Maszynowego"
+                            class="oe_highlight"
+                            icon="fa-check-square"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
+</odoo>
