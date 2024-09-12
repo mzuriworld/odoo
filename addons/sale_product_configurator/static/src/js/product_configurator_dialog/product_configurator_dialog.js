@@ -42,7 +42,7 @@ export class ProductConfiguratorDialog extends Component {
         this.state = useState({
             products: [],
             optionalProducts: [],
-            currentStep: 0,
+//            currentStep: 0,
         });
 
         useSubEnv({
@@ -249,7 +249,7 @@ export class ProductConfiguratorDialog extends Component {
                 this._checkExclusions(product);
             }
             this._checkInclusions(product);
-            this.state.currentStep++;  // Update to show the next attribute
+//            this.state.currentStep++;  // Update to show the next attribute
         }
     }
 

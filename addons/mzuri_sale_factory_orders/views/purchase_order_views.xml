@@ -41,7 +41,6 @@
 <!--</record>-->
 
 
-
 <!--    </data>-->
 <!--</odoo>-->
 
@@ -52,52 +51,63 @@
         <field name="model">purchase.order</field>
         <field name="inherit_id" ref="purchase.purchase_order_form"/>
         <field name="arch" type="xml">
-<!--            <xpath expr="//field[@name='product_id']" position="after">-->
-<!--                <button string="Configure Product"-->
-<!--        type="button"-->
-<!--        name="configure_product_button"-->
-<!--        class="oe_highlight configure_product_button"-->
-<!--        data-product-id="product_id"-->
-<!--        data-order-line-id="id"-->
-<!--        data-qty="product_qty"-->
-<!--        data-partner-id="order_id.partner_id.id"/>-->
+            <!--            <xpath expr="//field[@name='product_id']" position="after">-->
+            <!--                <button string="Configure Product"-->
+            <!--        type="button"-->
+            <!--        name="configure_product_button"-->
+            <!--        class="oe_highlight configure_product_button"-->
+            <!--        data-product-id="product_id"-->
+            <!--        data-order-line-id="id"-->
+            <!--        data-qty="product_qty"-->
+            <!--        data-partner-id="order_id.partner_id.id"/>-->
 
 
-
-
-
-<!--            </xpath>-->
-<!--            <xpath expr="//field[@name='product_id']" position="after">-->
-<!--                <field name="product_config" widget="char"/>-->
-<!--            </xpath>-->
-<!--            <xpath expr="//field[@name='price_unit']" position="before">-->
-<!--                <button name="action_view_configurator" type="object" string="Configure Product" class="btn-primary"/>-->
-<!--            </xpath>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='product_id']" position="after">-->
+            <!--                <field name="product_config" widget="char"/>-->
+            <!--            </xpath>-->
+            <!--            <xpath expr="//field[@name='price_unit']" position="before">-->
+            <!--                <button name="action_view_configurator" type="object" string="Configure Product" class="btn-primary"/>-->
+            <!--            </xpath>-->
             <sheet>
                 <group>
                     <field name="sale_order_id"/>
                 </group>
             </sheet>
-<!--             <xpath expr="//field[@name='partner_id']" position="attributes">-->
-<!--                    <attribute name="readonly">1</attribute>-->
-<!--                </xpath>-->
+
+            <xpath expr="//field[@name='partner_id']" position="replace">
+
+
+                <field name="partner_id" position="attributes">
+                    <attribute name="readonly">1</attribute>  <!-- Pole jest widoczne, ale nieedytowalne -->
+                </field>
+            </xpath>
+
+            <xpath expr="//header/button[@name='button_confirm']" position="attributes">
+                <attribute name="groups">mzuri_sale_factory_orders.group_sale_order_confirm_manager</attribute>
+            </xpath>
+
+
+            <!--             <xpath expr="//field[@name='partner_id']" position="attributes">-->
+            <!--                    <attribute name="readonly">1</attribute>-->
+            <!--                </xpath>-->
 
         </field>
     </record>
 
 
-<!--    <record id="view_purchase_order_line_form_inherit" model="ir.ui.view">-->
-<!--        <field name="name">purchase.order.line.form.inherit</field>-->
-<!--        <field name="model">purchase.order.line</field>-->
-<!--        <field name="inherit_id" ref="purchase.purchase_order_line_form2"/>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <xpath expr="//field[@name='product_id']" position="after">-->
-<!--                <field name="product_config" widget="char"/>-->
-<!--            </xpath>-->
-<!--            <xpath expr="//field[@name='price_unit']" position="before">-->
-<!--                <button name="action_view_configurator" type="object" string="Configure Product" class="btn-primary"/>-->
-<!--            </xpath>-->
-<!--        </field>-->
-<!--    </record>-->
+    <!--    <record id="view_purchase_order_line_form_inherit" model="ir.ui.view">-->
+    <!--        <field name="name">purchase.order.line.form.inherit</field>-->
+    <!--        <field name="model">purchase.order.line</field>-->
+    <!--        <field name="inherit_id" ref="purchase.purchase_order_line_form2"/>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <xpath expr="//field[@name='product_id']" position="after">-->
+    <!--                <field name="product_config" widget="char"/>-->
+    <!--            </xpath>-->
+    <!--            <xpath expr="//field[@name='price_unit']" position="before">-->
+    <!--                <button name="action_view_configurator" type="object" string="Configure Product" class="btn-primary"/>-->
+    <!--            </xpath>-->
+    <!--        </field>-->
+    <!--    </record>-->
 </odoo>
 

@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <!-- Widok użytkowników w ustawieniach z możliwością przypisywania grup -->
+        <record id="view_users_form_security_inherit" model="ir.ui.view">
+            <field name="name">view.users.form.security.inherit</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name='preferences']" position="after">
+                    <page string="Security Groups">
+                        <!-- Poprawione użycie ref dla category_id -->
+                        <field name="groups_id" widget="many2many_tags" options="{'no_create': True, 'no_create_edit': True}" context="{'default_category_id': 'base.module_category_user_type'}"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

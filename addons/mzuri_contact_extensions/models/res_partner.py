@@ -27,40 +27,40 @@ class ResPartnerProductInterest(models.Model):
     partner_id = fields.Many2one('res.partner', string="Partner", required=True, ondelete='cascade')
     product_id = fields.Many2one('product.product', string="Product", required=True)
 
+from odoo import models, fields, api
+
 class ResPartnerProductOwned(models.Model):
     _name = 'res.partner.product.owned'
     _description = 'Partner Product Owned'
 
     product_id = fields.Many2one('product.product', string="Product", required=True)
     partner_id = fields.Many2one('res.partner', string="Partner", required=True, ondelete='cascade')
-    serial_number = fields.Char(related='product_id.serial_number', string="Serial Number", readonly=False)
+    serial_number = fields.Char(string="Serial Number", required=False)
+
+    @api.model
+    def name_get(self):
+        result = []
+        for record in self:
+            name = record.product_id.name
+            if record.serial_number:
+                name = f'{name} ({record.serial_number})'
+            result.append((record.id, name))
+        return result
 
     @api.onchange('serial_number')
     def _onchange_serial_number(self):
-        """ Zablokuj edycję serial number po pierwszym wpisaniu """
+        """ Prevent editing serial number once it has been set. """
         if self.serial_number:
-            self.product_id.serial_number = self.serial_number
-            self.serial_number = self.product_id.serial_number
+            self._origin.serial_number = self.serial_number
 
-    @api.model
-    def create(self, vals):
-        # Jeśli serial_number jest ustawiony, zapisujemy go w produkcie
-        if 'serial_number' in vals and vals['serial_number']:
-            product = self.env['product.product'].browse(vals['product_id'])
-            product.serial_number = vals['serial_number']
-        return super(ResPartnerProductOwned, self).create(vals)
+    @api.depends('serial_number')
+    def _compute_serial_number_editable(self):
+        """ Helper function to make the serial number editable only if empty. """
+        for record in self:
+            record.serial_number_editable = not bool(record.serial_number)
 
-    @api.constrains('serial_number')
-    def _check_serial_number_once(self):
-        """ Blokuje możliwość edytowania serial number po jego pierwszym wpisaniu """
-        if self.serial_number and self.product_id.serial_number:
-            raise ValidationError("Numer seryjny nie może być edytowany po zapisaniu.")
+    serial_number_editable = fields.Boolean(compute="_compute_serial_number_editable")
 
-    def write(self, vals):
-        # Jeśli serial_number już istnieje, blokujemy jego edycję
-        if 'serial_number' in vals and self.serial_number:
-            raise ValidationError("Numer seryjny nie może być edytowany po zapisaniu.")
-        return super(ResPartnerProductOwned, self).write(vals)
 
 
 class ResPartner(models.Model):
@@ -106,3 +106,62 @@ class ResPartner(models.Model):
                     'partner_id': sale_order.partner_id.id,
                     'product_id': line.product_id.id,
                 })
+
+
+    def action_copy_products_from_purchase_order(self):
+        """Skopiuj produkty z zamówień zakupu powiązanych z zamówieniami sprzedaży dla tego klienta"""
+        SaleOrder = self.env['sale.order']
+        PurchaseOrder = self.env['purchase.order']
+
+        # Znajdź wszystkie zamówienia sprzedaży dla tego klienta
+        sale_orders = SaleOrder.search([('partner_id', '=', self.id), ('state', '=', 'sale')])
+
+        # Znajdź zamówienia zakupu powiązane z zamówieniami sprzedaży
+        purchase_orders = PurchaseOrder.search([('origin', 'in', sale_orders.mapped('name')), ('state', '=', 'purchase')])
+
+        # Dodaj produkty z zamówień zakupu do "Posiadane/Park Maszynowy"
+        for purchase_order in purchase_orders:
+            for line in purchase_order.order_line:
+                self.env['res.partner.product.owned'].create({
+                    'partner_id': self.id,
+                    'product_id': line.product_id.id,
+                    'serial_number': line.product_id.serial_number,
+                })
+
+        return True
+
+    def action_view_purchase_orders(self):
+        """ Wyświetlenie widoku zamówień zakupu powiązanych z zamówieniami sprzedaży dla tego klienta """
+        SaleOrder = self.env['sale.order']
+
+        # Znajdź wszystkie zamówienia sprzedaży dla danego partnera
+        sale_orders = SaleOrder.search([('partner_id', '=', self.id), ('state', '=', 'sale')])
+
+        # Wyświetlenie zamówień zakupu powiązanych z zamówieniami sprzedaży
+        return {
+            'name': 'Wybierz Zamówienie Zakupu',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'tree,form',
+            'res_model': 'purchase.order',
+            'domain': [('origin', 'in', sale_orders.mapped('name')), ('state', '=', 'purchase')],
+            'context': {'default_partner_id': self.id},
+            'target': 'new',
+        }
+
+    def action_add_to_park_from_purchase_order(self, purchase_order_ids):
+        """Dodaj produkty z wybranych zamówień zakupu do parku maszynowego"""
+        PurchaseOrder = self.env['purchase.order']
+
+        # Pobierz zamówienia zakupu na podstawie wybranych ID
+        purchase_orders = PurchaseOrder.browse(purchase_order_ids)
+
+        for purchase_order in purchase_orders:
+            for line in purchase_order.order_line:
+                self.env['res.partner.product.owned'].create({
+                    'partner_id': self.id,
+                    'product_id': line.product_id.id,
+                    'serial_number': line.product_id.serial_number,
+                })
+
+        return True
+

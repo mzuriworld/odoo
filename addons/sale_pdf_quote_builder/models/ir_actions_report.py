@@ -110,6 +110,9 @@ class IrActionsReport(models.Model):
         city = order.partner_id.city or ''
         street = order.partner_id.street or ''
         street2 = order.partner_id.street2 or ''
+        parent_city = order.user_id.parent_id.city or ''
+        parent_street = order.user_id.parent_id.street or ''
+        parent_zip = order.user_id.parent_id.zip or ''
         form_fields_mapping = {
             'name': order.name,
             'partner_id__name': order.partner_id.name,
@@ -123,6 +126,15 @@ class IrActionsReport(models.Model):
             'partner_id__address__street': city + ", " + street + " " + street2,
             'partner_id__address__zip': order.partner_id.zip or '',
             'partner_id__phone': order.partner_id.phone or '',
+            'partner_id__logo': order.partner_id.image_1920,
+            'user_id__phone': order.user_id.phone or '',
+            'user_id__email': order.user_id.email or '',
+            'user_id__parent_id__name': order.user_id.parent_id.name or 'Dealer Mzuri',
+            'user_id__parent_id__address__street': parent_city + "," + parent_street,
+            'user_id__parent_id__address__zip': parent_zip + parent_city
+
+
+
         }
         # print("order: " + order)
 

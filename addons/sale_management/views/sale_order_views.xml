@@ -9,7 +9,7 @@
             <page name="order_lines" position="after">
                 <page string="Optional Products"
                     name="optional_products"
-                    invisible="state not in ['draft', 'sent']">
+                    invisible="1">
                     <field name="sale_order_option_ids" mode="tree,kanban" readonly="state in ['cancel', 'sale']">
                         <form string="Optional Products">
                             <group>

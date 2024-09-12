@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-04 23:37+0000\n"
-"PO-Revision-Date: 2024-09-04 23:37+0000\n"
+"POT-Creation-Date: 2024-09-10 00:29+0000\n"
+"PO-Revision-Date: 2024-09-10 00:29+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -41,6 +41,28 @@ msgid "<b>Team:</b>"
 msgstr ""
 
 #. module: mzuri_repairs
+#: model:ir.model.fields,help:mzuri_repairs.field_repair_order__partner_id
+msgid ""
+"Choose partner for whom the order will be invoiced and delivered. You can "
+"find a partner by its Name, TIN, Email or Internal Reference."
+msgstr ""
+
+#. module: mzuri_repairs
+#: model:ir.model.fields,field_description:mzuri_repairs.field_repair_order__partner_id
+msgid "Customer"
+msgstr ""
+
+#. module: mzuri_repairs
+#: model:ir.model.fields,field_description:mzuri_repairs.field_repair_order__event_date
+msgid "Data zdarzenia"
+msgstr ""
+
+#. module: mzuri_repairs
+#: model:ir.model.fields,field_description:mzuri_repairs.field_repair_order__report_date
+msgid "Data zgłoszenia"
+msgstr ""
+
+#. module: mzuri_repairs
 #: model_terms:ir.ui.view,arch_db:mzuri_repairs.view_repair_order_kanban
 msgid "Delete"
 msgstr ""
@@ -69,6 +91,16 @@ msgid "No repair order found. Let's create one!"
 msgstr ""
 
 #. module: mzuri_repairs
+#: model:ir.model.fields,field_description:mzuri_repairs.field_repair_order__fault_description
+msgid "Opis usterki"
+msgstr ""
+
+#. module: mzuri_repairs
+#: model:ir.model,name:mzuri_repairs.model_res_partner_product_owned
+msgid "Partner Product Owned"
+msgstr ""
+
+#. module: mzuri_repairs
 #: model:ir.model.fields,help:mzuri_repairs.field_repair_order__repair_photo_ids
 msgid "Photos related to the actual repair process"
 msgstr ""
@@ -79,8 +111,24 @@ msgid "Photos related to the initial repair request"
 msgstr ""
 
 #. module: mzuri_repairs
+#: model:ir.model.fields,field_description:mzuri_repairs.field_repair_order__product_owned_id
+#: model_terms:ir.ui.view,arch_db:mzuri_repairs.view_repair_order_form_mzuri
+msgid "Product to Repair"
+msgstr ""
+
+#. module: mzuri_repairs
+#: model:ir.model.fields,field_description:mzuri_repairs.field_repair_order__worked_hours
+msgid "Przepracowane godziny"
+msgstr ""
+
+#. module: mzuri_repairs
 #: model_terms:ir.ui.view,arch_db:mzuri_repairs.view_repair_order_tree
 msgid "Quantity"
+msgstr ""
+
+#. module: mzuri_repairs
+#: model:res.groups,name:mzuri_repairs.group_repair_manager
+msgid "Repair Manager"
 msgstr ""
 
 #. module: mzuri_repairs

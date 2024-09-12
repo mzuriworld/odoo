@@ -382,7 +382,7 @@ class SaleOrderLine(models.Model):
             name += "\n" + _(
                 "%(attribute)s: %(values)s",
                 attribute=pta.name,
-                values=", ".join(ptav.name for ptav in ptavs)
+                values=", \n".join((ptav.name + " (" + (ptav.catalogue_number or '') + ")" ) for ptav in ptavs)
             )
 
         # Sort the values according to _order settings, because it doesn't work for virtual records in onchange

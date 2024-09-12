@@ -1,0 +1,60 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Group for Dealers -->
+        <record id="group_dealer_user" model="res.groups">
+            <field name="name">Dealer User</field>
+            <field name="category_id" ref="base.module_category_user_type"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/> <!-- Inherits Internal User permissions -->
+        </record>
+
+        <!-- Group for Mzuri Managers -->
+        <record id="group_mzuri_manager" model="res.groups">
+            <field name="name">Mzuri Manager</field>
+            <field name="category_id" ref="base.module_category_user_type"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/> <!-- Inherits Internal User permissions -->
+        </record>
+
+        <!-- Group for Mzuri Order Processors -->
+        <record id="group_mzuri_order_processor" model="res.groups">
+            <field name="name">Mzuri Order Processor</field>
+            <field name="category_id" ref="base.module_category_user_type"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/> <!-- Inherits Internal User permissions -->
+        </record>
+
+        <!-- Group for Mzuri Service Analysts -->
+        <record id="group_mzuri_service_analyst" model="res.groups">
+            <field name="name">Mzuri Service Analyst</field>
+            <field name="category_id" ref="base.module_category_user_type"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/> <!-- Inherits Internal User permissions -->
+        </record>
+    </data>
+</odoo>
+
+<!--access_res_users_dealer,access.res.users.dealer,base.model_res_users,group_dealer_user,1,1,0,0-->
+<!--<odoo>-->
+<!--    <data noupdate="1">-->
+<!--        &lt;!&ndash; Group for Dealers &ndash;&gt;-->
+<!--        <record id="group_dealer_user" model="res.groups">-->
+<!--            <field name="name">Dealer User</field>-->
+<!--            <field name="category_id" ref="base.module_category_user_type"/>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; Group for Mzuri Managers &ndash;&gt;-->
+<!--        <record id="group_mzuri_manager" model="res.groups">-->
+<!--            <field name="name">Mzuri Manager</field>-->
+<!--            <field name="category_id" ref="base.module_category_user_type"/>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; Group for Mzuri Order Processors &ndash;&gt;-->
+<!--        <record id="group_mzuri_order_processor" model="res.groups">-->
+<!--            <field name="name">Mzuri Order Processor</field>-->
+<!--            <field name="category_id" ref="base.module_category_user_type"/>-->
+<!--        </record>-->
+
+<!--        &lt;!&ndash; Group for Mzuri Service Analysts &ndash;&gt;-->
+<!--        <record id="group_mzuri_service_analyst" model="res.groups">-->
+<!--            <field name="name">Mzuri Service Analyst</field>-->
+<!--            <field name="category_id" ref="base.module_category_user_type"/>-->
+<!--        </record>-->
+<!--    </data>-->
+<!--</odoo>-->

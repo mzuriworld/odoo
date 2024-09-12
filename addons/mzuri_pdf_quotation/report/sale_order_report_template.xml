@@ -1,0 +1,54 @@
+<odoo>
+    <template id="report_sale_order_custom">
+        <t t-call="web.external_layout">
+            <div class="page" style="position: relative; width: 100%; height: 100%;">
+                <!-- Background Image (Page 1) -->
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
+                    <img src="/mzuri_pdf_quotation/static/src/img/page1.png" style="width: 100%; height: auto;" />
+                </div>
+
+                <!-- Dynamic Data Overlaid -->
+                <div style="position: absolute; top: 100px; left: 150px; font-size: 18px;">
+                    Numer oferty: <span t-field="doc.offer_number"/>
+                </div>
+
+                <div style="position: absolute; top: 150px; left: 150px; font-size: 18px;">
+                    Imię i nazwisko: <span t-field="doc.partner_id.name"/>
+                </div>
+
+                <div style="position: absolute; top: 200px; left: 150px; font-size: 18px;">
+                    Miejscowość, ulica: <span t-field="doc.partner_id.street"/>
+                </div>
+
+                <div style="position: absolute; top: 400px; left: 100px; right: 100px;">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Produkt</th>
+                                <th>Ilość</th>
+                                <th>Cena jednostkowa</th>
+                                <th>Wartość</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="doc.order_line" t-as="line">
+                                <tr>
+                                    <td><span t-field="line.product_id.name"/></td>
+                                    <td><span t-field="line.product_uom_qty"/></td>
+                                    <td><span t-field="line.price_unit"/></td>
+                                    <td><span t-field="line.price_subtotal"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="position: absolute; bottom: 50px; left: 150px; font-size: 18px;">
+                    <p>Twój partner handlowy: <span t-field="doc.salesperson_id.name"/></p>
+                    <p>Telefon: <span t-field="doc.salesperson_id.phone"/></p>
+                    <p>Email: <span t-field="doc.salesperson_id.email"/></p>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

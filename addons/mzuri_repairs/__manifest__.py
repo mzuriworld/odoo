@@ -7,8 +7,9 @@
     This module customizes the Odoo Repair module to add a kanban view for repair requests similar to the maintenance module.
     """,
     'author': 'Piotr Wawrzyniak',
-    'depends': ['repair', 'maintenance'],
+    'depends': ['repair', 'maintenance', 'mzuri_contact_extensions'],
     'data': [
+        'security/security.xml',  # Add this line to include your security settings
         'views/repair_order_kanban_view.xml',
         'views/repair_view.xml',
         'views/repair_order_action.xml',

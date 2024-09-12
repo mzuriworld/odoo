@@ -331,36 +331,46 @@ class PurchaseOrderLine(models.Model):
                 line.date_planned = line._get_date_planned(seller).strftime(DEFAULT_SERVER_DATETIME_FORMAT)
 
             # If not seller, use the standard price. It needs a proper currency conversion.
-            if not seller:
-                unavailable_seller = line.product_id.seller_ids.filtered(
-                    lambda s: s.partner_id == line.order_id.partner_id)
-                if not unavailable_seller and line.price_unit and line.product_uom == line._origin.product_uom:
-                    # Avoid to modify the price unit if there is no price list for this partner and
-                    # the line has already one to avoid to override unit price set manually.
+            if not line.sale_order_line_id :
+                if not seller:
+                    unavailable_seller = line.product_id.seller_ids.filtered(
+                        lambda s: s.partner_id == line.order_id.partner_id)
+                    if not unavailable_seller and line.price_unit and line.product_uom == line._origin.product_uom:
+                        # Avoid to modify the price unit if there is no price list for this partner and
+                        # the line has already one to avoid to override unit price set manually.
+                        continue
+                    po_line_uom = line.product_uom or line.product_id.uom_po_id
+                    price_unit = line.env['account.tax']._fix_tax_included_price_company(
+                        line.product_id.uom_id._compute_price(line.product_id.standard_price, po_line_uom),
+                        line.product_id.supplier_taxes_id,
+                        line.taxes_id,
+                        line.company_id,
+                    )
+                    price_unit = line.product_id.cost_currency_id._convert(
+                        price_unit,
+                        line.currency_id,
+                        line.company_id,
+                        line.date_order or fields.Date.context_today(line),
+                        False
+                    )
+                    line.price_unit = float_round(price_unit, precision_digits=max(line.currency_id.decimal_places, self.env['decimal.precision'].precision_get('Product Price')))
                     continue
-                po_line_uom = line.product_uom or line.product_id.uom_po_id
-                price_unit = line.env['account.tax']._fix_tax_included_price_company(
-                    line.product_id.uom_id._compute_price(line.product_id.standard_price, po_line_uom),
-                    line.product_id.supplier_taxes_id,
-                    line.taxes_id,
-                    line.company_id,
-                )
-                price_unit = line.product_id.cost_currency_id._convert(
-                    price_unit,
-                    line.currency_id,
-                    line.company_id,
-                    line.date_order or fields.Date.context_today(line),
-                    False
-                )
-                line.price_unit = float_round(price_unit, precision_digits=max(line.currency_id.decimal_places, self.env['decimal.precision'].precision_get('Product Price')))
-                continue
 
-            price_unit = line.env['account.tax']._fix_tax_included_price_company(seller.price, line.product_id.supplier_taxes_id, line.taxes_id, line.company_id) if seller else 0.0
-            price_unit = seller.currency_id._convert(price_unit, line.currency_id, line.company_id, line.date_order or fields.Date.context_today(line), False)
-            price_unit = float_round(price_unit, precision_digits=max(line.currency_id.decimal_places, self.env['decimal.precision'].precision_get('Product Price')))
-            line.price_unit = seller.product_uom._compute_price(price_unit, line.product_uom)
-            line.discount = seller.discount or 0.0
+                price_unit = line.env['account.tax']._fix_tax_included_price_company(seller.price, line.product_id.supplier_taxes_id, line.taxes_id, line.company_id) if seller else 0.0
+                price_unit = seller.currency_id._convert(price_unit, line.currency_id, line.company_id, line.date_order or fields.Date.context_today(line), False)
+                price_unit = float_round(price_unit, precision_digits=max(line.currency_id.decimal_places, self.env['decimal.precision'].precision_get('Product Price')))
+                line.price_unit = seller.product_uom._compute_price(price_unit, line.product_uom)
+                line.discount = seller.discount or 0.0
+            else :
+                # Fetch the sale.order.line record based on sale_order_line_id
+                sale_order_line = line.env['sale.order.line'].browse(line.sale_order_line_id.id)
 
+                if not sale_order_line:
+                    # Handle the case where sale_order_line is not found (optional)
+                    raise UserError(_('The sale order line with ID %s was not found.' % line.sale_order_line_id.id))
+
+                line.price_unit = sale_order_line.price_unit
+                line.discount = seller.discount or 0.0
             # record product names to avoid resetting custom descriptions
             default_names = []
             vendors = line.product_id._prepare_sellers({})

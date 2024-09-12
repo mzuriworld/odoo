@@ -12,7 +12,7 @@
             </thead>
             <tbody class="border-top-0">
                 <tr t-foreach="this.props.products" t-as="product" t-key="product.product_tmpl_id">
-                    <Product t-props="product" optional="this.props.areProductsOptional" currentStep="this.props.step"/>
+                    <Product t-props="product" optional="this.props.areProductsOptional" />
                 </tr>
                 <tr t-if="!this.props.areProductsOptional">
                     <td colspan="4" class="border-bottom-0 text-end">

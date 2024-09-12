@@ -45,6 +45,7 @@ patch(SaleOrderLineProductField.prototype, {
         super.setup(...arguments);
 
         this.dialog = useService("dialog");
+
         this.notification = useService("notification");
         this.orm = useService("orm");
     },

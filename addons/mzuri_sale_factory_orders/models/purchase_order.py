@@ -8,6 +8,13 @@ class PurchaseOrder(models.Model):
 
     sale_order_id = fields.Many2one('sale.order', string="Powiązane Zamówienie Sprzedaży")
 
+    # partner_id = fields.Many2one('res.partner', readonly=True, default=1)
+
+    def default_get(self, fields):
+        res = super(PurchaseOrder, self).default_get(fields)
+        res['partner_id'] = 1  # Ustawienie domyślnej wartości na partner_id = 1
+        return res
+
     @api.model
     def create(self, vals):
         if not vals.get('partner_id'):
@@ -69,7 +76,7 @@ class PurchaseOrder(models.Model):
 
                 self.order_line = [(0, 0, {
                     'product_id': line.product_id.id,
-                    'name': description,  # Dodajemy opis z numerami katalogowymi
+                    'name': line.name, #description,  # Dodajemy opis z numerami katalogowymi
                     'product_qty': line.product_uom_qty,
                     'price_unit': base_price_tot,
                     'date_planned': fields.Datetime.now(),
@@ -104,6 +111,7 @@ class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
     sale_order_line_id = fields.Many2one('sale.order.line', string="Related Sale Order Line")
+    # sale_order_line_price_unit = fields.Float(string="Unit price from sale order")
     product_config = fields.Char(string="Product Configuration")
 
     # @api.onchange('product_id')

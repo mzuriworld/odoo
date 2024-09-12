@@ -5,6 +5,33 @@
             <field name="model">repair.order</field>
             <field name="inherit_id" ref="repair.view_repair_order_form"/>
             <field name="arch" type="xml">
+                <!-- Instead of using 'string', use a valid selector such as 'name' -->
+                <xpath expr="//field[@name='product_id']" position="replace">
+                    <field name="product_id" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='product_id']" position="after">
+                    <field name="product_owned_id" string="Product to Repair"/>
+                </xpath>
+                <xpath expr="//field[@name='picking_id']" position="replace">
+                    <field name="picking_id" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//group" position="inside">
+                    <group>
+                        <field name="report_date" readonly="1"/>
+                        <field name="event_date"/>
+                    </group>
+                    <group>
+                        <field name="fault_description"/>
+                        <field name="worked_hours" required="1"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//header/button[@name='action_validate']" position="attributes">
+                    <!-- Restrict the "Confirm Repair" button to the group_repair_manager group -->
+                    <attribute name="groups">mzuri_repairs.group_repair_manager</attribute>
+                </xpath>
+
                 <xpath expr="//sheet/notebook/page[@name='parts']" position="after">
                     <page string="Request Photos" name="request_photos">
                         <field name="request_photo_ids" widget="many2many_binary" options="{'widget': 'm2m_binary'}">
