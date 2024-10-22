@@ -252,18 +252,18 @@
 <!--                <button id="create_invoice_percentage" name="%(sale.action_view_sale_advance_payment_inv)d" string="Create Invoice"-->
 <!--                    type="action" context="{'default_advance_payment_method': 'percentage'}" data-hotkey="i"-->
 <!--                    invisible="invoice_status != 'no' or state != 'sale'"/>-->
-                <button name="action_quotation_send" id="send_by_email_primary" string="Send by Email" type="object" data-hotkey="g"
-                    invisible="state != 'draft'" class="btn-primary"
-                    context="{'validate_analytic': True}"/>
+<!--                <button name="action_quotation_send" id="send_by_email_primary" string="Send by Email" type="object" data-hotkey="g"-->
+<!--                    invisible="state != 'draft'" class="btn-primary"-->
+<!--                    context="{'validate_analytic': True}"/>-->
 <!--                <button name="action_quotation_send" id="send_proforma_primary" type="object" string="Send PRO-FORMA Invoice" class="btn-primary"-->
 <!--                    groups="sale.group_proforma_sales"-->
 <!--                    invisible="state != 'draft' or invoice_count &gt;= 1" context="{'proforma': True, 'validate_analytic': True}"/>-->
                 <button name="action_confirm" id="action_confirm" data-hotkey="q"
                     string="Confirm" class="btn-primary" type="object" context="{'validate_analytic': True}"
                     invisible="state != 'sent'"/>
-                <button name="action_confirm" data-hotkey="q"
-                    string="Confirm" type="object" context="{'validate_analytic': True}"
-                    invisible="state != 'draft'"/>
+<!--                <button name="action_confirm" data-hotkey="q" -->
+<!--                    string="Confirm" type="object" context="{'validate_analytic': True}" -->
+<!--                    invisible="state != 'draft'"/> -->
 <!--                <button name="action_quotation_send" id="send_proforma" type="object" string="Send PRO-FORMA Invoice" groups="sale.group_proforma_sales" invisible="state == 'draft' or invoice_count &gt;= 1" context="{'proforma': True, 'validate_analytic': True}"/>-->
 <!--                <button name="action_quotation_send" id="send_by_email" string="Send by Email" type="object" invisible="state not in ('sent', 'sale')" data-hotkey="g" context="{'validate_analytic': True}"/>-->
 
@@ -277,7 +277,7 @@
                 <button name="action_preview_sale_order" string="Preview" type="object" class="btn-secondary"/>
                 <button name="action_cancel" type="object" string="Cancel" invisible="state not in ['draft', 'sent', 'sale'] or not id or locked" data-hotkey="x"/>
 
-                <button name="action_quotation_sent" string="Mark Quotation as sent"  type="object" invisible="state != 'draft'" class="btn-primary" />
+                <button name="action_quotation_sent" string="Mark Quotation as Sent"  type="object" invisible="state != 'draft'" class="btn-primary" />
 
                 <button name="action_draft" invisible="state != 'cancel'" type="object" string="Set to Quotation" data-hotkey="w"/>
 
@@ -288,7 +288,6 @@
                         groups="sales_team.group_sale_manager"/>
                 </t>
                 <field name="state" widget="statusbar" statusbar_visible="draft,sent,sale"/>
-                <field name="order_line" invisible="1"/>
             </header>
             <div
                  class="alert alert-warning" role="alert"
@@ -335,7 +334,7 @@
                         <div class="o_td_label" groups="base.group_no_one" invisible="state in ['sale', 'cancel']">
                             <label for="date_order" string="Quotation Date"/>
                         </div>
-                        <field name="date_order" nolabel="1" groups="base.group_no_one" invisible="state in ['sale', 'cancel']" readonly="state in ['cancel', 'sale']"/>
+                        <field name="date_order" nolabel="1" groups="base.group_no_one" invisible="state in ['sale', 'cancel']" readonly="1"/>
                         <div class="o_td_label" invisible="state in ['draft', 'sent']">
                             <label for="date_order" string="Order Date"/>
                         </div>
@@ -363,7 +362,6 @@
                         <field name="tax_country_id" invisible="1"/>
                         <field name="tax_calculation_rounding_method" invisible="1"/>
                         <field name="payment_term_id" options="{'no_open': True, 'no_create': True}"/>
-
                     </group>
                 </group>
                 <notebook>
@@ -413,12 +411,12 @@
                                                 readonly="product_uom_readonly"
                                                 required="not display_type"/>
                                         </div>
-                                        <label for="qty_delivered" string="Delivered" invisible="1"/><!--parent.state != 'sale'"/> -->
-                                        <div name="delivered_qty" invisible="1" > <!-- parent.state != 'sale'"> -->
+                                        <label for="qty_delivered" string="Delivered" invisible="parent.state != 'sale'"/>
+                                        <div name="delivered_qty" invisible="parent.state != 'sale'">
                                             <field name="qty_delivered" readonly="qty_delivered_method != 'manual'"/>
                                         </div>
-                                        <label for="qty_invoiced" string="Invoiced" invisible="1"/> <!--parent.state != 'sale'"/>-->
-                                        <div name="invoiced_qty" invisible="1"> <!--parent.state != 'sale'">-->
+                                        <label for="qty_invoiced" string="Invoiced" invisible="parent.state != 'sale'"/>
+                                        <div name="invoiced_qty" invisible="parent.state != 'sale'">
                                             <field name="qty_invoiced"/>
                                         </div>
                                         <field name="product_packaging_qty" invisible="not product_id or not product_packaging_id" groups="product.group_stock_packaging"/>
@@ -460,19 +458,18 @@
                                 </div>
                                 <field name="state" invisible="1"/>
                                 <field name="company_id" invisible="1"/>
-
                             </form>
                             <tree
                                 string="Sales Order Lines"
                                 editable="bottom"
                                 limit="200"
-                                create = "len(parent.order_line) &lt; 1"
+								create = "len(parent.order_line) &lt; 1"
                             >
                                 <control>
-                                    <create name="add_product_control" string="Add a product" invisible="len(order_id.order_line) &lt; 1"/>
-<!--                                    <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}" />-->
-<!--                                    <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>-->
-                                    <button name="action_add_from_catalog" string="Catalog" type="object" class="px-4 btn-link" context="{'order_id': parent.id}"/>
+                                    <create name="add_product_control" string="Add a product" column_invisible="len(parent.order_line) &gt; 0"/>
+                                    <!-- <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/> -->
+                                    <!-- <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/> -->
+                                    <button invisible="True" name="action_add_from_catalog" string="Catalog" type="object" class="px-4 btn-link" context="{'order_id': parent.id}"   />
                                 </control>
 
                                 <field name="sequence" widget="handle" />
@@ -583,7 +580,7 @@
                                     optional="show"/>
                                 <field name="discount" string="Disc.%" groups="product.group_discount_per_so_line" optional="show"/>
                                 <field name="is_downpayment" column_invisible="True"/>
-                                <field name="price_subtotal" string="Tax excl." invisible="is_downpayment"/>
+                                <field name="price_subtotal" string="Tax excl." invisible="is_downpayment" readonly="False"/>
                                 <field name="price_total"
                                        string="Tax incl."
                                        column_invisible="parent.tax_calculation_rounding_method == 'round_globally'"
@@ -756,7 +753,6 @@
                         </group>
                     </page>
                     <page groups="base.group_no_one" string="Customer Signature" name="customer_signature" invisible="1">
-<!--                        not require_signature and not signed_by and not signature and not signed_on">-->
                         <group>
                             <field name="signed_by" readonly="signature"/>
                             <field name="signed_on" readonly="signature"/>

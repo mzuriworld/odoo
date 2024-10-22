@@ -42,16 +42,21 @@
         <field name="name">purchase.order.tree.with.add.to.park</field>
         <field name="model">purchase.order</field>
         <field name="arch" type="xml">
-            <tree>
-                <field name="name"/>
-                <field name="partner_id"/>
-                <field name="date_order"/>
-                <field name="state"/>
-                <button string="Dodaj do Parku Maszynowego" type="object"
-                        name="action_add_to_park_from_purchase_order"
-                        class="btn-primary"
-                        groups="sales_team.group_sale_salesman"/>
-            </tree>
+			<tree>
+						<header>
+				<!-- Globalny przycisk, który działa na zaznaczonych zamówieniach zakupowych -->
+				<button name="action_add_to_park_from_purchase_order"
+						string="Dodaj do Parku Maszynowego"
+						type="object"
+						class="oe_highlight"						
+						/>
+			</header>
+				<field name="name"/>
+				<field name="partner_id"/>
+				<field name="date_order"/>
+				<field name="state"/>
+			</tree>
+
         </field>
     </record>
 

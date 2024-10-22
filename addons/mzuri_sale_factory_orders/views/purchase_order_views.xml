@@ -71,21 +71,51 @@
             <!--            </xpath>-->
             <sheet>
                 <group>
-                    <field name="sale_order_id"/>
+                    <field name="sale_order_id" readonly="state not in ['draft']"/>
                 </group>
             </sheet>
 
-            <xpath expr="//field[@name='partner_id']" position="replace">
-
-
-                <field name="partner_id" position="attributes">
-                    <attribute name="readonly">1</attribute>  <!-- Pole jest widoczne, ale nieedytowalne -->
-                </field>
+            <xpath expr="//field[@name='partner_id']" position="attributes">				
+                <attribute name="readonly">True</attribute>  
+					<!-- Pole jest widoczne, ale nieedytowalne -->                
             </xpath>
+			
+			<xpath expr="//field[@name='date_order']" position="attributes">
+				<attribute name="readonly">True</attribute>  
+				<!-- Pole jest widoczne, ale nieedytowalne -->
+            </xpath>
+			
+			<xpath expr="//field[@name='partner_ref']" position="attributes">
+				<attribute name="invisible">True</attribute>  
+				<!-- Pole jest widoczne, ale nieedytowalne -->
+            </xpath>
+			
 
             <xpath expr="//header/button[@name='button_confirm']" position="attributes">
                 <attribute name="groups">mzuri_sale_factory_orders.group_sale_order_confirm_manager</attribute>
             </xpath>
+			
+			<xpath expr="//page[@name='purchase_delivery_invoice']" position="attributes">
+				<attribute name="invisible">True</attribute>  
+				<!-- Pole jest widoczne, ale nieedytowalne -->
+            </xpath>
+			
+			<!-- <xpath expr="//button[@name='action_view_picking']" position="attributes"> -->
+				<!-- <attribute name="invisible">True</attribute>   -->
+				
+            <!-- </xpath> -->
+			
+			<xpath expr="//div[@name='reminder']" position="attributes">
+				<attribute name="invisible">True</attribute> 
+			</xpath>
+			
+			
+			
+			
+			
+			
+			
+
 
 
             <!--             <xpath expr="//field[@name='partner_id']" position="attributes">-->

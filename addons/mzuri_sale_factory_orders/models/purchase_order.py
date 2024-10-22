@@ -7,6 +7,8 @@ class PurchaseOrder(models.Model):
     _inherit = 'purchase.order'
 
     sale_order_id = fields.Many2one('sale.order', string="Powiązane Zamówienie Sprzedaży")
+    
+
 
     # partner_id = fields.Many2one('res.partner', readonly=True, default=1)
 
@@ -30,55 +32,55 @@ class PurchaseOrder(models.Model):
             self.order_line = [(5, 0, 0)]  # Usunięcie istniejących linii zamówienia zakupu
             for line in sale_order_lines:
                 # Pobieramy atrybuty produktu i numery katalogowe
-                # print(json.dumps(dir(line.product_id)))
-                # for attr in dir(line.product_id):
-                #     print("line.product_id.%s = %r" % (attr, getattr(line.product_id, attr)))
+                #print(json.dumps(dir(line)))
+                #for attr in dir(line):
+                #     print("line.%s = %r" % (attr, getattr(line, attr)))
 
-                attributes_with_catalogue_numbers = []
-                # print(len(line.product_id.product_template_attribute_value_ids))
+                # attributes_with_catalogue_numbers = []
+                # # print(len(line.product_id.product_template_attribute_value_ids))
 
-                for attribute_value in line.product_id.product_template_attribute_value_ids:
-                    for attr in dir(attribute_value):
-                        print("attribute_value.%s = %r" % (attr, getattr(attribute_value, attr)))
-                    # print (attribute_value)
-                    if attribute_value.catalogue_number:
-                        attributes_with_catalogue_numbers.append(f"{attribute_value.name} ({attribute_value.catalogue_number})")
-                    else:
-                        attributes_with_catalogue_numbers.append(attribute_value.name)
+                # for attribute_value in line.product_id.product_template_attribute_value_ids:
+                    # #for attr in dir(attribute_value):
+                    # #    print("attribute_value.%s = %r" % (attr, getattr(attribute_value, attr)))
+                    # # print (attribute_value)
+                    # if attribute_value.catalogue_number:
+                        # attributes_with_catalogue_numbers.append(f"{attribute_value.name} ({attribute_value.catalogue_number})")
+                    # else:
+                        # attributes_with_catalogue_numbers.append(attribute_value.name)
 
-                # Tworzymy opis z nazwą i numerami katalogowymi
-                description = f", ".join(attributes_with_catalogue_numbers)
-                print(description)
-#{line.name}\n" +
-                name = line.product_id.name
-                catalogue_number = list(line.product_id.product_tmpl_id.product_properties.values())[0] or ''
-                # Modyfikujemy nazwę, dodając numer katalogowy
-                display_name = f"{name} ({catalogue_number})"
-                # print(name)
-                # print(catalogue_number)
-                # print(display_name)
+                # # Tworzymy opis z nazwą i numerami katalogowymi
+                # description = f", ".join(attributes_with_catalogue_numbers)
+                # #print(description)
+# #{line.name}\n" +
+                # name = line.product_id.name
+                # catalogue_number = list(line.product_id.product_tmpl_id.product_properties.values())[0] or ''
+                # # Modyfikujemy nazwę, dodając numer katalogowy
+                # display_name = f"{name} ({catalogue_number})"
+                # # print(name)
+                # # print(catalogue_number)
+                # # print(display_name)
 
-                # Tworzymy opis z nazwą i numerami katalogowymi
-                description = f"{display_name}\n" + description
+                # # Tworzymy opis z nazwą i numerami katalogowymi
+                # description = f"{display_name}\n" + description
 
-                # Pobieramy bazową cenę z 'product.template'
-                base_price = line.product_id.product_tmpl_id.list_price
-                print(base_price)
+                # # Pobieramy bazową cenę z 'product.template'
+                # base_price = line.product_id.product_tmpl_id.list_price
+                # #print(base_price)
 
-                # Możemy tu dodać dodatkowe obliczenia w zależności od atrybutów i opcji
-                option_price = sum(
-                    value.price_extra for value in  line.product_id.product_template_attribute_value_ids
-                )
-                base_price_tot = base_price + option_price
-                print(base_price_tot)
-                #
-                # line.price_unit = base_price_tot
+                # # Możemy tu dodać dodatkowe obliczenia w zależności od atrybutów i opcji
+                # option_price = sum(
+                    # value.price_extra for value in  line.product_id.product_template_attribute_value_ids
+                # )
+                # base_price_tot = base_price + option_price
+                # #print(base_price_tot)
+                # #
+                # # line.price_unit = base_price_tot
 
                 self.order_line = [(0, 0, {
                     'product_id': line.product_id.id,
                     'name': line.name, #description,  # Dodajemy opis z numerami katalogowymi
                     'product_qty': line.product_uom_qty,
-                    'price_unit': base_price_tot,
+                    'price_unit': line.price_unit, #base_price_tot,
                     'date_planned': fields.Datetime.now(),
                     'product_uom': line.product_uom.id,
                     'sale_order_line_id': line.id,
@@ -111,7 +113,6 @@ class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
     sale_order_line_id = fields.Many2one('sale.order.line', string="Related Sale Order Line")
-    # sale_order_line_price_unit = fields.Float(string="Unit price from sale order")
     product_config = fields.Char(string="Product Configuration")
 
     # @api.onchange('product_id')

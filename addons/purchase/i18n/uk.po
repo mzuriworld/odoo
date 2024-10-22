@@ -3381,3 +3381,226 @@ msgstr "днів до"
 msgid "{{ object.company_id.name }} Order (Ref {{ object.name or 'n/a' }})"
 msgstr ""
 "{{ object.company_id.name }} Замовлення (Ref {{ object.name or 'n/a' }})"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
+msgid "<span class=\"o_form_label\" invisible=\"False\">Purchase Order </span>"
+msgstr "<span class=\"o_form_label\" invisible=\"False\">Замовлення на покупку </span>"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
+msgid "<span invisible=\"True\">Ask confirmation</span>"
+msgstr "<span invisible=\"True\">Запит підтвердження</span>"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
+msgid "<strong>Total Discount</strong>"
+msgstr "<strong>Загальна знижка</strong>"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.view_purchase_order_form_vin
+msgid "Anuluj"
+msgstr "Скасувати"
+
+#. module: purchase
+#: model:ir.model.fields.selection,name:purchase.selection__purchase_order__state__done
+msgid "Completed"
+msgstr "Завершено"
+
+#. module: purchase
+#: model:ir.model.fields.selection,name:purchase.selection__purchase_order__state__confirmed
+msgid "Confirmed"
+msgstr "Підтверджено"
+
+#. module: purchase
+#: model:res.groups,name:purchase.group_purchase_dealers
+msgid "Dealers"
+msgstr "Дилери"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
+msgid "Discount Type"
+msgstr "Тип знижки"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
+msgid "Discount Value"
+msgstr "Вартість знижки"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
+msgid ""
+"Do wysłania / wysłane / potwierdzone / zaległe / W drodze / Dostarczone - в "
+"процесі"
+msgstr ""
+"До відправки / відправлено / підтверджено / прострочено / У дорозі / Доставлено - в процесі"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
+msgid "Early Order Discount"
+msgstr "Знижка за раннє замовлення"
+
+#. module: purchase
+#: model:ir.model.fields,field_description:purchase.field_purchase_order__early_order_discount
+msgid "Early Order Discount (%)"
+msgstr "Знижка за раннє замовлення (%)"
+
+#. module: purchase
+#: model:ir.model.fields,field_description:purchase.field_purchase_order__early_order_discount_value
+msgid "Early Order Discount Value"
+msgstr "Вартість знижки за раннє замовлення"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
+msgid "Fixed Discount"
+msgstr "Фіксована знижка"
+
+#. module: purchase
+#: model:ir.model.fields,field_description:purchase.field_purchase_order__fixed_discount
+msgid "Fixed Discount (%)"
+msgstr "Фіксована знижка (%)"
+
+#. module: purchase
+#: model:ir.model.fields,field_description:purchase.field_purchase_order__fixed_discount_value
+msgid "Fixed Discount Value"
+msgstr "Вартість фіксованої знижки"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
+msgid "Gotowe"
+msgstr "Готово"
+
+#. module: purchase
+#: model:ir.model.fields.selection,name:purchase.selection__purchase_order__state__in_delivery
+msgid "In Delivery"
+msgstr "У доставці"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_order_view_search
+msgid "Late Activities bb"
+msgstr "Запізнілі дії bb"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_order_view_search
+msgid "My Orders bb"
+msgstr "Мої замовлення bb"
+
+#. module: purchase
+#: model:res.groups,name:purchase.group_purchase_mzuri
+msgid "Mzuri"
+msgstr "Mzuri"
+
+#. module: purchase
+#: model:ir.model.fields.selection,name:purchase.selection__purchase_order__state__sent
+msgid "New"
+msgstr "Нове"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.view_purchase_order_form_vin
+msgid "Numer VIN"
+msgstr "Номер VIN"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
+msgid "Odblokuj"
+msgstr "Розблокувати"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
+msgid "Potwierdź odbiór"
+msgstr "Підтвердити отримання"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
+msgid "Potwierdź zamówienie"
+msgstr "Підтвердити замовлення"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
+msgid "Rabaty"
+msgstr "Знижки"
+
+#. module: purchase
+#: model:ir.model.fields.selection,name:purchase.selection__purchase_order__state__ready
+msgid "Ready"
+msgstr "Готово"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
+msgid "Send order"
+msgstr "Відправити замовлення"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
+msgid "Special Discount"
+msgstr "Спеціальна знижка"
+
+#. module: purchase
+#: model:ir.model.fields,field_description:purchase.field_purchase_order__special_discount
+msgid "Special Discount (%)"
+msgstr "Спеціальна знижка (%)"
+
+#. module: purchase
+#: model:ir.model.fields,field_description:purchase.field_purchase_order__special_discount_value
+msgid "Special Discount Value"
+msgstr "Вартість спеціальної знижки"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.report_purchaseorder_document
+msgid "Tax 15%"
+msgstr "Податок 15%"
+
+#. module: purchase
+#. odoo-python
+#: code:addons/purchase/models/purchase_order_line.py:0
+#, python-format
+msgid "The sale order line with ID %s was not found."
+msgstr "Рядок замовлення продажу з ID %s не знайдено."
+
+#. module: purchase
+#: model:ir.model.fields.selection,name:purchase.selection__purchase_order__state__draft
+msgid "To send"
+msgstr "До відправки"
+
+#. module: purchase
+#: model:ir.model.fields,field_description:purchase.field_purchase_order__total_discount_value
+msgid "Total Discount Value"
+msgstr "Загальна вартість знижки"
+
+#. module: purchase
+#: model:ir.model.fields,field_description:purchase.field_purchase_order__vin_number
+msgid "VIN"
+msgstr "VIN"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
+#: model_terms:ir.ui.view,arch_db:purchase.view_purchase_order_form_vin
+msgid "Wprowadź VIN"
+msgstr "Введіть VIN"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
+msgid "Wysłane - w drodze"
+msgstr "Відправлено - в дорозі"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
+msgid "Wyślij zamówienie"
+msgstr "Відправити замовлення"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
+msgid "Zablokuj"
+msgstr "Заблокувати"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.view_purchase_order_form_vin
+msgid "Zapisz"
+msgstr "Зберегти"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
+msgid ""
+"nowe / potwierdzone / zaległe / Gotowe / W drodze / Dostarczone - в процесі"
+msgstr ""
+"нове / підтверджене / прострочене / Готове / В дорозі / Доставлене - в процесі"

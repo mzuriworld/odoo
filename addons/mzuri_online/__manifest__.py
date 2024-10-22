@@ -11,11 +11,11 @@
     'data': [
         'views/assets.xml',
     ],
-    # 'assets': {
-    #     'web.assets_backend': [
-    #         'mzuri_online/static/src/js/user_menu.js',
-    #     ],
-    # },
+    'assets': {
+        'web.assets_backend': [
+            'mzuri_online/static/src/js/user_menu.js',
+        ],
+    },
     'installable': True,
     'application': False,
 }

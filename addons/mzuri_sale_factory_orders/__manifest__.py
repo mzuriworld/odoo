@@ -13,14 +13,14 @@
         # 'security/ir.model.access.csv',
         'security/security.xml',  # Plik z grupami uprawnień
         'views/purchase_order_views.xml',
-        'views/sale_order_views.xml',
+        # 'views/sale_order_views.xml',
         'views/purchase_order_line.xml',
         # 'views/res_config_settings_views.xml',
     ],
     'assets': {
         'web.assets_backend': [
             'mzuri_sale_factory_orders/static/src/js/product_configurator_widget.js',
-            # 'sale_product_configurator/static/src/js/product_configurator_dialog.js',
+            'sale_product_configurator/static/src/js/product_configurator_dialog.js',
         ],
     },
 

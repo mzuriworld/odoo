@@ -24,7 +24,7 @@ export class Product extends Component {
         inclusions: Object,
         parent_exclusions: Object,
         parent_product_tmpl_ids: { type: Array, element: Number, optional: true },
-//        currentStep: Number,
+        currentStep: {type: Number, default: 0, optional: true },
 
     };
     // static step = 0;

@@ -25,9 +25,9 @@
                 </div>
             </div>
             <t t-foreach="this.props.attribute_lines" t-as="ptal" t-key="ptal.id">
-<!--                <t t-if="this.props.attribute_lines.indexOf(ptal) &lt;= this.props.currentStep" >-->
+                <!-- <t t-if="this.props.attribute_lines.indexOf(ptal) &lt;= this.props.currentStep" > -->
                     <PTAL t-props="ptal" productTmplId="this.props.product_tmpl_id"/>
-<!--                </t>-->
+                <!-- </t> -->
             </t>
         </td>
         <td class="o_sale_product_configurator_qty py-3 px-0 text-end">

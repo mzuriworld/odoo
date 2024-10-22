@@ -95,13 +95,17 @@ class PurchaseOrder(models.Model):
     currency_id = fields.Many2one('res.currency', 'Currency', required=True,
         default=lambda self: self.env.company.currency_id.id)
     state = fields.Selection([
-        ('draft', 'RFQ'),
-        ('sent', 'RFQ Sent'),
-        ('to approve', 'To Approve'),
-        ('purchase', 'Purchase Order'),
-        ('done', 'Locked'),
-        ('cancel', 'Cancelled')
-    ], string='Status', readonly=True, index=True, copy=False, default='draft', tracking=True)
+            ('draft', 'To send'),
+            ('sent', 'New'),  # renamed for sales manager
+            ('confirmed', 'Confirmed'),  # New state for confirmed
+            ('ready', 'Ready'),  # New state for ready
+            ('in_delivery', 'In Delivery'),  # New state for in delivery
+            ('to approve', 'To Approve'),
+            ('purchase', 'Purchase Order'),
+            ('done', 'Completed'),  # Changed label from 'Locked' to 'Completed'
+            ('cancel', 'Cancelled'),
+        ], string='Status', readonly=True, index=True, copy=False, default='draft', tracking=True)
+
     order_line = fields.One2many('purchase.order.line', 'order_id', string='Order Lines', copy=True)
     notes = fields.Html('Terms and Conditions')
 
@@ -148,6 +152,65 @@ class PurchaseOrder(models.Model):
 
     receipt_reminder_email = fields.Boolean('Receipt Reminder Email', compute='_compute_receipt_reminder_email')
     reminder_date_before_receipt = fields.Integer('Days Before Receipt', compute='_compute_receipt_reminder_email')
+
+    fixed_discount = fields.Float(string="Fixed Discount (%)", default=10.0)
+    early_order_discount = fields.Float(string="Early Order Discount (%)", default=0.0)
+    special_discount = fields.Float(string="Special Discount (%)", default=0.0)
+    
+    fixed_discount_value = fields.Monetary(string="Fixed Discount Value", compute="_compute_discount_values")
+    early_order_discount_value = fields.Monetary(string="Early Order Discount Value", compute="_compute_discount_values")
+    special_discount_value = fields.Monetary(string="Special Discount Value", compute="_compute_discount_values")
+    total_discount_value = fields.Monetary(string="Total Discount Value", compute="_compute_discount_values")
+    
+    vin_number = fields.Char(string='VIN', readonly=False)
+    
+    @api.depends('fixed_discount', 'early_order_discount', 'special_discount', 'amount_total')
+    def _compute_discount_values(self):
+        for order in self:
+            # Base amount to calculate discounts on
+            base_amount = order.amount_untaxed
+
+            # Calculate individual discounts
+            fixed_discount_value = base_amount * (order.fixed_discount / 100.0)
+            early_order_discount_value = (base_amount - fixed_discount_value) * (order.early_order_discount / 100.0)
+            special_discount_value = (base_amount - fixed_discount_value - early_order_discount_value) * (order.special_discount / 100.0)
+
+            # Calculate total discount value
+            total_discount_value = fixed_discount_value + early_order_discount_value + special_discount_value
+
+            # Assign values to the fields
+            order.fixed_discount_value = fixed_discount_value
+            order.early_order_discount_value = early_order_discount_value
+            order.special_discount_value = special_discount_value
+            order.total_discount_value = total_discount_value
+
+    @api.onchange('product_id', 'fixed_discount', 'early_order_discount', 'special_discount', 'order_line')
+    def _apply_discounts(self):
+        for line in self.order_line:
+            if line.order_id:
+                # Start with the original price
+                price = line.price_unit
+                print(price)
+                # Apply the fixed discount first
+                price_after_fixed_discount = price * (1 - line.order_id.fixed_discount / 100.0)
+                print(price_after_fixed_discount)
+                # Apply the early order discount on the reduced price
+                price_after_early_order_discount = price_after_fixed_discount * (1 - line.order_id.early_order_discount / 100.0)
+                print(price_after_early_order_discount)
+                # Apply the special discount on the reduced price
+                final_price_after_discounts = price_after_early_order_discount * (1 - line.order_id.special_discount / 100.0)
+                print(final_price_after_discounts)
+                # Calculate the total discount percentage
+                total_discount_percentage = 100 - (final_price_after_discounts / line.price_unit * 100)
+
+                # Update the line discount with the total discount
+                line.discount = total_discount_percentage
+                print(line.discount)
+    @api.constrains('fixed_discount', 'early_order_discount', 'special_discount')
+    def _check_discount_limits(self):
+        for order in self:
+            if any(discount > 20 for discount in [order.fixed_discount, order.early_order_discount, order.special_discount]):
+                raise ValidationError("Each individual discount cannot exceed 20%.")
 
     @api.constrains('company_id', 'order_line')
     def _check_order_line_company_id(self):
@@ -266,6 +329,7 @@ class PurchaseOrder(models.Model):
                 raise UserError(_('In order to delete a purchase order, you must cancel it first.'))
 
     def copy(self, default=None):
+        print(f"po 330: kopiowanie")
         ctx = dict(self.env.context)
         ctx.pop('default_product_id', None)
         self = self.with_context(ctx)
@@ -276,6 +340,7 @@ class PurchaseOrder(models.Model):
                     partner_id=line.partner_id, quantity=line.product_qty,
                     date=line.order_id.date_order and line.order_id.date_order.date(), uom_id=line.product_uom)
                 line.date_planned = line._get_date_planned(seller)
+                print(f"po 341: kopiowanie: {line.price_unit}")
         return new_po
 
     def _must_delete_date_planned(self, field_name):
@@ -418,57 +483,12 @@ class PurchaseOrder(models.Model):
 
     def action_rfq_send(self):
         '''
-        This function opens a window to compose an email, with the edi purchase template message loaded by default
+        This function sets the state of the purchase order to "sent"
         '''
         self.ensure_one()
-        ir_model_data = self.env['ir.model.data']
-        try:
-            if self.env.context.get('send_rfq', False):
-                template_id = ir_model_data._xmlid_lookup('purchase.email_template_edi_purchase')[1]
-            else:
-                template_id = ir_model_data._xmlid_lookup('purchase.email_template_edi_purchase_done')[1]
-        except ValueError:
-            template_id = False
-        try:
-            compose_form_id = ir_model_data._xmlid_lookup('mail.email_compose_message_wizard_form')[1]
-        except ValueError:
-            compose_form_id = False
-        ctx = dict(self.env.context or {})
-        ctx.update({
-            'default_model': 'purchase.order',
-            'default_res_ids': self.ids,
-            'default_template_id': template_id,
-            'default_composition_mode': 'comment',
-            'default_email_layout_xmlid': "mail.mail_notification_layout_with_responsible_signature",
-            'force_email': True,
-            'mark_rfq_as_sent': True,
-        })
-
-        # In the case of a RFQ or a PO, we want the "View..." button in line with the state of the
-        # object. Therefore, we pass the model description in the context, in the language in which
-        # the template is rendered.
-        lang = self.env.context.get('lang')
-        if {'default_template_id', 'default_model', 'default_res_id'} <= ctx.keys():
-            template = self.env['mail.template'].browse(ctx['default_template_id'])
-            if template and template.lang:
-                lang = template._render_lang([ctx['default_res_id']])[ctx['default_res_id']]
-
-        self = self.with_context(lang=lang)
-        if self.state in ['draft', 'sent']:
-            ctx['model_description'] = _('Request for Quotation')
-        else:
-            ctx['model_description'] = _('Purchase Order')
-
-        return {
-            'name': _('Compose Email'),
-            'type': 'ir.actions.act_window',
-            'view_mode': 'form',
-            'res_model': 'mail.compose.message',
-            'views': [(compose_form_id, 'form')],
-            'view_id': compose_form_id,
-            'target': 'new',
-            'context': ctx,
-        }
+        if self.state == 'draft':
+            self.state = 'sent'
+        return True
 
     def print_quotation(self):
         self.write({'state': "sent"})
@@ -476,8 +496,8 @@ class PurchaseOrder(models.Model):
 
     def button_approve(self, force=False):
         self = self.filtered(lambda order: order._approval_allowed())
-        self.write({'state': 'purchase', 'date_approve': fields.Datetime.now()})
-        self.filtered(lambda p: p.company_id.po_lock == 'lock').write({'state': 'done'})
+        self.write({'state': 'confirmed', 'date_approve': fields.Datetime.now()})
+        # self.filtered(lambda p: p.company_id.po_lock == 'lock').write({'state': 'done'})
         return {}
 
     def button_draft(self):
@@ -489,7 +509,7 @@ class PurchaseOrder(models.Model):
             if order.state not in ['draft', 'sent']:
                 continue
             order.order_line._validate_analytic_distribution()
-            order._add_supplier_to_product()
+            #order._add_supplier_to_product()
             # Deal with double validation process
             if order._approval_allowed():
                 order.button_approve()
@@ -1008,6 +1028,7 @@ class PurchaseOrder(models.Model):
             elif self.state in ['draft', 'sent']:
                 price_unit = self._get_product_price_and_data(pol.product_id)['price']
                 pol.unlink()
+                print(f"po 1027: {price_unit}")
                 return price_unit
             else:
                 pol.product_qty = 0
@@ -1026,6 +1047,7 @@ class PurchaseOrder(models.Model):
             if seller:
                 # Fix the PO line's price on the seller's one.
                 pol.price_unit = seller.price_discounted
+                print(f"po 1046: {pol.price_unit}")
         return pol.price_unit_discounted
 
     def _create_update_date_activity(self, updated_dates):
@@ -1074,3 +1096,58 @@ class PurchaseOrder(models.Model):
         """
         self.ensure_one()
         return self.state == 'cancel'
+    # Akcja do wprowadzania VIN-u
+    def action_input_vin(self):
+        """Otwiera formularz do wprowadzenia numeru VIN."""
+        self.ensure_one()
+        if self.state != 'confirmed':
+            raise UserError("Zamówienie nie zostało jeszcze potwierdzone.")
+
+
+        try:
+            compose_form_id = self.env['ir.model.data']._xmlid_lookup('purchase.view_purchase_order_form_vin')[1]
+        except ValueError:
+            compose_form_id = False
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Wprowadź VIN',
+            'res_model': 'purchase.order',
+            'view_mode': 'form',
+            'res_id': self.id,
+            'target': 'new',
+            'views': [(compose_form_id, 'form')],
+            'context': {'default_vin_number': self.vin_number},
+        }
+
+    # Akcja zmieniająca status na 'ready'
+    def action_ready(self):
+        """Zmień status zamówienia na 'ready'."""
+        self.ensure_one()
+        if self.state != 'confirmed':
+            raise UserError("Zamówienie nie jest w stanie 'Potwierdzone'.")
+        self.state = 'ready'
+
+    # Akcja zmieniająca status na 'in_delivery'
+    def action_in_delivery(self):
+        """Zmień status zamówienia na 'in_delivery'."""
+        self.ensure_one()
+        if self.state != 'ready':
+            raise UserError("Zamówienie nie jest gotowe do wysyłki.")
+        self.state = 'in_delivery'
+        
+    def action_save_vin(self):
+        """Zapisz numer VIN w zamówieniu."""
+        self.ensure_one()
+        if not self.vin_number:
+            raise UserError("Numer VIN jest wymagany.")
+        self.state = 'ready'
+        
+    # Akcja potwierdzenia odbioru przez dealera
+    def action_confirm_receipt(self):
+        """Potwierdzenie odbioru przez dealera."""
+        self.ensure_one()
+        if self.state != 'in_delivery':
+            raise UserError("Zamówienie nie jest w drodze.")
+        # Po potwierdzeniu odbioru zmienia stan zamówienia na 'done'
+        self.state = 'done'
+

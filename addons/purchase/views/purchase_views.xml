@@ -133,22 +133,75 @@
             <field name="arch" type="xml">
                 <form string="Purchase Order" class="o_purchase_order">
                 <header>
-                    <button name="action_rfq_send" invisible="state != 'draft'" string="Send by Email" type="object" context="{'send_rfq':True}" class="oe_highlight" data-hotkey="g"/>
-                    <button name="print_quotation" string="Print RFQ" type="object" invisible="state != 'draft'" class="oe_highlight" groups="base.group_user" data-hotkey="k"/>
-                    <button name="button_confirm" type="object" invisible="state != 'sent'" string="Confirm Order" context="{'validate_analytic': True}" class="oe_highlight" id="bid_confirm" data-hotkey="q"/>
-                    <button name="button_approve" type="object" invisible="state != 'to approve'" string="Approve Order" class="oe_highlight" groups="purchase.group_purchase_manager" data-hotkey="z"/>
-                    <button name="action_create_invoice" string="Create Bill" type="object" class="oe_highlight" context="{'create_bill':True}" invisible="state not in ('purchase', 'done') or invoice_status in ('no', 'invoiced')" data-hotkey="w"/>
-                    <button name="action_rfq_send" invisible="state != 'sent'" string="Re-Send by Email" type="object" context="{'send_rfq':True}" data-hotkey="g"/>
-                    <button name="print_quotation" string="Print RFQ" type="object" invisible="state != 'sent'" groups="base.group_user" data-hotkey="k"/>
-                    <button name="button_confirm" type="object" invisible="state != 'draft'" context="{'validate_analytic': True}" string="Confirm Order" id="draft_confirm" data-hotkey="q"/>
-                    <button name="action_rfq_send" invisible="state != 'purchase'" string="Send PO by Email" type="object" context="{'send_rfq':False}" data-hotkey="g"/>
-                    <button name="confirm_reminder_mail" string="Confirm Receipt Date" type="object" invisible="state not in ('purchase', 'done') or mail_reminder_confirmed or not date_planned" groups="base.group_no_one" data-hotkey="o"/>
-                    <button name="action_create_invoice" string="Create Bill" type="object" context="{'create_bill':True}" invisible="state not in ('purchase', 'done') or invoice_status not in ('no', 'invoiced') or not order_line" data-hotkey="w"/>
-                    <button name="button_draft" invisible="state != 'cancel'" string="Set to Draft" type="object" data-hotkey="o"/>
-                    <button name="button_cancel" invisible="state not in ('draft', 'to approve', 'sent', 'purchase')" string="Cancel" type="object" data-hotkey="x" />
-                    <button name="button_done" type="object" string="Lock" invisible="state != 'purchase'" data-hotkey="l"/>
-                    <button name="button_unlock" type="object" string="Unlock" invisible="state != 'done'" groups="purchase.group_purchase_manager" data-hotkey="l"/>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,sent,purchase" readonly="1"/>
+				
+					<!-- Flow dla dealera: To send/Sent/Confirmed/In delivery/Done-->
+					
+					 <!-- Dla Dealera: Nowe zamówienie -> Wyślij -->
+    <button name="action_rfq_send" string="Wyślij zamówienie" type="object" context="{'send_rfq':True}" class="oe_highlight" data-hotkey="g" groups="purchase.group_purchase_dealers" invisible="state != 'draft'"/>
+
+    <!-- Dla Mzuri: Potwierdza -> Wprowadza VIN -> Gotowe -->
+    <button name="button_confirm" string="Potwierdź zamówienie" type="object" context="{'validate_analytic': True}" class="oe_highlight" data-hotkey="q" groups="purchase.group_purchase_mzuri" invisible="state != 'sent'"/>
+
+    <!-- Button wprowadzania VIN (dla Mzuri) -->
+    <button name="action_input_vin" string="Wprowadź VIN" type="object" class="oe_highlight" data-hotkey="v" groups="purchase.group_purchase_mzuri" invisible="state != 'confirmed'"/>
+
+    <!-- Button gotowości (dla Mzuri) -->
+    <!-- <button name="action_ready" string="Gotowe" type="object" class="oe_highlight" data-hotkey="r" groups="purchase.group_purchase_mzuri" invisible="state != 'ready'"/> -->
+
+    <!-- Dla Mzuri: Wyślij fizycznie (W drodze) -->
+    <button name="action_in_delivery" string="Wysłane - w drodze" type="object" class="oe_highlight" data-hotkey="i" groups="purchase.group_purchase_mzuri" invisible="state != 'ready'"/>
+
+    <!-- Dla Dealera: Potwierdzenie odbioru -->
+    <button name="action_confirm_receipt" string="Potwierdź odbiór" type="object" class="oe_highlight" data-hotkey="o" groups="purchase.group_purchase_dealers" invisible="state != 'in_delivery'"/>
+
+    <!-- Dla wszystkich: Zablokowanie zamówienia po dostarczeniu -->
+    <!-- <button name="button_done" string="Zablokuj" type="object" class="oe_highlight" data-hotkey="l" invisible="state != 'done'"/> -->
+
+    <!-- Dla Mzuri: Odbokowanie zamówienia -->
+    <button name="button_unlock" string="Odblokuj" type="object" class="oe_highlight" data-hotkey="l" groups="purchase.group_purchase_mzuri" invisible="state != 'done'"/>
+	
+	
+	
+					
+                    <button name="action_rfq_send" invisible="True" string="Send order" type="object" context="{'send_rfq':True}" class="oe_highlight" data-hotkey="g"/>
+					
+					<button name="button_confirm" type="object" invisible="True" string="Confirm Order" context="{'validate_analytic': True}" class="oe_highlight" id="bid_confirm" data-hotkey="q"/>
+					
+					
+                    <button name="print_quotation" string="Print RFQ" type="object" invisible="True" class="oe_highlight" groups="base.group_user" data-hotkey="k"/>
+                    
+                    <button name="button_approve" type="object" invisible="True" string="Approve Order" class="oe_highlight" groups="purchase.group_purchase_manager" data-hotkey="z"/>
+                    <button name="action_create_invoice" string="Create Bill" type="object" class="oe_highlight" context="{'create_bill':True}" invisible="True" data-hotkey="w"/>
+                    <button name="action_rfq_send" invisible="True" string="Re-Send by Email" type="object" context="{'send_rfq':True}" data-hotkey="g"/>
+                    <button name="print_quotation" string="Print RFQ" type="object" invisible="True" groups="base.group_user" data-hotkey="k"/>
+                    <button name="button_confirm" type="object" invisible="True" context="{'validate_analytic': True}" string="Confirm Order" id="draft_confirm" data-hotkey="q"/>
+                    <button name="action_rfq_send" invisible="True" string="Send PO by Email" type="object" context="{'send_rfq':False}" data-hotkey="g"/>
+                    <button name="confirm_reminder_mail" string="Confirm Receipt Date" type="object" invisible="True" groups="base.group_no_one" data-hotkey="o"/>
+                    <button name="action_create_invoice" string="Create Bill" type="object" context="{'create_bill':True}" invisible="True" data-hotkey="w"/>
+                    <button name="button_draft" invisible="True" string="Set to Draft" type="object" data-hotkey="o"/>
+                    <button name="button_cancel" invisible="True" string="Cancel" type="object" data-hotkey="x" />
+                    <button name="button_done" type="object" string="Lock" invisible="True" data-hotkey="l"/>
+                    <button name="button_unlock" type="object" string="Unlock" invisible="True" groups="purchase.group_purchase_manager" data-hotkey="l"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,sent,purchase" readonly="1" invisible="True"/>
+					                <!-- Zaktualizowany statusbar z nowymi stanami -->
+ 					<!-- <field name="state" widget="statusbar"  -->
+						   <!-- statusbar_visible="draft,sent,confirmed,ready,in_delivery,purchase,done,cancel"  -->
+						   <!-- statusbar_colors="{'draft': 'gray', 'sent': 'blue', 'confirmed': 'orange', 'ready': 'purple', 'in_delivery': 'yellow', 'purchase': 'green', 'done': 'lightgreen', 'cancel': 'red'}" -->
+						   <!-- readonly="1"/> -->
+						   <!-- Widok dla grupy "dealers" -->
+<field name="state" widget="statusbar" 
+       statusbar_visible="draft,sent,confirmed,in_delivery,done"
+       statusbar_colors="{'draft': 'gray', 'sent': 'blue', 'confirmed': 'orange', 'ready': 'purple', 'in_delivery': 'yellow', 'done': 'lightgreen'}"
+       string="Do wysłania / wysłane / potwierdzone / zaległe / W drodze / Dostarczone - w toku"
+       groups="purchase.group_purchase_dealers" readonly="1"/>
+
+<!-- Widok dla grupy "mzuri" -->
+<field name="state" widget="statusbar" 
+       statusbar_visible="draft,sent,confirmed,ready,in_delivery,done"
+       statusbar_colors="{'draft': 'gray', 'sent': 'blue', 'confirmed': 'orange', 'ready': 'purple', 'in_delivery': 'yellow', 'done': 'lightgreen'}"
+       string="nowe / potwierdzone / zaległe / Gotowe / W drodze / Dostarczone - w toku"
+       groups="purchase.group_purchase_mzuri" readonly="1"/>
+						   
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
@@ -160,8 +213,8 @@
                         </button>
                     </div>
                     <div class="oe_title">
-                        <span class="o_form_label" invisible="state not in ('draft', 'sent')">Request for Quotation </span>
-                        <span class="o_form_label" invisible="state in ('draft', 'sent')">Purchase Order </span>
+                        <!-- <span class="o_form_label" invisible="state not in ('draft', 'sent')">Request for Quotation </span> -->
+                        <span class="o_form_label" invisible="False">Purchase Order </span>
                         <h1 class="d-flex">
                             <field name="priority" widget="priority" class="me-3"/>
                             <field name="name" readonly="1"/>
@@ -169,18 +222,17 @@
                     </div>
                     <group>
                         <group>
-                            <field name="partner_id" widget="res_partner_many2one" context="{'res_partner_search_mode': 'supplier', 'show_vat': True}"
-                                placeholder="Name, TIN, Email, or Reference"
-                             readonly="state in ['cancel', 'done', 'purchase']"/>
+                            <field name="partner_id" 
+                             readonly="True"/>
                             <field name="partner_ref"/>
-                            <field name="currency_id" groups="base.group_multi_currency" force_save="1" readonly="state in ['cancel', 'done', 'purchase']"/>
+                            <field name="currency_id" groups="base.group_multi_currency" force_save="1" readonly="True"/>
                             <field name="id" invisible="1"/>
                             <field name="company_id" invisible="1" readonly="state in ['cancel', 'done', 'purchase']"/>
                             <field name="currency_id" invisible="1" readonly="state in ['cancel', 'done', 'purchase']" groups="!base.group_multi_currency"/>
                             <field name="tax_calculation_rounding_method" invisible="1"/>
                         </group>
                         <group>
-                            <field name="date_order" invisible="state in ('purchase', 'done')" readonly="state in ['cancel', 'done', 'purchase']"/>
+                            <field name="date_order" invisible="state in ('purchase', 'done')" readonly="True"/>
                             <label for="date_approve" invisible="state not in ('purchase', 'done')"/>
                             <div name="date_approve" invisible="state not in ('purchase', 'done')" class="o_row">
                                 <field name="date_approve"/>
@@ -193,14 +245,14 @@
                                 <field name="mail_reminder_confirmed" invisible="1"/>
                                 <span class="text-muted" invisible="not mail_reminder_confirmed">(confirmed by vendor)</span>
                             </div>
-                            <label for="receipt_reminder_email" class="d-none" groups="purchase.group_send_reminder"/>
-                            <div name="reminder" class="o_row" groups='purchase.group_send_reminder' title="Automatically send a confirmation email to the vendor X days before the expected receipt date, asking him to confirm the exact date.">
-                                <field name="receipt_reminder_email"/>
-                                <span>Ask confirmation</span>
-                                <div class="o_row oe_inline" invisible="not receipt_reminder_email">
-                                    <field name="reminder_date_before_receipt"/>
+                            <label for="receipt_reminder_email" class="d-none" groups="purchase.group_send_reminder" invisible="True"/>
+                            <div invisible="True" name="reminder" class="o_row" groups='purchase.group_send_reminder' title="Automatically send a confirmation email to the vendor X days before the expected receipt date, asking him to confirm the exact date.">
+                                <field invisible="True" name="receipt_reminder_email"/>
+                                <span invisible="True">Ask confirmation</span>
+                                <div class="o_row oe_inline" invisible="True">
+                                    <field name="reminder_date_before_receipt" invisible="True"/>
                                     day(s) before
-                                    <widget name='toaster_button' button_name="send_reminder_preview" title="Preview the reminder email by sending it to yourself." invisible="not id"/>
+                                    <widget name='toaster_button' button_name="send_reminder_preview" title="Preview the reminder email by sending it to yourself." invisible="True"/>
                                 </div>
                             </div>
                         </group>
@@ -216,7 +268,7 @@
                                 <tree string="Purchase Order Lines" editable="bottom">
                                     <control>
                                         <create name="add_product_control" string="Add a product"/>
-                                        <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
+                                        <!-- <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/> -->
                                         <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>
                                         <button name="action_add_from_catalog" string="Catalog" type="object" class="px-4 btn-link" context="{'order_id': parent.id}"/>
                                     </control>
@@ -255,10 +307,10 @@
                                         force_save="1" optional="show"/>
                                     <field name="product_packaging_qty" invisible="not product_id or not product_packaging_id" groups="product.group_stock_packaging" optional="show"/>
                                     <field name="product_packaging_id" invisible="not product_id" context="{'default_product_id': product_id, 'tree_view_ref':'product.product_packaging_tree_view', 'form_view_ref':'product.product_packaging_form_view'}" groups="product.group_stock_packaging" optional="show"/>
-                                    <field name="price_unit" readonly="qty_invoiced != 0"/>
+                                    <field name="price_unit" readonly="1" force_save="1"/>
                                     <button name="action_purchase_history" type="object" icon="fa-history" title="Purchase History" invisible="not id"/>
                                     <field name="taxes_id" widget="many2many_tags" domain="[('type_tax_use', '=', 'purchase'), ('company_id', 'parent_of', parent.company_id), ('country_id', '=', parent.tax_country_id), ('active', '=', True)]" context="{'default_type_tax_use': 'purchase', 'search_view_ref': 'account.account_tax_view_search'}" options="{'no_create': True}" optional="show"/>
-                                    <field name="discount" string="Disc.%" readonly="qty_invoiced != 0" optional="hide"/>
+                                    <field name="discount" string="Disc.%" optional="hide" column_invisible="True" readonly="1" force_save="1"/>
                                     <field name="price_subtotal" string="Tax excl."/>
                                     <field name="price_total"
                                            string="Tax incl."
@@ -290,7 +342,7 @@
                                                 <field name="product_packaging_qty" invisible="not product_id or not product_packaging_id" groups="product.group_stock_packaging"/>
                                                 <field name="product_packaging_id" invisible="not product_id" context="{'default_product_id': product_id, 'tree_view_ref':'product.product_packaging_tree_view', 'form_view_ref':'product.product_packaging_form_view'}" groups="product.group_stock_packaging" />
                                                 <field name="price_unit"/>
-                                                <field name="discount"/>
+                                                <field name="discount" invisible="True"/>
                                                 <field name="taxes_id" widget="many2many_tags" domain="[('type_tax_use', '=', 'purchase'), ('company_id', 'parent_of', parent.company_id), ('country_id', '=', parent.tax_country_id)]" options="{'no_create': True}"/>
                                             </group>
                                             <group>
@@ -399,6 +451,70 @@
                             </group>
                             <div class="clearfix"/>
                         </page>
+						
+						<!-- New Discounts page -->
+                        <page string="Rabaty" name="discounts">
+							                <group>
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>Discount Type</th>
+                                <th>Discount (%)</th>
+                                <th>Discount Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Fixed Discount</td>
+                                <td>
+                                    <field name="fixed_discount"  options="{'max': 20}"/>
+                                </td>
+                                <td>
+                                    <field name="fixed_discount_value" readonly="1" widget="monetary"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Early Order Discount</td>
+                                <td>
+                                    <field name="early_order_discount"  options="{'max': 20}"/>
+                                </td>
+                                <td>
+                                    <field name="early_order_discount_value" readonly="1" widget="monetary"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Special Discount</td>
+                                <td>
+                                    <field name="special_discount"  options="{'max': 20}"/>
+                                </td>
+                                <td>
+                                    <field name="special_discount_value" readonly="1" widget="monetary"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-end">
+                                    <strong>Total Discount</strong>
+                                </td>
+                                <td>
+                                    <field name="total_discount_value" readonly="1" widget="monetary"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </group>
+						
+						
+						
+                            <!-- <group> -->
+                                <!-- <group> -->
+                                    <!-- <field name="fixed_discount"/> -->
+                                    <!-- <field name="early_order_discount"/> -->
+                                    <!-- <field name="special_discount"/> -->
+                                <!-- </group> -->
+                            <!-- </group> -->
+                        </page>
+						
+						
                         <page string="Other Information" name="purchase_delivery_invoice">
                             <group>
                                 <group name="other_info">
@@ -445,7 +561,7 @@
                     <separator/>
                     <filter name="order_date" string="Order Date" date="date_order"/>
                     <filter name="draft_rfqs" string="Draft RFQs" domain="[('state', '=', 'draft')]"/>
-                    <filter name="waiting_rfqs" string="Waiting RFQs" domain="[('state', '=', 'sent'), ('date_order', '&gt;=', datetime.datetime.now())]"/>
+                    <filter name="waiting_rfqs" string="Waiting RFQs" domain="[('state', 'in', ['sent', 'confirmed']), ('date_order', '&gt;=', datetime.datetime.now())]"/>
                     <filter name="late_rfqs" string="Late RFQs" domain="[('state', 'in', ['draft', 'sent', 'to approve']),('date_order', '&lt;', datetime.datetime.now())]"/>
                     <separator/>
                     <filter invisible="1" string="Late Activities" name="activities_overdue"
@@ -477,7 +593,7 @@
                     <field name="partner_id" operator="child_of"/>
                     <field name="user_id"/>
                     <field name="product_id"/>
-                    <filter name="my_Orders" string="My Orders" domain="[('user_id', '=', uid)]"/>
+                    <filter name="my_Orders" string="My Orders bb" domain="[('user_id', '=', uid)]"/>
                     <filter string="Starred" name="starred" domain="[('priority', '=', '1')]"/>
                     <separator/>
                     <filter name="unconfirmed" string="Not Acknowledged" domain="[('mail_reception_confirmed', '=', False), ('state', '=', 'purchase')]"/>
@@ -486,7 +602,7 @@
                     <separator/>
                     <filter name="order_date" string="Order Date" date="date_order"/>
                     <separator/>
-                    <filter invisible="1" string="Late Activities" name="activities_overdue"
+                    <filter invisible="1" string="Late Activities bb" name="activities_overdue"
                         domain="[('my_activity_date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]"
                         help="Show all records which has next action date is before today"/>
                     <filter invisible="1" string="Today Activities" name="activities_today"
@@ -876,5 +992,23 @@
         <field name="search_view_id" ref="view_purchase_order_filter"/>
         <field name="target">main</field>
     </record>
+	
+	<record id="view_purchase_order_form_vin" model="ir.ui.view">
+    <field name="name">purchase.order.form.vin</field>
+    <field name="model">purchase.order</field>
+    <field name="arch" type="xml">
+        <form string="Wprowadź VIN">
+            <group>
+                <field name="vin_number" string="Numer VIN"/>
+            </group>
+            <footer>
+                <button string="Zapisz" type="object" name="action_save_vin" class="oe_highlight"/>
+                <button string="Anuluj" class="btn-secondary" special="cancel"/>
+            </footer>
+        </form>
+    </field>
+</record>
+
+	
 
 </odoo>

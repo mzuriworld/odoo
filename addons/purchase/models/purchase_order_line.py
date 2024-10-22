@@ -36,8 +36,7 @@ class PurchaseOrderLine(models.Model):
     product_id = fields.Many2one('product.product', string='Product', domain=[('purchase_ok', '=', True)], change_default=True, index='btree_not_null')
     product_type = fields.Selection(related='product_id.detailed_type', readonly=True)
     price_unit = fields.Float(
-        string='Unit Price', required=True, digits='Product Price',
-        compute="_compute_price_unit_and_date_planned_and_name", readonly=False, store=True)
+        string='Unit Price', required=True, digits='Product Price', readonly=False, store=True)
     price_unit_discounted = fields.Float('Unit Price (Discounted)', compute='_compute_price_unit_discounted')
 
     price_subtotal = fields.Monetary(compute='_compute_amount', string='Subtotal', store=True)
@@ -86,6 +85,29 @@ class PurchaseOrderLine(models.Model):
             "Forbidden values on non-accountable purchase order line"),
     ]
 
+    @api.onchange('product_uom_qty', 'product_qty', 'product_id', 'price_unit')
+    def _apply_discounts(self):
+        for line in self:
+            if line.order_id:
+                # Start with the original price
+                price = line.price_unit
+                print(price)
+                # Apply the fixed discount first
+                price_after_fixed_discount = price * (1 - line.order_id.fixed_discount / 100.0)
+                print(price_after_fixed_discount)
+                # Apply the early order discount on the reduced price
+                price_after_early_order_discount = price_after_fixed_discount * (1 - line.order_id.early_order_discount / 100.0)
+                print(price_after_early_order_discount)
+                # Apply the special discount on the reduced price
+                final_price_after_discounts = price_after_early_order_discount * (1 - line.order_id.special_discount / 100.0)
+                print(final_price_after_discounts)
+                # Calculate the total discount percentage
+                total_discount_percentage = 100 - (final_price_after_discounts / line.price_unit * 100)
+
+                # Update the line discount with the total discount
+                line.discount = total_discount_percentage
+                print(line.discount)
+
     @api.depends('product_qty', 'price_unit', 'taxes_id', 'discount')
     def _compute_amount(self):
         for line in self:
@@ -107,6 +129,7 @@ class PurchaseOrderLine(models.Model):
         :return: A python dictionary.
         """
         self.ensure_one()
+        print(f"132: {self.price_unit}")
         return self.env['account.tax']._convert_to_tax_base_line_dict(
             self,
             partner=self.order_id.partner_id,
@@ -226,6 +249,7 @@ class PurchaseOrderLine(models.Model):
         if 'qty_received' in values:
             for line in self:
                 line._track_qty_received(values['qty_received'])
+        print(f"252: {self.price_unit}")
         return super(PurchaseOrderLine, self).write(values)
 
     @api.ondelete(at_uninstall=False)
@@ -274,7 +298,8 @@ class PurchaseOrderLine(models.Model):
             return
 
         # Reset date, price and quantity since _onchange_quantity will provide default values
-        self.price_unit = self.product_qty = 0.0
+        print(f"301: {self.price_unit}")
+        #self.price_unit = self.product_qty = 0.0
 
         self._product_id_change()
 
@@ -332,6 +357,7 @@ class PurchaseOrderLine(models.Model):
 
             # If not seller, use the standard price. It needs a proper currency conversion.
             if not line.sale_order_line_id :
+                print("tu tu tu")
                 if not seller:
                     unavailable_seller = line.product_id.seller_ids.filtered(
                         lambda s: s.partner_id == line.order_id.partner_id)
@@ -354,12 +380,14 @@ class PurchaseOrderLine(models.Model):
                         False
                     )
                     line.price_unit = float_round(price_unit, precision_digits=max(line.currency_id.decimal_places, self.env['decimal.precision'].precision_get('Product Price')))
+                    print("tu tu tu sie ustawia " + line.price_unit)
                     continue
 
                 price_unit = line.env['account.tax']._fix_tax_included_price_company(seller.price, line.product_id.supplier_taxes_id, line.taxes_id, line.company_id) if seller else 0.0
                 price_unit = seller.currency_id._convert(price_unit, line.currency_id, line.company_id, line.date_order or fields.Date.context_today(line), False)
                 price_unit = float_round(price_unit, precision_digits=max(line.currency_id.decimal_places, self.env['decimal.precision'].precision_get('Product Price')))
-                line.price_unit = seller.product_uom._compute_price(price_unit, line.product_uom)
+                # line.price_unit = seller.product_uom._compute_price(price_unit, line.product_uom)
+                print(f"to to to sie ustawia {price_unit} zamiast tego {line.price_unit}")
                 line.discount = seller.discount or 0.0
             else :
                 # Fetch the sale.order.line record based on sale_order_line_id
@@ -371,6 +399,8 @@ class PurchaseOrderLine(models.Model):
 
                 line.price_unit = sale_order_line.price_unit
                 line.discount = seller.discount or 0.0
+
+            # record product names to avoid resetting custom descriptions
             # record product names to avoid resetting custom descriptions
             default_names = []
             vendors = line.product_id._prepare_sellers({})
@@ -382,6 +412,24 @@ class PurchaseOrderLine(models.Model):
             if not line.name or line.name in default_names:
                 product_ctx = {'seller_id': seller.id, 'lang': get_lang(line.env, line.partner_id.lang).code}
                 line.name = line._get_product_purchase_description(line.product_id.with_context(product_ctx))
+
+    
+    
+    
+    # def _compute_price_unit_and_date_planned_and_name(self):
+        # for line in self:
+            # if not line.product_id or line.invoice_lines or not line.company_id:
+                # continue
+            # params = {'order_id': line.order_id}
+            # seller = line.product_id._select_seller(
+                # partner_id=line.partner_id,
+                # quantity=line.product_qty,
+                # date=line.order_id.date_order and line.order_id.date_order.date() or fields.Date.context_today(line),
+                # uom_id=line.product_uom,
+                # params=params)
+
+            # if seller or not line.date_planned:
+                # line.date_planned = line._get_date_planned(seller).strftime(DEFAULT_SERVER_DATETIME_FORMAT)
 
     @api.depends('product_id', 'product_qty', 'product_uom')
     def _compute_product_packaging_id(self):
@@ -452,6 +500,7 @@ class PurchaseOrderLine(models.Model):
             price_unit = float_round(price_unit / qty, precision_digits=price_unit_prec)
         if self.product_uom.id != self.product_id.uom_id.id:
             price_unit *= self.product_uom.factor / self.product_id.uom_id.factor
+        print(f"427: {price_unit}")
         return price_unit
 
     def action_add_from_catalog(self):
@@ -575,6 +624,7 @@ class PurchaseOrderLine(models.Model):
         }
         if self.analytic_distribution and not self.display_type:
             res['analytic_distribution'] = self.analytic_distribution
+        print(f"551: {res.price_unit}")
         return res
 
     @api.model
@@ -605,7 +655,7 @@ class PurchaseOrderLine(models.Model):
 
         product_taxes = product_id.supplier_taxes_id.filtered(lambda x: x.company_id.id == company_id.id)
         taxes = po.fiscal_position_id.map_tax(product_taxes)
-
+        print(f"582: {self.price_unit}")
         price_unit = seller.price if seller else product_id.standard_price
         price_unit = self.env['account.tax']._fix_tax_included_price_company(
             price_unit, product_taxes, taxes, company_id)
@@ -623,7 +673,7 @@ class PurchaseOrderLine(models.Model):
 
         date_planned = self.order_id.date_planned or self._get_date_planned(seller, po=po)
         discount = seller.discount or 0.0
-
+        print(f"600: Tu jest price_unit: {price_unit}")
         return {
             'name': name,
             'product_qty': uom_po_qty,

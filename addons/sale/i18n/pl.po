@@ -2957,11 +2957,6 @@ msgid "Mark Quotation as Sent"
 msgstr "Oznacz ofertę jako wysłaną"
 
 #. module: sale
-#: model_terms:ir.ui.view,arch_db:sale.view_order_form
-msgid "Mark Quotation as sent"
-msgstr "Oznacz ofertę jako wysłaną"
-
-#. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.account_invoice_form
 msgid "Marketing"
 msgstr "Marketing"

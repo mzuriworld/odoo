@@ -42,10 +42,10 @@ class PurchaseOrderLine(models.Model):
     #         'target': 'new',
     #     }
 
-    def write(self, vals):
-        res = super(PurchaseOrderLine, self).write(vals)
-        if vals.get('product_config'):
+    # def write(self, vals):
+        # res = super(PurchaseOrderLine, self).write(vals)
+        # if vals.get('product_config'):
             # Handle configuration changes here, e.g. update product description or other fields
-            self.product_id.write({'config_details': vals['product_config']})
-        return res
+            # self.product_id.write({'config_details': vals['product_config']})
+        # return res
 

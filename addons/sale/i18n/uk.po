@@ -2691,10 +2691,6 @@ msgstr "Маржі"
 msgid "Mark Quotation as Sent"
 msgstr "Позначити комерційну пропозицію, як надіслано"
 
-#. module: sale
-#: model_terms:ir.ui.view,arch_db:sale.view_order_form
-msgid "Mark Quotation as sent"
-msgstr "Позначити комерційну пропозицію, як надіслано"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.account_invoice_form

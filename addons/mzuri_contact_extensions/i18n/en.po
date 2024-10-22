@@ -1,15 +1,25 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mzuri_contact_extensions
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-08 13:07+0000\n"
-"PO-Revision-Date: 2024-09-08 13:07+0000\n"
+"POT-Creation-Date: 2024-09-18 00:36+0000\n"
+"PO-Revision-Date: 2024-09-18 00:36+0000\n"
 "Last-Translator: \n"
-"Language-Team: English\n"
+"Language-Team: \n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: mzuri_contact_extensions
+#: model_terms:ir.ui.view,arch_db:mzuri_contact_extensions.view_order_tree_with_add_to_park
+msgid "Add to Machinery Park"
+msgstr "Add to Machinery Park"
 
 #. module: mzuri_contact_extensions
 #: model:ir.model,name:mzuri_contact_extensions.model_res_partner
@@ -17,17 +27,76 @@ msgid "Contact"
 msgstr "Contact"
 
 #. module: mzuri_contact_extensions
-#: model_terms:ir.ui.view,arch_db:mzuri_contact_extensions.view_order_tree_with_add_to_park
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_interest__create_uid
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_owned__create_uid
+msgid "Created by"
+msgstr "Created by"
+
+#. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_interest__create_date
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_owned__create_date
+msgid "Created on"
+msgstr "Created on"
+
+#. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_interest__display_name
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_owned__display_name
+msgid "Display Name"
+msgstr "Display Name"
+
+#. module: mzuri_contact_extensions
+#: model_terms:ir.ui.view,arch_db:mzuri_contact_extensions.view_purchase_order_tree_with_add_to_park
 msgid "Dodaj do Parku Maszynowego"
 msgstr "Add to Machinery Park"
 
 #. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_interest__id
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_owned__id
+msgid "ID"
+msgstr "ID"
+
+#. module: mzuri_contact_extensions
 #: model_terms:ir.ui.view,arch_db:mzuri_contact_extensions.view_partner_form_inherit_product
-msgid "Kopiuj produkty z zamówienia sprzedaży"
-msgstr "Copy products from sale order"
+msgid "Kopiuj produkty z zamówienia zakupu"
+msgstr "Copy products from purchase order"
+
+#. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_interest__write_uid
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_owned__write_uid
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_interest__write_date
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_owned__write_date
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_owned__name
+msgid "Name"
+msgstr "Name"
+
+#. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_interest__partner_id
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_owned__partner_id
+msgid "Partner"
+msgstr "Partner"
+
+#. module: mzuri_contact_extensions
+#: model:ir.model,name:mzuri_contact_extensions.model_res_partner_product_interest
+msgid "Partner Product Interest"
+msgstr "Partner Product Interest"
+
+#. module: mzuri_contact_extensions
+#: model:ir.model,name:mzuri_contact_extensions.model_res_partner_product_owned
+msgid "Partner Product Owned"
+msgstr "Partner Product Owned"
 
 #. module: mzuri_contact_extensions
 #: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner__product_owned_ids
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_users__product_owned_ids
+#: model_terms:ir.ui.view,arch_db:mzuri_contact_extensions.view_partner_form_inherit_product
 msgid "Posiadane/Park Maszynowy"
 msgstr "Owned/Machinery Park"
 
@@ -38,12 +107,34 @@ msgid "Product"
 msgstr "Product"
 
 #. module: mzuri_contact_extensions
+#: model:ir.model,name:mzuri_contact_extensions.model_product_product
+msgid "Product Variant"
+msgstr "Product Variant"
+
+#. module: mzuri_contact_extensions
+#: model:ir.model,name:mzuri_contact_extensions.model_purchase_order
+msgid "Purchase Order"
+msgstr "Purchase Order"
+
+#. module: mzuri_contact_extensions
+#: model:ir.model,name:mzuri_contact_extensions.model_sale_order
+msgid "Sales Order"
+msgstr "Sales Order"
+
+#. module: mzuri_contact_extensions
 #: model:ir.model.fields,field_description:mzuri_contact_extensions.field_product_product__serial_number
 #: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_owned__serial_number
 msgid "Serial Number"
 msgstr "Serial Number"
 
 #. module: mzuri_contact_extensions
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner_product_owned__serial_number_editable
+msgid "Serial Number Editable"
+msgstr "Serial Number Editable"
+
+#. module: mzuri_contact_extensions
 #: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_partner__product_interest_ids
+#: model:ir.model.fields,field_description:mzuri_contact_extensions.field_res_users__product_interest_ids
+#: model_terms:ir.ui.view,arch_db:mzuri_contact_extensions.view_partner_form_inherit_product
 msgid "Zainteresowania"
 msgstr "Interests"

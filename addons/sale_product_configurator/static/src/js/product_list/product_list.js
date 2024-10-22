@@ -10,7 +10,7 @@ export class ProductList extends Component {
     static props = {
         products: Array,
         areProductsOptional: { type: Boolean, optional: true },
-        step: Number,
+        step: { type: Number, default: 0, optional: true },
     };
     // static step = 0;
     static defaultProps = {

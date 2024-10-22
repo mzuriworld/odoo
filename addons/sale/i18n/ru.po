@@ -2978,11 +2978,6 @@ msgid "Mark Quotation as Sent"
 msgstr "Отметить цитату как отправленную"
 
 #. module: sale
-#: model_terms:ir.ui.view,arch_db:sale.view_order_form
-msgid "Mark Quotation as sent"
-msgstr "Отметить цитату как отправленную"
-
-#. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.account_invoice_form
 msgid "Marketing"
 msgstr "Маркетинг"

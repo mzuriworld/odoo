@@ -147,9 +147,8 @@ class SaleOrderLine(models.Model):
 
     discount = fields.Float(
         string="Discount (%)",
-        compute='_compute_discount',
-        digits='Discount',
-        store=True, readonly=False, precompute=True)
+        
+        store=True, readonly=False)
 
     price_subtotal = fields.Monetary(
         string="Subtotal",
@@ -383,6 +382,7 @@ class SaleOrderLine(models.Model):
                 "%(attribute)s: %(values)s",
                 attribute=pta.name,
                 values=", \n".join((ptav.name + " (" + (ptav.catalogue_number or '') + ")" ) for ptav in ptavs)
+                # values=", ".join(ptav.name for ptav in ptavs)
             )
 
         # Sort the values according to _order settings, because it doesn't work for virtual records in onchange
@@ -591,6 +591,26 @@ class SaleOrderLine(models.Model):
                     # only show negative discounts if price is negative
                     # otherwise it's a surcharge which shouldn't be shown to the customer
                     line.discount = discount
+    @api.onchange('discount')
+    def _onchange_discount(self):
+        """
+        When the discount changes, recalculate the price_subtotal.
+        """
+        for line in self:
+            if line.discount and line.price_unit and line.product_uom_qty:
+                line.price_subtotal = line.product_uom_qty * line.price_unit * (1 - (line.discount / 100.0))
+
+    @api.onchange('price_subtotal')
+    def _onchange_price_subtotal(self):
+        """
+        When the price_subtotal changes, recalculate the discount.
+        """
+        for line in self:
+            if line.price_subtotal and line.product_uom_qty and line.price_unit:
+                price_without_discount = line.product_uom_qty * line.price_unit
+                if price_without_discount:
+                    line.discount = (1 - (line.price_subtotal / price_without_discount)) * 100
+
 
     def _convert_to_tax_base_line_dict(self, **kwargs):
         """ Convert the current record to a dictionary in order to use the generic taxes computation method
@@ -618,6 +638,7 @@ class SaleOrderLine(models.Model):
         Compute the amounts of the SO line.
         """
         for line in self:
+            line.price_subtotal = line.product_uom_qty * line.price_unit * (1 - (line.discount / 100.0))
             tax_results = self.env['account.tax']._compute_taxes([
                 line._convert_to_tax_base_line_dict()
             ])

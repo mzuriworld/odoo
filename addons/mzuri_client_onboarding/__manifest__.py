@@ -13,11 +13,11 @@
         'security/onboarding_access_rules.xml',
         'data/ir_config_parameter_data.xml',
         'data/mail_template_data.xml',
-        'data/website_pages_data.xml',  # Dodajemy plik z rejestracją stron
         'views/onboarding_confirmation.xml',
         'views/onboarding_success.xml',
         'views/onboarding_token_invalid.xml',
         'views/res_partner_views.xml',
+        'data/website_pages_data.xml',  # Dodajemy plik z rejestracją stron
     ],
     'installable': True,
     'application': False,

@@ -36,15 +36,27 @@ class ResPartnerProductOwned(models.Model):
     product_id = fields.Many2one('product.product', string="Product", required=True)
     partner_id = fields.Many2one('res.partner', string="Partner", required=True, ondelete='cascade')
     serial_number = fields.Char(string="Serial Number", required=False)
-
+    name = fields.Char(
+        string='Name',
+        compute='_compute_name',
+        store=False,  # This is not necessary as it's the default, but included for clarity
+    )
+    
+    @api.depends('product_id', 'serial_number')
+    def _compute_name(self):
+        for record in self:
+            product_name = record.product_id.name or ''
+            serial = record.serial_number or ''
+            record.name = f"{product_name} ({serial})" if serial else product_name
+    
     @api.model
     def name_get(self):
         result = []
-        for record in self:
-            name = record.product_id.name
-            if record.serial_number:
-                name = f'{name} ({record.serial_number})'
-            result.append((record.id, name))
+        #for record in self:
+        name = self.product_id.name
+        if self.serial_number:
+            name = f'{name} ({self.serial_number})'
+        result.append((self.id, name))
         return result
 
     @api.onchange('serial_number')
@@ -117,7 +129,7 @@ class ResPartner(models.Model):
         sale_orders = SaleOrder.search([('partner_id', '=', self.id), ('state', '=', 'sale')])
 
         # Znajdź zamówienia zakupu powiązane z zamówieniami sprzedaży
-        purchase_orders = PurchaseOrder.search([('origin', 'in', sale_orders.mapped('name')), ('state', '=', 'purchase')])
+        purchase_orders = PurchaseOrder.search([ ('state', '=', 'done')])
 
         # Dodaj produkty z zamówień zakupu do "Posiadane/Park Maszynowy"
         for purchase_order in purchase_orders:
@@ -125,7 +137,7 @@ class ResPartner(models.Model):
                 self.env['res.partner.product.owned'].create({
                     'partner_id': self.id,
                     'product_id': line.product_id.id,
-                    'serial_number': line.product_id.serial_number,
+                    'serial_number': purchase_order.vin_number,
                 })
 
         return True
@@ -135,33 +147,44 @@ class ResPartner(models.Model):
         SaleOrder = self.env['sale.order']
 
         # Znajdź wszystkie zamówienia sprzedaży dla danego partnera
-        sale_orders = SaleOrder.search([('partner_id', '=', self.id), ('state', '=', 'sale')])
+        sale_orders = SaleOrder.search([('state', '=', 'sale')])
+        
+        
+        
+        try:
+            compose_form_id = self.env['ir.model.data']._xmlid_lookup('mzuri_contact_extensions.view_purchase_order_tree_with_add_to_park')[1]
+        except ValueError:
+            compose_form_id = False
 
         # Wyświetlenie zamówień zakupu powiązanych z zamówieniami sprzedaży
         return {
             'name': 'Wybierz Zamówienie Zakupu',
             'type': 'ir.actions.act_window',
             'view_mode': 'tree,form',
+            'views': [(compose_form_id, 'tree')],
+            'res_id': self.id,
             'res_model': 'purchase.order',
-            'domain': [('origin', 'in', sale_orders.mapped('name')), ('state', '=', 'purchase')],
+            'domain': [('state', '=', 'done')],
             'context': {'default_partner_id': self.id},
             'target': 'new',
         }
 
     def action_add_to_park_from_purchase_order(self, purchase_order_ids):
         """Dodaj produkty z wybranych zamówień zakupu do parku maszynowego"""
-        PurchaseOrder = self.env['purchase.order']
+        print("call of action")
+        PurchaseOrder = self.env.context.get('active_ids', [])
 
         # Pobierz zamówienia zakupu na podstawie wybranych ID
         purchase_orders = PurchaseOrder.browse(purchase_order_ids)
-
+        print(f"PO len: {len(purchase_orders)}")
         for purchase_order in purchase_orders:
+            print(f"PO: {purchase_order.name}")
             for line in purchase_order.order_line:
                 self.env['res.partner.product.owned'].create({
                     'partner_id': self.id,
                     'product_id': line.product_id.id,
-                    'serial_number': line.product_id.serial_number,
+                    'serial_number': purchase_order.vin_number,
                 })
 
-        return True
+        #return True
 

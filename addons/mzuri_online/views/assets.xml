@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- Inherit the user_menu template from the web module -->
-    <template id="remove_odoo_account_link" inherit_id="web.UserMenu" name="Remove Odoo Account Link">
-        <xpath expr="//t[@t-call='web.user_menu_footprint']" position="replace">
-            <!-- Do nothing here to remove the footprint (My Odoo.com account link) -->
-        </xpath>
-    </template>
+    <data>
+        <!-- Define custom assets for backend -->
+        <template id="assets_backend" inherit_id="web.assets_backend" name="mzuri_online assets">
+            <xpath expr="." position="inside">
+                <script type="module" src="/mzuri_online/static/src/js/user_menu.js"/>
+            </xpath>
+        </template>
+    </data>
 </odoo>
