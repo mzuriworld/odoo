@@ -1,0 +1,62 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mzuri_sale_factory_orders
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-18 00:39+0000\n"
+"PO-Revision-Date: 2024-09-18 00:39+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es\n"
+
+#. module: mzuri_sale_factory_orders
+#: model_terms:ir.ui.view,arch_db:mzuri_sale_factory_orders.view_purchase_order_line_form_inherit_configurator
+msgid "Configure Product 1"
+msgstr "Configurar Producto 1"
+
+#. module: mzuri_sale_factory_orders
+#: model:ir.model.fields,field_description:mzuri_sale_factory_orders.field_sale_order__purchase_order_ids
+msgid "Powiązane Zamówienia Zakupu"
+msgstr "Órdenes de compra relacionadas"
+
+#. module: mzuri_sale_factory_orders
+#: model:ir.model.fields,field_description:mzuri_sale_factory_orders.field_purchase_order__sale_order_id
+msgid "Powiązane Zamówienie Sprzedaży"
+msgstr "Órdenes de venta relacionadas"
+
+#. module: mzuri_sale_factory_orders
+#: model:ir.model.fields,field_description:mzuri_sale_factory_orders.field_purchase_order_line__product_config
+msgid "Product Configuration"
+msgstr "Configuración del Producto"
+
+#. module: mzuri_sale_factory_orders
+#: model:ir.model,name:mzuri_sale_factory_orders.model_purchase_order
+msgid "Purchase Order"
+msgstr "Orden de Compra"
+
+#. module: mzuri_sale_factory_orders
+#: model:ir.model,name:mzuri_sale_factory_orders.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Línea de Orden de Compra"
+
+#. module: mzuri_sale_factory_orders
+#: model:ir.model.fields,field_description:mzuri_sale_factory_orders.field_purchase_order_line__sale_order_line_id
+msgid "Related Sale Order Line"
+msgstr "Línea de Orden de Venta Relacionada"
+
+#. module: mzuri_sale_factory_orders
+#: model:res.groups,name:mzuri_sale_factory_orders.group_sale_order_confirm_manager
+msgid "Sale Order Confirm Manager"
+msgstr "Administrador de Confirmación de Ordenes de Venta"
+
+#. module: mzuri_sale_factory_orders
+#: model:ir.model,name:mzuri_sale_factory_orders.model_sale_order
+msgid "Sales Order"
+msgstr "Orden de Venta"
