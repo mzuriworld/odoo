@@ -205,6 +205,8 @@ class OfferReportGenerator:
         if 'dealer_logo' in context and context['dealer_logo']:
             self.replace_image(doc, '<<dealer_logo>>', context['dealer_logo'])
 
+        # Remove any remaining placeholders
+        self.remove_unreplaced_placeholders(doc)
         # Save the modified document
         doc.save(self.output_path)
 
@@ -217,7 +219,58 @@ class OfferReportGenerator:
         # Return the PDF path
         return pdf_path
 
+    def remove_unreplaced_placeholders(self, doc):
+        # Iterate through paragraphs and remove any unreplaced placeholders
+        for paragraph in doc.paragraphs:
+            if any("<<" in run.text and ">>" in run.text for run in paragraph.runs):
+                self._remove_paragraph(paragraph)
 
+        # Iterate through tables and remove any unreplaced placeholders
+        for table in doc.tables:
+            for row in table.rows:
+                for cell in row.cells:
+                    for paragraph in cell.paragraphs:
+                        if any("<<" in run.text and ">>" in run.text for run in paragraph.runs):
+                            self._remove_paragraph(paragraph)
+
+    def _remove_paragraph(self, paragraph):
+        p = paragraph._element
+        p.getparent().remove(p)
+        p._element = None
+    # def remove_unreplaced_placeholders(self, doc):
+    #     # Iterate through paragraphs and remove any unreplaced placeholders
+    #     for paragraph in doc.paragraphs:
+    #         if '<<' in paragraph.text and '>>' in paragraph.text:
+    #             doc.paragraphs.remove(paragraph)
+    #         # self._remove_placeholder_from_runs(paragraph.runs)
+    #
+    #     # Iterate through tables and remove any unreplaced placeholders
+    #     for table in doc.tables:
+    #         for row in table.rows:
+    #             for cell in row.cells:
+    #                 for paragraph in cell.paragraphs:
+    #                     self._remove_placeholder_from_runs(paragraph.runs)
+
+    def _remove_placeholder_from_runs(self, runs):
+        # Concatenate all runs to a single string
+        full_text = "".join(run.text for run in runs)
+
+        # Remove all placeholders in the concatenated text
+        updated_text = full_text
+        while "<<" in updated_text and ">>" in updated_text:
+            start_idx = updated_text.index("<<")
+            end_idx = updated_text.index(">>", start_idx) + 2
+            updated_text = updated_text[:start_idx] + updated_text[end_idx:]
+
+        # Update the runs with new text while preserving formatting
+        if updated_text != full_text:
+            # Clear the existing runs
+            for run in runs:
+                run.text = ""
+
+            # Assign the updated text to the first run
+            if runs:
+                runs[0].text = updated_text
     def replace_image(self, doc, placeholder, image_data):
         # Save the image data to a temporary file
         image_path = self._save_temp_image(image_data)
