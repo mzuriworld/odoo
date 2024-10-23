@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Dziedziczenie widoku sale.order.form -->
+    <record id="view_order_form_inherit_name_in_offer" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.name.in.offer</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Dodanie kolumny do drzewa linii zamówienia -->
+            <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="after">
+                <field name="name_in_offer" optional="hide"/>
+            </xpath>
+            <!-- Dodanie pola do formularza linii zamówienia -->
+            <xpath expr="//field[@name='order_line']/form//field[@name='name']" position="after">
+                <field name="name_in_offer" optional="hide"/>
+            </xpath>
+
+<!--            &lt;!&ndash; Zastąpienie przycisku "PDF Preview" naszą akcją &ndash;&gt;-->
+<!--                        <xpath expr="//button[@name='action_preview_sale_order']" position="attributes">-->
+<!--                <attribute name="name">sale.action_report_saleorder</attribute>-->
+<!--                <attribute name="string">Podgląd PDF</attribute>-->
+<!--                <attribute name="type">action</attribute>-->
+<!--                <attribute name="class">btn-secondary</attribute>-->
+<!--                <attribute name="report_name">sale.report_saleorder</attribute>-->
+<!--            </xpath>-->
+            <xpath expr="//button[@name='action_preview_sale_order']" position="replace">
+                <button name="action_generate_offer_report"
+                        string="PDF Preview"
+                        type="object"
+                        class="btn-primary"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

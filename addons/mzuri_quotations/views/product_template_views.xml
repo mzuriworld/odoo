@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Widok dla product.template -->
+    <record id="view_product_template_form_inherit_quotation_description" model="ir.ui.view">
+        <field name="name">product.template.form.inherit.quotation.description</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Poprawione wyrażenie XPath -->
+            <xpath expr="//page[@name='sales']" position="after">
+                <page string="Quotation Description">
+                <group string="Offer Template">
+                    <field name="offer_template_ids"/>
+                </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Widok dla product.template.attribute.value -->
+    <record id="view_product_template_attribute_value_form_inherit_quotation_description" model="ir.ui.view">
+        <field name="name">product.template.attribute.value.form.inherit.quotation.description</field>
+        <field name="model">product.template.attribute.value</field>
+        <field name="inherit_id" ref="product.product_template_attribute_value_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group" position="inside">
+                <field name="quotation_description" codeview="True"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
